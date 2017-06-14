@@ -8,7 +8,7 @@ setup(name='ask_amy',
       author_email='daniel.higgins@yahoo.com',
       license='MIT',
       packages=['ask_amy', 'ask_amy.cli', 'ask_amy.core', 'ask_amy.database', 'ask_amy.utilities'],
-      test_suite='nose.collector',
+      test_suite='ask_amy.tests',
       entry_points={
           'console_scripts': ['ask-amy-cli=ask_amy.cli.command_line:main'],
       },
