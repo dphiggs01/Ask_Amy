@@ -1,8 +1,10 @@
-from ask_amy.object_dictionary import ObjectDictionary
-from ask_amy.database import DynamoDB
-from ask_amy.skill_factory import SkillFactory
-from ask_amy.exceptions import SessionError
 import logging
+
+from ask_amy.core.skill_factory import SkillFactory
+
+from ask_amy.core.exceptions import SessionError
+from ask_amy.core.object_dictionary import ObjectDictionary
+from ask_amy.database.database import DynamoDB
 
 logger = logging.getLogger()
 

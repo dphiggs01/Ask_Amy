@@ -1,6 +1,7 @@
-from ask_amy.session import Session
-from ask_amy.request import Request
 import logging
+
+from ask_amy.core.session import Session
+from ask_amy.core.request import Request
 
 logger = logging.getLogger()
 

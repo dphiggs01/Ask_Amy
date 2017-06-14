@@ -1,7 +1,8 @@
 import logging
-from ask_amy.event import Event
-from ask_amy.object_dictionary import ObjectDictionary
-from ask_amy.exceptions import ApplicationIdError
+
+from ask_amy.core.event import Event
+from ask_amy.core.exceptions import ApplicationIdError
+from ask_amy.core.object_dictionary import ObjectDictionary
 
 logger = logging.getLogger()
 

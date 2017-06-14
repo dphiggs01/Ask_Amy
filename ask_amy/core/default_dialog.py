@@ -1,7 +1,7 @@
 import logging
-from ask_amy.dialog import Dialog
-from ask_amy.reply import Reply
 
+from ask_amy.core.dialog import Dialog
+from ask_amy.core.reply import Reply
 
 logger = logging.getLogger()
 
