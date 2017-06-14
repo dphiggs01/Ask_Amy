@@ -21,38 +21,54 @@ class TestTimeOfDay(TestCaseASKAmy):
         pass
 
     def test_day_night(self):
-        breakfast = datetime(2017, 7, 4, 8, 00, 00)
-        back_two_hr = TimeOfDay.current_time(-2, breakfast)
-        forward_one_hr = TimeOfDay.current_time(1, breakfast)
-        #self.assertEquals('06:00 AM',back_two_hr)
-        #self.assertEquals('09:00 AM',forward_one_hr)
+        base_time = datetime(2017, 7, 4, 8, 00, 00)
+        back_two_hr = TimeOfDay.current_time(-2, base_time)
+        forward_one_hr = TimeOfDay.current_time(1, base_time)
+        self.assertEquals('06:00 AM',back_two_hr)
+        self.assertEquals('09:00 AM',forward_one_hr)
         print(back_two_hr)
         print(forward_one_hr)
 
     def test_mealtime(self):
         time_desc=['Breakfast', 'Lunch', 'Dinner', 'Daytime', 'Nighttime']
-        lunch = datetime(2017, 7, 4, 12, 00, 00)
-        meal_1 = TimeOfDay.meal_time(-1,lunch)
-        meal_2 = TimeOfDay.meal_time(4,lunch)
-        meal_3 = TimeOfDay.meal_time(5,lunch)
-        self.assertEquals(TimeOfDay.Breakfast,meal_1)
-        self.assertEquals(TimeOfDay.Lunch,meal_2)
-        self.assertEquals(TimeOfDay.Dinner,meal_3)
-        # print(time_desc[meal_1])
+        base_time = datetime(2017, 7, 4, 12, 22, 00)
+        time_adj = TimeOfDay.time_adj("05:22","AM",base_time)
+        tod = TimeOfDay.meal_time(time_adj,base_time)
+        self.assertEquals(TimeOfDay.Breakfast,tod)
+
+        time_adj = TimeOfDay.time_adj("12:22","PM",base_time)
+        tod = TimeOfDay.meal_time(time_adj,base_time)
+        self.assertEquals(TimeOfDay.Lunch,tod)
+
+        time_adj = TimeOfDay.time_adj("05:22","PM",base_time)
+        tod = TimeOfDay.meal_time(time_adj,base_time)
+        self.assertEquals(TimeOfDay.Dinner,tod)
+        print("adj={} time_desc={}".format(time_adj,time_desc[tod]))
+
+
 
     def test_day_night(self):
         time_desc=['Breakfast', 'Lunch', 'Dinner', 'Daytime', 'Nighttime']
-        lunch = datetime(2017, 7, 4, 12, 00, 00)
-        tod_1 = TimeOfDay.day_night(0,lunch)
-        tod_2 = TimeOfDay.day_night(8,lunch)
-        tod_3 = TimeOfDay.day_night(-8,lunch)
-        self.assertEquals(TimeOfDay.Daytime,tod_1)
-        self.assertEquals(TimeOfDay.Nighttime,tod_2)
-        self.assertEquals(TimeOfDay.Nighttime,tod_3)
-        # print(time_desc[tod_1])
-        # print(time_desc[tod_2])
+        base_time = datetime(2017, 7, 4, 12, 22, 00)
+        time_adj = TimeOfDay.time_adj("04:22","AM",base_time)
+        tod = TimeOfDay.day_night(time_adj,base_time)
+        # print("adj={} time_desc={}".format(time_adj,time_desc[tod]))
+        self.assertEquals(TimeOfDay.Nighttime,tod)
+
+        time_adj = TimeOfDay.time_adj("06:22","AM",base_time)
+        tod = TimeOfDay.day_night(time_adj,base_time)
+        self.assertEquals(TimeOfDay.Daytime,tod)
+
+        time_adj = TimeOfDay.time_adj("08:22","PM",base_time)
+        tod = TimeOfDay.day_night(time_adj,base_time)
+        self.assertEquals(TimeOfDay.Nighttime,tod)
+
+        # print("adj={} time_desc={}".format(time_adj,time_desc[tod]))
+
 
     def test_time_adj(self):
         lunch = datetime(2017, 7, 4, 12, 22, 00)
+        time_adj = TimeOfDay.time_adj("11:22","AM",lunch)
+        self.assertEquals(1,time_adj)
         time_adj = TimeOfDay.time_adj("01:22","PM",lunch)
-        print(time_adj)
+        self.assertEquals(-1,time_adj)

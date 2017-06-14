@@ -18,7 +18,7 @@ class TimeOfDay(object):
         """
         if time_adj is None:
             return None
-        #now = datetime.now() + timedelta(hours=int(time_adj))
+
         now -= timedelta(hours=int(time_adj))
         return now.strftime('%I:%M %p')
 
@@ -34,11 +34,12 @@ class TimeOfDay(object):
             return None
         now -= timedelta(hours=int(time_adj))
         # now = datetime.strptime(datetime_str, "%Y-%m-%dT%H:%M:%SZ")
+        today430am = now.replace(hour=4, minute=30, second=0, microsecond=0)
         today1130 = now.replace(hour=11, minute=30, second=0, microsecond=0)
-        today430 = now.replace(hour=12 + 4, minute=30, second=0, microsecond=0)
-        if now < today1130:
+        today430pm = now.replace(hour=12 + 4, minute=30, second=0, microsecond=0)
+        if today430am < now < today1130:
             return TimeOfDay.Breakfast
-        elif today1130 < now < today430:
+        elif today1130 < now < today430pm:
             return TimeOfDay.Lunch
         else:
             return TimeOfDay.Dinner
@@ -76,14 +77,16 @@ class TimeOfDay(object):
             return None
         if time_am_pm is None:
             return None
-        if time_am_pm.lower() == "pm":
+        hours, minutes = time_str.split(':')
+        if hours != "12" and time_am_pm.lower() == "pm":
             am_pm_shift = 12
+        elif hours == "12" and time_am_pm.lower() != "pm":
+            am_pm_shift = -12
         else:
             am_pm_shift = 0
         time_difference_in_hours = None
         pattern = re.compile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$")
         if pattern.match(time_str):
-            hours, minutes = time_str.split(':')
             server_time = now
             users_time = server_time.replace(hour=int(hours)+am_pm_shift, minute=int(minutes), second=0, microsecond=0)
             time_difference = server_time - users_time
