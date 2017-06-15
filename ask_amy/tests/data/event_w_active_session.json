@@ -9,7 +9,8 @@
       "target_bg_level_day": "100",
       "time_adj": "4",
       "terms_of_use": "June 07, 2017",
-      "correction_factor_day": "30"
+      "correction_factor_day": "30",
+      "requested_value_nm":"some_important_nm"
     },
     "user": {
       "userId": "amzn1.ask.account.AH5IOJ4HZXJARKXBUSO2JJOVLD2E4XSNXKGIXO6XNFPHXYYH25TNVGF26RLWQWROXHEQEYQXDR52RLWODP4EP62P2VC3IB2522RZPE3IQXJYJHD3RNPC32VDVA4GU44S5YKTT4HXQQLPXWTSF6TVWAF3MRCPZMJYD5X4I6GUTEI2LHNGEYGWHTG23DVSVKCWYX6UODI6LJRSXHY"
