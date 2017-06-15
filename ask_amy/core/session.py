@@ -15,12 +15,13 @@ class Session(ObjectDictionary):
 
         self._persistence = False  # Assume no persistence until explicitlty defined
         config_dict = SkillFactory.load_configuartion(self.__class__.__name__)
+        print("config_dict {}".format(config_dict))
         if config_dict:
             self._persistence = self.get_value_from_dict(['persistence'], config_dict)
             if self._persistence:
                 self._table_name = self.get_value_from_dict(['tableName'], config_dict)
                 self._fields_to_persist = self.get_value_from_dict(['fieldsToPersist'], config_dict)
-                if self.get_value_from_dict(['new']):
+                if self.get_value_from_dict(['new']): # if new session load data
                     self.load()
 
     def session_id(self):

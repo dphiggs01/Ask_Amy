@@ -17,7 +17,6 @@ class Event(object):
     def request(self):
         return self._request
 
-    # todo candidate for removal
     def get_user_id(self):
         return self._session.user_id()
 

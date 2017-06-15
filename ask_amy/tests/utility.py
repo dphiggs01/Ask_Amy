@@ -1,7 +1,7 @@
 import unittest
 import logging
 import os
-
+import json
 
 
 class TestCaseASKAmy(unittest.TestCase):
@@ -15,3 +15,10 @@ class TestCaseASKAmy(unittest.TestCase):
     formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
     hdlr.setFormatter(formatter)
     logger.addHandler(hdlr)
+
+    # Helper functions
+    def load_json_file(self, file_name):
+        file_ptr_r = open("../data/{}".format(file_name), 'r')
+        json_data = json.load(file_ptr_r)
+        file_ptr_r.close()
+        return json_data
