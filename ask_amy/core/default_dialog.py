@@ -35,8 +35,6 @@ class DefaultDialog(Dialog):
         request = self._event.request()
         intent_name = request.intent_name()
         method_name = self._sc_intent_control[intent_name]
-        # todo you should only map after a test for expected intents
-
         return self.execute_method(method_name)
 
     def default_stop_intent(self, method_name=None):

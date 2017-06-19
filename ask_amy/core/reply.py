@@ -19,36 +19,50 @@ class Reply(ObjectDictionary):
         return cls(reply)
 
     @staticmethod
-    def build(intent_dict, session=None):
+    def build(dialog_dict, session=None):
         logger.debug("**************** entering Reply.build")
         prompt = None
         reprompt = None
         card = None
-        logger.debug("intent_dict={}".format(intent_dict))
+        logger.debug("dialog_dict={}".format(dialog_dict))
 
-        if 'speech_out_text' in intent_dict:
-            logger.debug("speech_out_text={}".format(intent_dict['speech_out_text']))
-            prompt = Prompt.text(intent_dict['speech_out_text'], session)
-        if 're_prompt_text' in intent_dict:
-            logger.debug("re_prompt_text={}".format(intent_dict['re_prompt_text']))
-            reprompt = Prompt.text(intent_dict['re_prompt_text'], session)
-        if 'speech_out_ssml' in intent_dict:
-            prompt = Prompt.ssml(intent_dict['speech_out_ssml'], session)
-        if 're_prompt_ssml' in intent_dict:
-            reprompt = Prompt.ssml(intent_dict['re_prompt_ssml'], session)
-        if 'should_end_session' in intent_dict:
-            should_end_session = intent_dict['should_end_session']
+        if 'speech_out_text' in dialog_dict:
+            logger.debug("speech_out_text={}".format(dialog_dict['speech_out_text']))
+            prompt = Prompt.text(dialog_dict['speech_out_text'], session)
+        if 're_prompt_text' in dialog_dict:
+            logger.debug("re_prompt_text={}".format(dialog_dict['re_prompt_text']))
+            reprompt = Prompt.text(dialog_dict['re_prompt_text'], session)
+        if 'speech_out_ssml' in dialog_dict:
+            prompt = Prompt.ssml(dialog_dict['speech_out_ssml'], session)
+        if 're_prompt_ssml' in dialog_dict:
+            reprompt = Prompt.ssml(dialog_dict['re_prompt_ssml'], session)
+        if 'should_end_session' in dialog_dict:
+            should_end_session = dialog_dict['should_end_session']
         else:
             should_end_session = True
-        if 'card_title' in intent_dict:
-            logger.debug("card_title={}".format(intent_dict['card_title']))
-            card = Card.simple(intent_dict['card_title'], intent_dict['speech_out_text'], session)
-        # todo build out proper card in reply
-        if 'card' in intent_dict:
-            pass
+        if 'card_title' in dialog_dict:
+            logger.debug("card_title={}".format(dialog_dict['card_title']))
+            card = Card.simple(dialog_dict['card_title'], dialog_dict['speech_out_text'], session)
+
+        if 'card' in dialog_dict:
+            card_dict = dialog_dict['card']
+            if 'small_image' in card_dict:
+                card = Card.standard(card_dict['title'], card_dict['content'], card_dict['small_image'],
+                                     card_dict['large_image'], session)
+            elif 'type' in card_dict:
+
+                card = Card.link_account(None, None)
+            else:
+                card = Card.simple(card_dict['title'], card_dict['content'], session)
 
         response = Response.constr(prompt, reprompt, card, should_end_session)
-        reply = Reply.constr(response, session.attributes())
+
+        attributes = {}
+        if session is not None:
+            attributes = session.attributes()
+
+        reply = Reply.constr(response, attributes)
+        logger.debug("**************** exiting Reply.build")
         return reply.json()
 
 
@@ -72,7 +86,7 @@ class Response(ObjectDictionary):
         return cls(response)
 
 
-class OutText(ObjectDictionary):
+class CommunicationChannel(ObjectDictionary):
     def __init__(self, card_dict=None):
         super().__init__(card_dict)
 
@@ -88,12 +102,13 @@ class OutText(ObjectDictionary):
         return text_str
 
     @staticmethod
-    def map_vales_to_names(text, session):
-        logger.debug("**************** entering OutText.map_vales_to_names")
-        if text is None: return text
+    def inject_session_data(text, session):
+        logger.debug("**************** entering OutText.inject_session_data")
+        if text is None:
+            return text
         out_list = []
         indx = 0
-        len_text = len(text)
+        # len_text = len(text)
         done = False
         while not done:
             start_token_index = text.find("{")
@@ -107,12 +122,11 @@ class OutText(ObjectDictionary):
                 text = text[end_token_index + 1:len(text)]
                 if fragment != '':
                     out_list.append(fragment)
-                out_list.append(OutText.process_token(token, session))
+                out_list.append(CommunicationChannel.process_token(token, session))
                 if text.find("{") == -1:
                     if text != '':
                         out_list.append(text)
                     done = True
-        print(out_list)
         return "".join(out_list)
 
     @staticmethod
@@ -124,7 +138,7 @@ class OutText(ObjectDictionary):
         return str(value)
 
 
-class Prompt(OutText):
+class Prompt(CommunicationChannel):
     def __init__(self, card_dict=None):
         super().__init__(card_dict)
 
@@ -133,7 +147,7 @@ class Prompt(OutText):
         logger.debug("**************** entering Prompt.ssml")
         ssml = Prompt.concat_text_if_list(ssml)
         if session is not None:
-            ssml = Prompt.map_vales_to_names(ssml, session)
+            ssml = Prompt.inject_session_data(ssml, session)
         prompt = {'type': 'SSML', 'ssml': "<speak>{}</speak>".format(ssml)}
         return cls(prompt)
 
@@ -142,12 +156,12 @@ class Prompt(OutText):
         logger.debug("**************** entering Prompt.text")
         text = Prompt.concat_text_if_list(text)
         if session is not None:
-            text = Prompt.map_vales_to_names(text, session)
+            text = Prompt.inject_session_data(text, session)
         prompt = {'type': 'PlainText', 'text': text}
         return cls(prompt)
 
 
-class Card(OutText):
+class Card(CommunicationChannel):
     def __init__(self, card_dict=None):
         super().__init__(card_dict)
 
@@ -156,7 +170,7 @@ class Card(OutText):
         logger.debug("**************** entering Card.simple")
         content = Card.concat_text_if_list(content)
         if session is not None:
-            content = Card.map_vales_to_names(content, session)
+            content = Card.inject_session_data(content, session)
         card = {'type': 'Simple', 'title': title, 'content': content}
         return cls(card)
 
@@ -165,12 +179,19 @@ class Card(OutText):
         logger.debug("**************** entering Card.standard")
         content = Card.concat_text_if_list(content)
         if session is not None:
-            content = Card.map_vales_to_names(content, session)
+            content = Card.inject_session_data(content, session)
         card = {'type': 'Standard', 'title': title, 'text': content}
         image = {}
         card['image'] = image
-        image['smallImageUrl'] = small_image_url
-        image['largeImageUrl'] = large_image_url
+        image['smallImageUrl'] = small_image_url  # 720w x 480h pixels
+        image['largeImageUrl'] = large_image_url  # 1200w x 800h pixels
         return cls(card)
 
-
+    @classmethod
+    def link_account(cls, title, content, session=None):
+        logger.debug("**************** entering Card.link_account")
+        content = Card.concat_text_if_list(content)
+        if session is not None:
+            content = Card.inject_session_data(content, session)
+        card = {'type': 'LinkAccount'}
+        return cls(card)

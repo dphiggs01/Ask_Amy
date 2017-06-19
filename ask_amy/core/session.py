@@ -20,7 +20,7 @@ class Session(ObjectDictionary):
             if self._persistence:
                 self._table_name = self.get_value_from_dict(['tableName'], config_dict)
                 self._fields_to_persist = self.get_value_from_dict(['fieldsToPersist'], config_dict)
-                if self.get_value_from_dict(['new']): # if new session load data
+                if self.get_value_from_dict(['new']):  # if new session load data
                     self.load()
 
     def session_id(self):

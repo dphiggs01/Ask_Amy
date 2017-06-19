@@ -45,7 +45,7 @@ class Event(object):
     def slot_data_to_session_attributes(self):
         logger.debug("**************** entering Event.slot_data_to_session_attributes")
         # If we have an Intent Request map the slot values to the session
-        if(isinstance(self._request,IntentRequest)):
+        if isinstance(self._request, IntentRequest):
             slots_dict = self._request.slots()
             for name in slots_dict.keys():
                 # get the value for this name if available
@@ -60,7 +60,6 @@ class Event(object):
                             self.set_value_in_session(name, value)
                     else:
                         self.set_value_in_session(name, value)
-
 
     def __str__(self):
         output = 'Event[\n\tsession = {}\n\trequest = {}\n]'.format(

@@ -22,14 +22,24 @@ class Dialog(ObjectDictionary):
     def event(self):
         return self._event
 
-    def get_prompt_for_data(self, data_name):
-        return self.get_value_from_dict(['slots', data_name, 'prompt'])
-
     def get_expected_intent_for_data(self, data_name):
         return self.get_value_from_dict(['slots', data_name, 'expected_intent'])
 
-    def get_re_prompt_for_data(self, data_name):
-        return self.get_value_from_dict(['slots', data_name, 're_prompt_text'])
+    def get_re_prompt_for_slot_data(self, data_name):
+        slot_data_details = self.get_value_from_dict(['slots', data_name])
+        if 're_prompt_text' in slot_data_details:
+            slot_data_details['speech_out_text'] = slot_data_details['re_prompt_text']
+            del slot_data_details['re_prompt_text']
+        if 're_prompt_ssml' in slot_data_details:
+            slot_data_details['speech_out_text'] = slot_data_details['re_prompt_ssml']
+            del slot_data_details['re_prompt_ssml']
+        slot_data_details['should_end_session'] = False
+        return slot_data_details
+
+    def get_slot_data_details(self, data_name):
+        slot_data_details = self.get_value_from_dict(['slots', data_name])
+        slot_data_details['should_end_session'] = False
+        return slot_data_details
 
     def get_intent_details(self, intent_name):
         return self.get_value_from_dict([intent_name])
@@ -83,6 +93,14 @@ class Dialog(ObjectDictionary):
         ret_val = None
         if dialog_stack is not None:
             ret_val = dialog_stack.pop()
+        return ret_val
+
+    def reset_established_dialog(self):
+        logger.debug("**************** entering Dialog.reset_established_dialog")
+        dialog_stack = self._event.get_value_in_session(['established_conversation'])
+        ret_val = None
+        if dialog_stack is not None:
+            del dialog_stack[:]
         return ret_val
 
     def execute_method(self, method_name):

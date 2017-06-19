@@ -10,3 +10,5 @@ class TestReply(TestCaseASKAmy):
         card = Card.simple('title','some content')
         print(card)
 
+    def test_build_w_card(self):
+        pass

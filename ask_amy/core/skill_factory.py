@@ -42,9 +42,7 @@ class SkillFactory(object):
         try:
             logging_level = skill_dict['loggingLevel']
             logging_level = logging_level.upper()
-            print(logging_level)
             if logging_level == 'NONE':
-                print("disable logger")
                 root_logger = logging.getLogger()
                 root_logger.disabled = True
             else:
@@ -90,7 +88,6 @@ class SkillFactory(object):
         logger.debug("**************** entering SkillFactory.__import_class_from_str")
         module = None
         class_name = None
-        print(dotted_path)
         try:
             module_path, class_name = dotted_path.rsplit('.', 1)
             module = importlib.import_module(module_path)
