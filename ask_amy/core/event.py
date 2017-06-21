@@ -11,12 +11,16 @@ class Event(object):
     def __init__(self, event_dict):
         self._request = Request.factory(event_dict['request'])
         self._session = Session(event_dict['session'])
+        self._version = event_dict['version']
 
     def session(self):
         return self._session
 
     def request(self):
         return self._request
+
+    def version(self):
+        return self._version
 
     def get_user_id(self):
         return self._session.user_id()
