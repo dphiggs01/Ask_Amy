@@ -2,36 +2,50 @@ import sys
 from ask_amy.cli.cli_deploy import DeployCLI
 
 
-
 HELP_BLURB = (
+    "ask-amy-cli provides a simple way to create, deploy and monitor "
+    "your lambda functions. \nThe available commands are: \n"
+    "\n"
+    "  ask-amy-cli help\n"
+    "  ask-amy-cli create --deploy-json-file <filename>\n"
+    "  ask-amy-cli deploy --deploy-json-file <filename>\n"
+    "  ask-amy-cli logs --log-group-name <name> [--tail-log]\n"
+)
+USAGE = (
+    "ask-amy-cli <command> [parameters]\n"
     "To see help text, you can run:\n"
     "\n"
     "  ask-amy-cli help\n"
     "  ask-amy-cli <command> help\n"
 )
-USAGE = (
-    "ask-amy-cli [options] <command> <subcommand> [parameters]\n"
-    "%s" % HELP_BLURB
-)
 
 class AMYCLI(object):
 
-    COMMANDS = ['help', 'deploy', 'create', 'log' ]
+    COMMANDS = ['help', 'deploy', 'create', 'logs' ]
     def parse_command(self, args):
 
         if len(args) == 0:
             sys.stderr.write("usage: %s\n" % USAGE)
             return None
 
+        if len(args) == 1 and str(args[0])=='help':
+            sys.stdout.write(HELP_BLURB)
+            return None
+
         if len(args) >= 1:
-            #print('do cool stuff' + args[0])
             if args[0] in AMYCLI.COMMANDS:
                 cmd = args.pop(0)
-                return self.execute_command(cmd, args)
+                if len(args) >= 1:
+                    return self.execute_command(cmd, args)
+                else:
+                    sys.stderr.write("ERROR: expected a valid parameter\n")
+                    sys.stderr.write("usage: %s\n" % USAGE)
+            else:
+                sys.stderr.write("ERROR: expected a valid command\n")
+                sys.stderr.write("usage: %s\n" % USAGE)
+                return None
 
 
-    def help_cmd(self, args):
-        return HELP_BLURB
 
     #  ask-amy-cli deploy --deploy-json-file config.json
     def deploy_cmd(self, args):
@@ -41,7 +55,7 @@ class AMYCLI(object):
             cli = DeployCLI()
             ret_val = cli.deploy(args[0])
         else:
-            sys.stderr.write("ERROR: expected --deploy-json-file paramater \n")
+            sys.stderr.write("ERROR: expected ask-amy-cli deploy --deploy-json-file <filename> \n")
             ret_val = None
         return ret_val
 
@@ -53,12 +67,12 @@ class AMYCLI(object):
             cli = DeployCLI()
             ret_val = cli.create(args[0])
         else:
-            sys.stderr.write("ERROR: expected --deploy-json-file paramater \n")
+            sys.stderr.write("ERROR: expected ask-amy-cli create --deploy-json-file <filename> \n")
             ret_val = None
         return ret_val
 
 
-    def log_cmd(self, args):
+    def logs_cmd(self, args):
         tail_log = '--tail-log'
         should_tail_log=False
         if tail_log in args:

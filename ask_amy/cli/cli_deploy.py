@@ -71,12 +71,19 @@ class DeployCLI(object):
             pip.main(['install', '--upgrade', 'ask_amy', '-t', destination_dir])
 
     def copy_skill_to_dist(self, source_dir, destination_dir):
+        print(source_dir)
         files = os.listdir(source_dir)
-        for file in files:
-            if file.endswith(".py"):
-                shutil.copy(file, destination_dir)
-            if file.endswith(".json"):
-                shutil.copy(file, destination_dir)
+        try:
+            for file in files:
+                full_path = source_dir+os.sep+file
+                if file.endswith(".py"):
+                    shutil.copy(full_path, destination_dir)
+                if file.endswith(".json"):
+                    shutil.copy(full_path, destination_dir)
+        except FileNotFoundError:
+            sys.stderr.write("ERROR: filename not found {}\n".format(full_path))
+            sys.exit(-1)
+
 
     def make_zipfile(self, output_filename, source_dir):
         output_filename = output_filename[:-4]
@@ -150,9 +157,14 @@ class DeployCLI(object):
         return cmd_args
 
     def load_config(self, config_file_name):
-        file_ptr_r = open(config_file_name, 'r')
-        deploy_dict = json.load(file_ptr_r)
-        file_ptr_r.close()
+        deploy_dict = None
+        try:
+            file_ptr_r = open(config_file_name, 'r')
+            deploy_dict = json.load(file_ptr_r)
+            file_ptr_r.close()
+        except FileNotFoundError:
+            sys.stderr.write("ERROR: filename not found {}\n".format(config_file_name))
+            sys.exit(-1)
         return deploy_dict
 
     def run(self, args):

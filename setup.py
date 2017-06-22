@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='ask_amy',
-      version='0.2.4',
+      version='0.2.5',
       description='Python framework for Alexa Skill development',
       url='https://github.com/dphiggs01/ask_amy',
       author='Dan Higgins',
