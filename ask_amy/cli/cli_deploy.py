@@ -94,7 +94,7 @@ class DeployCLI(object):
         skill_name = config_dict['skill_name']
         lambda_zip = 'fileb://' + config_dict['skill_home_dir'] + '/' + config_dict['lambda_zip']
         aws_profile = config_dict['aws_profile']
-        cmd_args = ['aws', 'lambda', 'update-function-code',
+        cmd_args = ['aws', '--output', 'json', 'lambda', 'update-function-code',
                     '--region', aws_region,
                     '--function-name', skill_name,
                     '--zip-file', lambda_zip,
@@ -110,7 +110,7 @@ class DeployCLI(object):
         lambda_timeout = config_dict['lambda_timeout']
         lambda_memory = config_dict['lambda_memory']
         lambda_zip = 'fileb://' + config_dict['skill_home_dir'] + '/' + config_dict['lambda_zip']
-        cmd_args = ['aws', 'lambda', 'create-function',
+        cmd_args = ['aws', '--output', 'json', 'lambda', 'create-function',
                     '--function-name', skill_name,
                     '--runtime', lambda_runtime,
                     '--role', aws_role,
@@ -124,7 +124,7 @@ class DeployCLI(object):
 
     def lambda_add_trigger(self, config_dict):
         skill_name = config_dict['skill_name']
-        cmd_args = ['aws', 'lambda', 'add-permission',
+        cmd_args = ['aws', '--output', 'json', 'lambda', 'add-permission',
                     '--function-name', skill_name,
                     '--statement-id', 'alexa_trigger',
                     '--action', 'lambda:InvokeFunction',
@@ -174,10 +174,12 @@ class DeployCLI(object):
             out = str(out, 'utf-8')
             if not out:
                 out = '{}'
-
+            print(process)
             return process.returncode, json.loads(out), err
         except Exception as e:
+            print('what the f')
             sys.stderr.write("ERROR: command line error %s\n" % args)
             sys.stderr.write("ERROR: %s\n" % e)
+            sys.exit(-1)
 
         return None
