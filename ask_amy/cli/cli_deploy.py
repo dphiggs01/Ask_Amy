@@ -9,6 +9,22 @@ from time import sleep
 
 class DeployCLI(object):
     def deploy(self, config_file_name):
+        deploy_dict = self.stage_to_dist(config_file_name)
+        deploy_response = self.run(self.lamabda_update_function(deploy_dict))
+        print("deploy_response type {}".format(type(deploy_response)))
+        return json.dumps(deploy_response, indent=4)
+
+    def create(self, config_file_name):
+        deploy_dict = self.stage_to_dist(config_file_name)
+        create_function_out = self.run(self.lambda_create_function(deploy_dict))
+        add_trigger_out = self.run(self.lambda_add_trigger(deploy_dict))
+        response_dict = {}
+        response_dict['create_function']=create_function_out
+        response_dict['add_trigger']=add_trigger_out
+        return json.dumps(response_dict, indent=4)
+
+
+    def stage_to_dist(self, config_file_name):
         deploy_dict = self.load_config(config_file_name)
         skill_home_dir = deploy_dict['skill_home_dir']
         distribution_dir = skill_home_dir + '/dist'
@@ -21,21 +37,13 @@ class DeployCLI(object):
         self.install_ask_amy(distribution_dir, ask_amy_impl)
         self.copy_skill_to_dist(skill_home_dir, distribution_dir)
         self.make_zipfile(deploy_dict['lambda_zip'], distribution_dir)
-        out = self.run(self.lamabda_update_function(deploy_dict))
-        deploy_response = out[1]
-        return json.dumps(deploy_response, indent=4)
+        return deploy_dict
 
-    def create(self, config_file_name):
-        deploy_dict = self.load_config(config_file_name)
-        out = self.run(self.lambda_create_function(deploy_dict))
-        out = self.run(self.lambda_add_trigger(deploy_dict))
-        return out
 
     def log(self, log_group_name, log_stream_name=None, next_forward_token=None):
         if log_stream_name is None:
             log_stream_name = self.latest_log_stream_for_log_group(log_group_name)
-        log_events_tuple = self.run(self.cloudwatch_get_log_events(log_group_name, log_stream_name, next_forward_token))
-        log_events_dict = log_events_tuple[1]
+        log_events_dict = self.run(self.cloudwatch_get_log_events(log_group_name, log_stream_name, next_forward_token))
         next_forward_token = log_events_dict['nextForwardToken']
         log_events_lst = log_events_dict['events']
         for event_dict in log_events_lst:
@@ -44,8 +52,7 @@ class DeployCLI(object):
         return next_forward_token, log_stream_name
 
     def latest_log_stream_for_log_group(self, log_group_name):
-        log_streams_tuple = self.run(self.cloudwatch_latest_log_stream(log_group_name))
-        log_streams_dict = log_streams_tuple[1]
+        log_streams_dict = self.run(self.cloudwatch_latest_log_stream(log_group_name))
         log_streams = log_streams_dict['logStreams']
         latest_stream = log_streams[-1]
         log_stream_name = latest_stream['logStreamName']
@@ -174,12 +181,9 @@ class DeployCLI(object):
             out = str(out, 'utf-8')
             if not out:
                 out = '{}'
-            print(process)
-            return process.returncode, json.loads(out), err
+            return json.loads(out)
         except Exception as e:
             print('what the f')
             sys.stderr.write("ERROR: command line error %s\n" % args)
             sys.stderr.write("ERROR: %s\n" % e)
             sys.exit(-1)
-
-        return None
