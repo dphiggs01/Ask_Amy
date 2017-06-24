@@ -13,38 +13,17 @@ class Event(object):
         self._session = Session(event_dict['session'])
         self._version = event_dict['version']
 
-    def session(self):
+    def _get_session(self):
         return self._session
+    session = property(_get_session)
 
-    def request(self):
+    def _get_request(self):
         return self._request
+    request = property(_get_request)
 
-    def version(self):
+    def _get_version(self):
         return self._version
-
-    def get_user_id(self):
-        return self._session.user_id()
-
-    def is_new_session(self):
-        return self._session.is_new_session()
-
-    def get_request_type(self):
-        return self._request.request_type()
-
-    def get_intent_name(self):
-        return self._request.intent_name()
-
-    def value_for_slot_name(self, slot_name):
-        return self._request.value_for_slot_name(slot_name)
-
-    def get_session_attributes(self):
-        return self._session.attributes()
-
-    def get_value_in_session(self, path):
-        return self._session.get_attribute(path)
-
-    def set_value_in_session(self, name, value):
-        return self._session.put_attribute(name, value)
+    version = property(_get_version)
 
     def slot_data_to_session_attributes(self):
         logger.debug("**************** entering Event.slot_data_to_session_attributes")
@@ -53,17 +32,17 @@ class Event(object):
             slots_dict = self._request.slots()
             for name in slots_dict.keys():
                 # get the value for this name if available
-                value = self.value_for_slot_name(name)
+                value = self.request.value_for_slot_name(name)
                 if value is not None:
                     # Is this is a 'requested_value' and do we have a field to map to?
                     if name == 'requested_value':
-                        requested_value_nm = self.get_value_in_session(['requested_value_nm'])
+                        requested_value_nm = self.session.get_attribute(['requested_value_nm'])
                         if requested_value_nm is not None:
-                            self.set_value_in_session(requested_value_nm, value)
+                            self.session.put_attribute(requested_value_nm, value)
                         else:
-                            self.set_value_in_session(name, value)
+                            self.session.put_attribute(name, value)
                     else:
-                        self.set_value_in_session(name, value)
+                        self.session.put_attribute(name, value)
 
     def __str__(self):
         output = 'Event[\n\tsession = {}\n\trequest = {}\n]'.format(

@@ -32,8 +32,7 @@ class DefaultDialog(Dialog):
 
         """
         logger.debug("**************** entering DefaultDialog.intent_request")
-        request = self._event.request()
-        intent_name = request.intent_name()
+        intent_name = self.request.intent_name()
         method_name = self._sc_intent_control[intent_name]
         return self.execute_method(method_name)
 
@@ -53,5 +52,5 @@ class DefaultDialog(Dialog):
                              "speech_out_text": "Good Bye.",
                              "should_end_session": True}
 
-        reply = Reply.build(response_dict, self.event().session())
+        reply = Reply.build(response_dict, self.session)
         return reply

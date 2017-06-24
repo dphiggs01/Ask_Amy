@@ -19,10 +19,9 @@ class DeployCLI(object):
         create_function_out = self.run(self.lambda_create_function(deploy_dict))
         add_trigger_out = self.run(self.lambda_add_trigger(deploy_dict))
         response_dict = {}
-        response_dict['create_function']=create_function_out
-        response_dict['add_trigger']=add_trigger_out
+        response_dict['create_function'] = create_function_out
+        response_dict['add_trigger'] = add_trigger_out
         return json.dumps(response_dict, indent=4)
-
 
     def stage_to_dist(self, config_file_name):
         deploy_dict = self.load_config(config_file_name)
@@ -30,7 +29,7 @@ class DeployCLI(object):
         distribution_dir = skill_home_dir + '/dist'
         ask_amy_impl = None
         if 'ask_amy_dev' in deploy_dict:
-            if deploy_dict['ask_amy_dev']:
+            if deploy_dict['ask_amy_dev']:  # set to true
                 ask_amy_home_dir = deploy_dict['ask_amy_home_dir']
                 ask_amy_impl = ask_amy_home_dir + '/ask_amy'
 
@@ -38,7 +37,6 @@ class DeployCLI(object):
         self.copy_skill_to_dist(skill_home_dir, distribution_dir)
         self.make_zipfile(deploy_dict['lambda_zip'], distribution_dir)
         return deploy_dict
-
 
     def log(self, log_group_name, log_stream_name=None, next_forward_token=None):
         if log_stream_name is None:
@@ -71,18 +69,22 @@ class DeployCLI(object):
 
     def install_ask_amy(self, destination_dir, source_dir=None):
         ask_amy_dist = destination_dir + '/ask_amy'
-        shutil.rmtree(ask_amy_dist, ignore_errors=True)
-        if source_dir is not None:
-            shutil.copytree(source_dir, ask_amy_dist)
-        else:
-            pip.main(['install', '--upgrade', 'ask_amy', '-t', destination_dir])
+        try:
+            shutil.rmtree(ask_amy_dist, ignore_errors=True)
+            if source_dir is not None:
+                shutil.copytree(source_dir, ask_amy_dist)
+            else:
+                pip.main(['install', '--upgrade', 'ask_amy', '-t', destination_dir])
+        except FileNotFoundError:
+            sys.stderr.write("ERROR: path not found {}\n".format(source_dir))
+            sys.exit(-1)
 
     def copy_skill_to_dist(self, source_dir, destination_dir):
         print(source_dir)
         files = os.listdir(source_dir)
         try:
             for file in files:
-                full_path = source_dir+os.sep+file
+                full_path = source_dir + os.sep + file
                 if file.endswith(".py"):
                     shutil.copy(full_path, destination_dir)
                 if file.endswith(".json"):
@@ -90,7 +92,6 @@ class DeployCLI(object):
         except FileNotFoundError:
             sys.stderr.write("ERROR: filename not found {}\n".format(full_path))
             sys.exit(-1)
-
 
     def make_zipfile(self, output_filename, source_dir):
         output_filename = output_filename[:-4]

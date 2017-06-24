@@ -94,9 +94,13 @@ class AMYCLI(object):
         return ret_val
 
     def execute_command(self, method_name, args):
-        method = getattr(self, method_name+'_cmd')
-        #print(method)
-        return method(args)
+        try:
+            method = getattr(self, method_name+'_cmd')
+            return method(args)
+        except AttributeError:
+            sys.stderr.write("ERROR: unable to process request {} {}\n".format(method_name, args))
+            sys.exit(-1)
+
 
 
 
