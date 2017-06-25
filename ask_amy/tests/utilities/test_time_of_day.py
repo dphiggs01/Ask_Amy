@@ -69,6 +69,16 @@ class TestTimeOfDay(TestCaseASKAmy):
     def test_time_adj(self):
         lunch = datetime(2017, 7, 4, 12, 22, 00)
         time_adj = TimeOfDay.time_adj("11:22","AM",lunch)
-        self.assertEquals(1,time_adj)
-        time_adj = TimeOfDay.time_adj("01:22","PM",lunch)
         self.assertEquals(-1,time_adj)
+        time_adj = TimeOfDay.time_adj("01:22","PM",lunch)
+        self.assertEquals(1,time_adj)
+
+    def test_utc_time_adj(self):
+        lunch = datetime(2017, 7, 4, 12, 22, 00)
+        time_adj = TimeOfDay.time_adj("3:54","PM")
+        now = TimeOfDay.current_time(-4)
+        #print("now {}".format(now))
+        us_tz_nms =['US/Alaska', 'US/Hawaii', 'US/Arizona', 'US/Pacific', 'US/Mountain', 'US/Central', 'US/Eastern']
+
+        TimeOfDay.time_adj_with_tz('US/Eastern')
+

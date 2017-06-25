@@ -2,6 +2,12 @@ from datetime import datetime, timedelta
 import re
 import logging
 
+try:
+    import pytz
+except ImportError:
+    pass # don't freak if pytz is not installed
+
+
 logger = logging.getLogger()
 
 
@@ -9,7 +15,7 @@ class TimeOfDay(object):
     Breakfast, Lunch, Dinner, Daytime, Nighttime = range(5)
 
     @staticmethod
-    def current_time(time_adj, now=datetime.now()):
+    def current_time(time_adj, now=datetime.utcnow()):
         """
         current time with an offset applied
         :param time_adj: a positive or negative int to offset current time
@@ -19,20 +25,20 @@ class TimeOfDay(object):
         if time_adj is None:
             return None
 
-        now -= timedelta(hours=int(time_adj))
+        now += timedelta(hours=int(time_adj))
         return now.strftime('%I:%M %p')
 
     @staticmethod
-    def meal_time(time_adj, now=datetime.now()):
+    def meal_time(time_adj, now=datetime.utcnow()):
         """
-        Calculate if its breakfast, lunch or dinner time after appling and hours offset
+        Calculate if its breakfast, lunch or dinner time after applying and hours offset
         :param time_adj:
         :param now: current time or passed time used for testing
         :return: Breakfast, Lunch, Dinner enumeration
         """
         if time_adj is None:
             return None
-        now -= timedelta(hours=int(time_adj))
+        now += timedelta(hours=int(time_adj))
         # now = datetime.strptime(datetime_str, "%Y-%m-%dT%H:%M:%SZ")
         today430am = now.replace(hour=4, minute=30, second=0, microsecond=0)
         today1130 = now.replace(hour=11, minute=30, second=0, microsecond=0)
@@ -45,16 +51,16 @@ class TimeOfDay(object):
             return TimeOfDay.Dinner
 
     @staticmethod
-    def day_night(time_adj, now=datetime.now()):
+    def day_night(time_adj, now=datetime.utcnow()):
         """
-        Calculate if it Daytime or Nighttime after appling and hours offset
+        Calculate if it Daytime or Nighttime after applying and hours offset
         :param time_adj:
         :param now: current time or passed time used for testing
         :return:
         """
         if time_adj is None:
             return None
-        now -= timedelta(hours=int(time_adj))
+        now += timedelta(hours=int(time_adj))
         # now = datetime.strptime(datetime_str, "%Y-%m-%dT%H:%M:%SZ")
         today5am = now.replace(hour=5, minute=0, second=0, microsecond=0)
         today8pm = now.replace(hour=12 + 8, minute=0, second=0, microsecond=0)
@@ -64,7 +70,7 @@ class TimeOfDay(object):
             return TimeOfDay.Nighttime
 
     @staticmethod
-    def time_adj(time_str, time_am_pm, now=datetime.now()):
+    def time_adj(time_str, time_am_pm, now=datetime.utcnow()):
         """
         Given a time calculate how many hours different it is from the current system time
         :param time_str: HH:MM
@@ -89,8 +95,31 @@ class TimeOfDay(object):
         if pattern.match(time_str):
             server_time = now
             users_time = server_time.replace(hour=int(hours)+am_pm_shift, minute=int(minutes), second=0, microsecond=0)
-            time_difference = server_time - users_time
+            time_difference = users_time - server_time
             time_difference_in_hours = int(round(time_difference / timedelta(minutes=60), 0))
             logger.debug("Time on Server [{}] User stated time [{}] difference {}".format(server_time, time_str,
                                                                                           time_difference_in_hours))
         return time_difference_in_hours
+
+    @staticmethod
+    def time_adj_given_tz(time_zone, now=datetime.utcnow()):
+
+        utc = pytz.timezone('UTC')
+        utc_date = utc.localize(now)
+        print("utc_date {}".format(utc_date.strftime("%a %b %d %H:%M:%S %Y")))
+        print("utcnow   {}".format(now.strftime("%a %b %d %H:%M:%S %Y")))
+
+        us_tz_nms =['US/Alaska', 'US/Hawaii', 'US/Arizona', 'US/Pacific', 'US/Mountain', 'US/Central', 'US/Eastern']
+
+        pytz_timezone = pytz.timezone(time_zone)
+        adjusted_date = utc_date.astimezone(pytz_timezone)
+        # todo I'm certain there is a better way to do this (but limited on time)
+        adjusted_date_str = adjusted_date.strftime("%a %b %d %H:%M:%S %Y")
+        # new adjusted date is tz naive so I can subtract
+        adjusted_date = adjusted_date.strptime(adjusted_date_str, "%a %b %d %H:%M:%S %Y")
+
+        time_difference = adjusted_date - now
+        time_difference_in_hours = int(round(time_difference / timedelta(minutes=60), 0))
+        return time_difference_in_hours
+
+
