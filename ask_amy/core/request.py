@@ -10,17 +10,21 @@ class Request(ObjectDictionary):
         super().__init__(request_dict)
         self.logger.debug("Request __init__")
 
-    def request_type(self):
+    def _request_type(self):
         return self.get_value_from_dict(['type'])
+    request_type = property(_request_type)
 
-    def request_id(self):
+    def _request_id(self):
         return self.get_value_from_dict(['requestId'])
+    request_id = property(_request_id)
 
-    def locale(self):
+    def _locale(self):
         return self.get_value_from_dict(['locale'])
+    locale = property(_locale)
 
-    def timestamp(self):
+    def _timestamp(self):
         return self.get_value_from_dict(['timestamp'])
+    timestamp = property(_timestamp)
 
     @staticmethod
     def factory(request_dict):
@@ -47,14 +51,17 @@ class IntentRequest(Request):
         self._slots = None
         self.logger.debug("IntentRequest __init__")
 
-    def dialog_state(self):
+    def _dialog_state(self):
         return self.get_value_from_dict(['dialogState'])
+    dialog_state = property(_dialog_state)
 
-    def intent_name(self):
+    def _intent_name(self):
         return self.get_value_from_dict(['intent', 'name'])
+    intent_name = property(_intent_name)
 
-    def confirmation_status(self):
+    def _confirmation_status(self):
         return self.get_value_from_dict(['intent', 'confirmationStatus'])
+    confirmation_status = property(_confirmation_status)
 
     def _get_slots(self):
         if self._slots is None:
@@ -79,14 +86,17 @@ class SessionEndedRequest(Request):
         super().__init__(request_dict)
         self.logger.debug("SessionEndedRequest __init__")
 
-    def reason(self):
+    def _reason(self):
         return self.get_value_from_dict(['reason'])
+    reason = property(_reason)
 
-    def error_type(self):
+    def _error_type(self):
         return self.get_value_from_dict(['error', 'type'])
+    error_type = property(_error_type)
 
-    def error_message(self):
+    def _error_message(self):
         return self.get_value_from_dict(['error', 'message'])
+    error_message = property(_error_message)
 
 
 class Slot(ObjectDictionary):

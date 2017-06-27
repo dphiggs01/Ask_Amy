@@ -11,10 +11,11 @@ class Dialog(ObjectDictionary):
     def __init__(self, dialog_dict=None):
         super().__init__(dialog_dict)
         self._event = None
+        self._method_name = None
 
         self._sc_application_id = self.get_value_from_dict(['applicationId'])
+
         self._sc_request_control = {
-            "NewSession": "new_session_started",
             "LaunchRequest": "launch_request",
             "IntentRequest": "intent_request",
             "SessionEndedRequest": "session_ended_request"
@@ -24,10 +25,6 @@ class Dialog(ObjectDictionary):
     def _get_event(self):
         return self._event
     event = property(_get_event)
-
-    def _set_event(self, event):
-        self._event = event
-    event = event.setter(_set_event)
 
     def _get_session(self):
         return self._event.session
@@ -40,6 +37,22 @@ class Dialog(ObjectDictionary):
     def _get_version(self):
         return self._event.version
     version = property(_get_version)
+
+    def _get_application_id(self):
+        return self._sc_application_id
+    application_id = property(_get_application_id)
+
+    def _get_method_name(self):
+        return self._method_name
+    method_name = property(_get_method_name)
+
+    def _get_reply_dialog(self):
+        return self._obj_dict
+    reply_dialog = property(_get_reply_dialog)
+
+    # todo deprecate replace with property 'reply_dialog'
+    def get_intent_details(self, intent_name):
+        return self.get_value_from_dict([intent_name])
 
     def get_expected_intent_for_data(self, data_name):
         return self.get_value_from_dict(['slots', data_name, 'expected_intent'])
@@ -60,9 +73,6 @@ class Dialog(ObjectDictionary):
         slot_data_details['should_end_session'] = False
         return slot_data_details
 
-    def get_intent_details(self, intent_name):
-        return self.get_value_from_dict([intent_name])
-
     def begin(self, event_dict):
         logger.debug("**************** entering Dialog.begin")
         self._event = Event(event_dict)
@@ -74,16 +84,16 @@ class Dialog(ObjectDictionary):
             if self.session.application_id != self._sc_application_id:
                 raise ApplicationIdError("Invalid Application ID")
 
-        # If we are starting a new session then call the method in the request
-        # control. This methods may be overridden on the skills derived class
+        # If we are starting a new session then call new_session_started.
+        # This methods may be overridden on the skills derived class
         if self.session.is_new_session:
-            method_name = self._sc_request_control['NewSession']
-            self.execute_method(method_name)
+            self.new_session_started()
+
 
         # Get the request type from the event and execute the mapped method
         # This methods may be overridden on the skills derived class
         # Current request may be  "LaunchRequest", "IntentRequest", "SessionEndedRequest"
-        request_type = self.request.request_type()
+        request_type = self.request.request_type
         method_name = self._sc_request_control[request_type]
         return self.execute_method(method_name)
 
@@ -122,4 +132,4 @@ class Dialog(ObjectDictionary):
 
     def execute_method(self, method_name):
         method = getattr(self, method_name)
-        return method(method_name)
+        return method()

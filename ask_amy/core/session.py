@@ -48,7 +48,10 @@ class Session(ObjectDictionary):
     consent_token = property(_consent_token)
 
     def _attributes(self):
-        return self.get_value_from_dict(['attributes'])
+        has_attributes = self.get_value_from_dict(['attributes'])
+        if has_attributes is None:
+            self._obj_dict['attributes'] = {}
+        return self._obj_dict['attributes']
     attributes = property(_attributes)
 
     def attribute_exists(self,attribute):
