@@ -23,26 +23,39 @@ class Session(ObjectDictionary):
                 if self.get_value_from_dict(['new']):  # if new session load data
                     self.load()
 
-    def session_id(self):
+    def _session_id(self):
         return self.get_value_from_dict(['sessionId'])
+    session_id = property(_session_id)
 
-    def application_id(self):
+    def _application_id(self):
         return self.get_value_from_dict(['application', 'applicationId'])
+    application_id = property(_application_id)
 
-    def is_new_session(self):
+    def _is_new_session(self):
         return self.get_value_from_dict(['new'])
+    is_new_session = property(_is_new_session)
 
-    def user_id(self):
+    def _user_id(self):
         return self.get_value_from_dict(['user', 'userId'])
+    user_id = property(_user_id)
 
-    def access_token(self):
+    def _access_token(self):
         return self.get_value_from_dict(['user', 'accessToken'])
+    access_token = property(_access_token)
 
-    def consent_token(self):
+    def _consent_token(self):
         return self.get_value_from_dict(['user', 'permissions', 'consentToken'])
+    consent_token = property(_consent_token)
 
-    def attributes(self):
+    def _attributes(self):
         return self.get_value_from_dict(['attributes'])
+    attributes = property(_attributes)
+
+    def attribute_exists(self,attribute):
+        if attribute in self.attributes.keys():
+            return True
+        else:
+            return False
 
     def put_attribute(self, name, value):
         logger.debug("**************** entering Session.put_attribute")
@@ -57,6 +70,7 @@ class Session(ObjectDictionary):
             raise SessionError
         return val
 
+
     def get_attribute(self, path):
         path.insert(0, 'attributes')
         val = self.get_value_from_dict(path)
@@ -65,23 +79,20 @@ class Session(ObjectDictionary):
     def load(self):
         logger.debug("**************** entering Session.load")
         if self._persistence:
-            user_id = self.user_id()
             dynamo_db = DynamoDB(self._table_name)
-            session_data = dynamo_db.load(user_id)
+            session_data = dynamo_db.load(self.user_id)
             for name in session_data.keys():
                 self.put_attribute(name, session_data[name]['value'])
 
     def save(self):
         logger.debug("**************** entering Session.save")
         if self._persistence:
-            user_id = self.user_id()
             dynamo_db = DynamoDB(self._table_name)
-            session_data = self.attributes()
-            dynamo_db.save(user_id, self._fields_to_persist, session_data)
+            session_data = self.attributes
+            dynamo_db.save(self.user_id, self._fields_to_persist, session_data)
 
     def reset_stored_values(self):
         logger.debug("**************** entering Session.reset_stored_values")
         if self._persistence:
-            user_id = self.user_id()
             dynamo_db = DynamoDB(self._table_name)
-            dynamo_db.update_data(user_id, DynamoDB.NAME, DynamoDB.SESSION_DATA, "{}")
+            dynamo_db.update_data(self.user_id, DynamoDB.NAME, DynamoDB.SESSION_DATA, "{}")

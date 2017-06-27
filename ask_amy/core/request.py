@@ -44,6 +44,7 @@ class IntentRequest(Request):
 
     def __init__(self, request_dict):
         super().__init__(request_dict)
+        self._slots = None
         self.logger.debug("IntentRequest __init__")
 
     def dialog_state(self):
@@ -55,8 +56,15 @@ class IntentRequest(Request):
     def confirmation_status(self):
         return self.get_value_from_dict(['intent', 'confirmationStatus'])
 
-    def slots(self):
-        return self.get_value_from_dict(['intent', 'slots'])
+    def _get_slots(self):
+        if self._slots is None:
+            self._slots = {}
+            slots_dict = self.get_value_from_dict(['intent', 'slots'])
+            if slots_dict is not None:
+                for slot_name in slots_dict.keys():
+                    self._slots[slot_name] = Slot(slots_dict[slot_name])
+        return self._slots
+    slots = property(_get_slots)
 
     def value_for_slot_name(self, name):
         path = ['intent', 'slots', name, 'value']
@@ -88,11 +96,14 @@ class Slot(ObjectDictionary):
         super().__init__(slot_dict)
         self.logger.debug("Slot __init__")
 
-    def name(self):
+    def _name(self):
         return self.get_value_from_dict(['name'])
+    name = property(_name)
 
-    def value(self):
+    def _value(self):
         return self.get_value_from_dict(['value'])
+    value = property(_value)
 
-    def confirmation_status(self):
+    def _confirmation_status(self):
         return self.get_value_from_dict(['confirmationStatus'])
+    confirmation_status = property(_confirmation_status)

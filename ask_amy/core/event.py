@@ -29,7 +29,7 @@ class Event(object):
         logger.debug("**************** entering Event.slot_data_to_session_attributes")
         # If we have an Intent Request map the slot values to the session
         if isinstance(self._request, IntentRequest):
-            slots_dict = self._request.slots()
+            slots_dict = self._request.slots
             for name in slots_dict.keys():
                 # get the value for this name if available
                 value = self.request.value_for_slot_name(name)

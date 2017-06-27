@@ -59,7 +59,7 @@ class Reply(ObjectDictionary):
 
         attributes = {}
         if session is not None:
-            attributes = session.attributes()
+            attributes = session.attributes
 
         reply = Reply.constr(response, attributes)
         logger.debug("**************** exiting Reply.build")

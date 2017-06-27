@@ -36,8 +36,8 @@ class TestRequest(TestCaseASKAmy):
         self.assertEquals('agreeToTerms',request_obj.intent_name())
         self.assertEquals('agree',request_obj.value_for_slot_name('agree'))
         slots_expected = {'agree': {'name': 'agree', 'value': 'agree'}}
-        self.assertEquals(slots_expected,request_obj.slots())
+        self.assertEquals(slots_expected,request_obj.slots)
         #self.assertEquals()
         #print(request_obj.value_for_slot_name('agree'))
-        print(request_obj.slots())
+        print(request_obj.slots)
 

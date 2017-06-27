@@ -71,12 +71,12 @@ class Dialog(ObjectDictionary):
         # If we have and application id in our configuration see if it matches the
         # application id in the event
         if self._sc_application_id:
-            if self.session.application_id() != self._sc_application_id:
+            if self.session.application_id != self._sc_application_id:
                 raise ApplicationIdError("Invalid Application ID")
 
         # If we are starting a new session then call the method in the request
         # control. This methods may be overridden on the skills derived class
-        if self.session.is_new_session():
+        if self.session.is_new_session:
             method_name = self._sc_request_control['NewSession']
             self.execute_method(method_name)
 
