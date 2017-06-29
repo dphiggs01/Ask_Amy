@@ -44,7 +44,6 @@ class DynamoDB(object):
             }
         )
 
-        logger.debug("DynamoDB.create_table Table status:{}".format(table.table_status))
 
     def get_item(self, user_id, name):
         logger.debug("**************** entering DynamoDB.get_item")
@@ -58,10 +57,9 @@ class DynamoDB(object):
                 }
             )
         except ClientError as e:
-            logger.debug(e.response['Error']['Message'])
+            logger.critital(e.response['Error']['Message'])
         else:
             if "Item" in response:
-                logger.debug("DynamoDB.get_item succeeded")
                 return_val = response['Item']
         return return_val
 
@@ -81,9 +79,8 @@ class DynamoDB(object):
                 ReturnValues="UPDATED_NEW"
             )
         except ClientError as e:
-            logger.debug(e.response['Error']['Message'])
+            logger.critical(e.response['Error']['Message'])
             response = None
-        logger.debug("DynamoDB.update_data for [{}]".format(value))
         return response
 
     def query_by_userid(self, user_id):
@@ -117,7 +114,6 @@ class DynamoDB(object):
             logger.critical(e.response['Error']['Message'])
             raise
         else:
-            logger.debug("DynamoDB.delete_item DELETED id={}".format(id))
             return response
 
     def load(self, user_id):
@@ -127,12 +123,10 @@ class DynamoDB(object):
 
         if len(persisted_user_data) == 0:
             self.update_data(user_id, DynamoDB.NAME, DynamoDB.SESSION_DATA, '{}')
-            logger.debug("DynamoDB.load adding new user to DB")
         else:
             user_data = persisted_user_data[0]
             # Replace with json dump
             dialog_data = eval(user_data[DynamoDB.SESSION_DATA])
-            logger.debug("DynamoDB.load dialog_fields={}".format(dialog_data))
 
         return dialog_data
 
@@ -141,11 +135,9 @@ class DynamoDB(object):
         dialog_dict = {}
         for name in fields_to_persist:
             value = self.get_attribute(session_data, [name])
-            logger.debug("DynamoDB.save      session name={} value={}".format(name, value))
             if value is not None:
                 dialog_dict[name] = {'value': value}
 
-        logger.debug("      dialog_dict={}".format(str(dialog_dict)))
         self.update_data(user_id, DynamoDB.NAME, DynamoDB.SESSION_DATA, str(dialog_dict))
 
     def get_attribute(self, attributes, path):

@@ -3,6 +3,7 @@ import json
 import os
 import sys
 import importlib
+from ask_amy.core.exceptions import SkillLoadError
 
 logger = logging.getLogger()
 
@@ -20,7 +21,6 @@ class SkillFactory(object):
             config_file_name = SkillFactory.SKILL_CONFIG
         config_dict = SkillFactory.__load(config_file_name)
 
-        # todo add exception management
         skill_dict = config_dict['Skill']
         skill_class_name = skill_dict['className']
         SkillFactory.set_logging_level(skill_dict)
@@ -48,8 +48,8 @@ class SkillFactory(object):
             else:
                 set_level = logging_levels[logging_level]
                 logger.setLevel(set_level)
-        except KeyError as e:
-
+        except KeyError:
+            # Ignore error if you fail to set the logging level
             pass
 
     @staticmethod
@@ -79,23 +79,22 @@ class SkillFactory(object):
 
         if not_found:
             logger.critical("Error in SkillFactory.__load seaching for file {} ".format(file_name))
-            raise FileNotFoundError
+            raise SkillLoadError('Unable to load skill: for {}'.format(file_name))
 
         return dialog_dict
 
     @staticmethod
     def __import_class_from_str(dotted_path):
         logger.debug("**************** entering SkillFactory.__import_class_from_str")
-        module = None
-        class_name = None
         try:
             module_path, class_name = dotted_path.rsplit('.', 1)
             module = importlib.import_module(module_path)
-        except ValueError:
+        except ValueError as error:
             logger.critical("Error SkillFactory.__import_class_from_str")
-            # todo Add proper exception management
+            raise SkillLoadError('Unable to load skill: Value error for {}'.format(dotted_path)) from error
 
         try:
             return getattr(module, class_name)
-        except AttributeError as err:
-            logger.critical("Error in SkillFactory.__import_class_from_str path {} err={}".format(dotted_path, err))
+        except AttributeError as error:
+            logger.critical("Error in SkillFactory.__import_class_from_str path {} err={}".format(dotted_path, error))
+            raise SkillLoadError('Unable to load skill: Attribute error for {}'.format(module, class_name)) from error

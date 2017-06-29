@@ -97,8 +97,6 @@ class TimeOfDay(object):
             users_time = server_time.replace(hour=int(hours)+am_pm_shift, minute=int(minutes), second=0, microsecond=0)
             time_difference = users_time - server_time
             time_difference_in_hours = int(round(time_difference / timedelta(minutes=60), 0))
-            logger.debug("Time on Server [{}] User stated time [{}] difference {}".format(server_time, time_str,
-                                                                                          time_difference_in_hours))
         return time_difference_in_hours
 
     @staticmethod

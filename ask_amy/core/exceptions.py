@@ -16,7 +16,12 @@ class IntentControlError(ASKAmyError):
 
 
 class DialogIntentError(ASKAmyError):
-    """The Intent Name does not map to an Intent in the IntentControl section for this skill"""
+    """The Method Name does not map to an Intent in the Dialog section for this skill"""
+
+
+class SkillLoadError(ASKAmyError):
+    """Unable to load, bootstrap and execute the skill """
+
 
 class SessionError(ASKAmyError):
     """Error in session """

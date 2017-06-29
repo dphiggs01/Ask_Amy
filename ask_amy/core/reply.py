@@ -24,13 +24,10 @@ class Reply(ObjectDictionary):
         prompt = None
         reprompt = None
         card = None
-        logger.debug("dialog_dict={}".format(dialog_dict))
 
         if 'speech_out_text' in dialog_dict:
-            logger.debug("speech_out_text={}".format(dialog_dict['speech_out_text']))
             prompt = Prompt.text(dialog_dict['speech_out_text'], session)
         if 're_prompt_text' in dialog_dict:
-            logger.debug("re_prompt_text={}".format(dialog_dict['re_prompt_text']))
             reprompt = Prompt.text(dialog_dict['re_prompt_text'], session)
         if 'speech_out_ssml' in dialog_dict:
             prompt = Prompt.ssml(dialog_dict['speech_out_ssml'], session)
@@ -41,7 +38,6 @@ class Reply(ObjectDictionary):
         else:
             should_end_session = True
         if 'card_title' in dialog_dict:
-            logger.debug("card_title={}".format(dialog_dict['card_title']))
             card = Card.simple(dialog_dict['card_title'], dialog_dict['speech_out_text'], session)
 
         if 'card' in dialog_dict:
@@ -62,7 +58,6 @@ class Reply(ObjectDictionary):
             attributes = session.attributes
 
         reply = Reply.constr(response, attributes)
-        logger.debug("**************** exiting Reply.build")
         return reply.json()
 
 
@@ -132,8 +127,9 @@ class CommunicationChannel(ObjectDictionary):
     @staticmethod
     def process_token(token, session):
         logger.debug("**************** entering OutText.process_token")
-        value = session.get_attribute([token])
-        if value is None:
+        if session.attribute_exists(token):
+            value = session.attributes[token]
+        else:
             value = ''
         return str(value)
 

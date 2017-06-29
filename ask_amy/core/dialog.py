@@ -11,7 +11,7 @@ class Dialog(ObjectDictionary):
     def __init__(self, dialog_dict=None):
         super().__init__(dialog_dict)
         self._event = None
-        self._method_name = None
+        self._intent_name = None
 
         self._sc_application_id = self.get_value_from_dict(['applicationId'])
 
@@ -42,9 +42,9 @@ class Dialog(ObjectDictionary):
         return self._sc_application_id
     application_id = property(_get_application_id)
 
-    def _get_method_name(self):
-        return self._method_name
-    method_name = property(_get_method_name)
+    def _get_intent_name(self):
+        return self._intent_name
+    intent_name = property(_get_intent_name)
 
     def _get_reply_dialog(self):
         return self._obj_dict
@@ -96,39 +96,6 @@ class Dialog(ObjectDictionary):
         request_type = self.request.request_type
         method_name = self._sc_request_control[request_type]
         return self.execute_method(method_name)
-
-    def peek_established_dialog(self):
-        logger.debug("**************** entering Dialog.peek_established_dialog")
-        dialog_stack = self.session.get_attribute(['established_conversation'])
-        ret_val = None
-        if dialog_stack is not None:
-            ret_val = dialog_stack[len(dialog_stack) - 1]
-        return ret_val
-
-    def push_established_dialog(self, intent_name):
-        logger.debug("**************** entering Dialog.push_established_dialog")
-        dialog_stack = self.session.get_attribute(['established_conversation'])
-        if dialog_stack is None:
-            dialog_stack = []
-        dialog_stack.append(intent_name)
-        self.session.put_attribute('established_conversation', dialog_stack)
-        return dialog_stack
-
-    def pop_established_dialog(self):
-        logger.debug("**************** entering Dialog.pop_established_dialog")
-        dialog_stack = self.session.get_attribute(['established_conversation'])
-        ret_val = None
-        if dialog_stack is not None:
-            ret_val = dialog_stack.pop()
-        return ret_val
-
-    def reset_established_dialog(self):
-        logger.debug("**************** entering Dialog.reset_established_dialog")
-        dialog_stack = self.session.get_attribute(['established_conversation'])
-        ret_val = None
-        if dialog_stack is not None:
-            del dialog_stack[:]
-        return ret_val
 
     def execute_method(self, method_name):
         method = getattr(self, method_name)

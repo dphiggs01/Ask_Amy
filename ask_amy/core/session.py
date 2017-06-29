@@ -1,8 +1,6 @@
 import logging
 
 from ask_amy.core.skill_factory import SkillFactory
-
-from ask_amy.core.exceptions import SessionError
 from ask_amy.core.object_dictionary import ObjectDictionary
 from ask_amy.database.database import DynamoDB
 
@@ -25,26 +23,32 @@ class Session(ObjectDictionary):
 
     def _session_id(self):
         return self.get_value_from_dict(['sessionId'])
+
     session_id = property(_session_id)
 
     def _application_id(self):
         return self.get_value_from_dict(['application', 'applicationId'])
+
     application_id = property(_application_id)
 
     def _is_new_session(self):
         return self.get_value_from_dict(['new'])
+
     is_new_session = property(_is_new_session)
 
     def _user_id(self):
         return self.get_value_from_dict(['user', 'userId'])
+
     user_id = property(_user_id)
 
     def _access_token(self):
         return self.get_value_from_dict(['user', 'accessToken'])
+
     access_token = property(_access_token)
 
     def _consent_token(self):
         return self.get_value_from_dict(['user', 'permissions', 'consentToken'])
+
     consent_token = property(_consent_token)
 
     def _attributes(self):
@@ -52,32 +56,14 @@ class Session(ObjectDictionary):
         if has_attributes is None:
             self._obj_dict['attributes'] = {}
         return self._obj_dict['attributes']
+
     attributes = property(_attributes)
 
-    def attribute_exists(self,attribute):
+    def attribute_exists(self, attribute):
         if attribute in self.attributes.keys():
             return True
         else:
             return False
-
-    def put_attribute(self, name, value):
-        logger.debug("**************** entering Session.put_attribute")
-        logger.debug("name={} value={}".format(name, value))
-        val = value
-        obj_dict = self.get_value_from_dict(['attributes'])
-        if obj_dict is None:
-            self._obj_dict['attributes'] = {}
-        try:
-            self._obj_dict['attributes'][name] = value
-        except KeyError:
-            raise SessionError
-        return val
-
-
-    def get_attribute(self, path):
-        path.insert(0, 'attributes')
-        val = self.get_value_from_dict(path)
-        return val
 
     def load(self):
         logger.debug("**************** entering Session.load")
@@ -85,7 +71,7 @@ class Session(ObjectDictionary):
             dynamo_db = DynamoDB(self._table_name)
             session_data = dynamo_db.load(self.user_id)
             for name in session_data.keys():
-                self.put_attribute(name, session_data[name]['value'])
+                self.attributes[name] = session_data[name]['value']
 
     def save(self):
         logger.debug("**************** entering Session.save")

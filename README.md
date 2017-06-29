@@ -8,5 +8,8 @@ pip install ask_amy -t /path/to/project-dir/dist
 * python setup.py sdist
 * python setup.py sdist upload
 
-sphinx-apidoc -o aaa/ ~/Code/AWS/alexa/ask_amy/ask_amy
+ask-amy-cli deploy --deploy-json-file cli_config.json
+ask-amy-cli logs --log-group-name /aws/lambda/insulin_calc_skill
 
+sphinx-apidoc -o aaa/ ~/Code/AWS/alexa/ask_amy/ask_amy
+find . -type d -name dist -exec rm -rf {} \;

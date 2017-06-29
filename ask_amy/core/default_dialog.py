@@ -12,16 +12,14 @@ class DefaultDialog(Dialog):
 
     def new_session_started(self):
         logger.debug("**************** entering DefaultDialog.new_session_started")
-        pass
 
     def launch_request(self):
         logger.debug("**************** entering DefaultDialog.launch_request")
         try:
-            self._method_name = self._sc_intent_control['AMAZON.HelpIntent']
+            self._intent_name = self._sc_intent_control['AMAZON.HelpIntent']
         except KeyError as error:
             raise IntentControlError("No Key found for IntentControl: AMAZON.HelpIntent") from error
-
-        return self.execute_method(self.method_name)
+        return self.execute_method(self.intent_name)
 
     def session_ended_request(self):
         logger.debug("**************** entering DefaultDialog.session_ended_request")
@@ -42,10 +40,14 @@ class DefaultDialog(Dialog):
         """
         logger.debug("**************** entering DefaultDialog.intent_request")
         try:
-            self._method_name = self._sc_intent_control[self.request.intent_name]
+            self._intent_name = self._sc_intent_control[self.request.intent_name]
+            execute_method = self.intent_name
+            if self.intent_name in self._obj_dict:
+                if 'method_name' in self._obj_dict[self.intent_name]:
+                    execute_method = self._obj_dict[self.intent_name]['method_name']
         except KeyError as error:
             raise IntentControlError("No Key found for IntentControl: {}".format(self.request.intent_name)) from error
-        return self.execute_method(self.method_name)
+        return self.execute_method(execute_method)
 
     def default_stop_intent(self):
         logger.debug("**************** entering DefaultDialog.default_stop_intent")
@@ -56,16 +58,16 @@ class DefaultDialog(Dialog):
         return self.handle_default_intent(use_default_message=True)
 
     def handle_default_intent(self, use_default_message=None):
-        logger.debug('**************** entering DefaultDialog.handle_default_intent.{}'.format(self.method_name))
+        logger.debug('**************** entering DefaultDialog.handle_default_intent')
         try:
-            reply_dialog = self.reply_dialog[self.method_name]
+            reply_dialog = self.reply_dialog[self.intent_name]
         except KeyError as error:
             if use_default_message is not None:
                 reply_dialog = {
                     "speech_out_text": "Good Bye.",
                     "should_end_session": True}
             else:
-                raise DialogIntentError("No key found for Intent in Dialog: {}".format(self.method_name)) from error
+                raise DialogIntentError("No key found for Intent in Dialog: {}".format(self.intent_name)) from error
 
         reply = Reply.build(reply_dialog, self.session)
         return reply

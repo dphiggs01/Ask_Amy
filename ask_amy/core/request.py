@@ -8,22 +8,25 @@ logger = logging.getLogger()
 class Request(ObjectDictionary):
     def __init__(self, request_dict):
         super().__init__(request_dict)
-        self.logger.debug("Request __init__")
 
     def _request_type(self):
         return self.get_value_from_dict(['type'])
+
     request_type = property(_request_type)
 
     def _request_id(self):
         return self.get_value_from_dict(['requestId'])
+
     request_id = property(_request_id)
 
     def _locale(self):
         return self.get_value_from_dict(['locale'])
+
     locale = property(_locale)
 
     def _timestamp(self):
         return self.get_value_from_dict(['timestamp'])
+
     timestamp = property(_timestamp)
 
     @staticmethod
@@ -39,7 +42,6 @@ class Request(ObjectDictionary):
 class LaunchRequest(Request):
     def __init__(self, request_dict):
         super().__init__(request_dict)
-        self.logger.debug("LaunchRequest __init__")
 
 
 class IntentRequest(Request):
@@ -49,18 +51,20 @@ class IntentRequest(Request):
     def __init__(self, request_dict):
         super().__init__(request_dict)
         self._slots = None
-        self.logger.debug("IntentRequest __init__")
 
     def _dialog_state(self):
         return self.get_value_from_dict(['dialogState'])
+
     dialog_state = property(_dialog_state)
 
     def _intent_name(self):
         return self.get_value_from_dict(['intent', 'name'])
+
     intent_name = property(_intent_name)
 
     def _confirmation_status(self):
         return self.get_value_from_dict(['intent', 'confirmationStatus'])
+
     confirmation_status = property(_confirmation_status)
 
     def _get_slots(self):
@@ -71,6 +75,7 @@ class IntentRequest(Request):
                 for slot_name in slots_dict.keys():
                     self._slots[slot_name] = Slot(slots_dict[slot_name])
         return self._slots
+
     slots = property(_get_slots)
 
     def value_for_slot_name(self, name):
@@ -84,18 +89,20 @@ class SessionEndedRequest(Request):
 
     def __init__(self, request_dict):
         super().__init__(request_dict)
-        self.logger.debug("SessionEndedRequest __init__")
 
     def _reason(self):
         return self.get_value_from_dict(['reason'])
+
     reason = property(_reason)
 
     def _error_type(self):
         return self.get_value_from_dict(['error', 'type'])
+
     error_type = property(_error_type)
 
     def _error_message(self):
         return self.get_value_from_dict(['error', 'message'])
+
     error_message = property(_error_message)
 
 
@@ -104,16 +111,18 @@ class Slot(ObjectDictionary):
 
     def __init__(self, slot_dict):
         super().__init__(slot_dict)
-        self.logger.debug("Slot __init__")
 
     def _name(self):
         return self.get_value_from_dict(['name'])
+
     name = property(_name)
 
     def _value(self):
         return self.get_value_from_dict(['value'])
+
     value = property(_value)
 
     def _confirmation_status(self):
         return self.get_value_from_dict(['confirmationStatus'])
+
     confirmation_status = property(_confirmation_status)
