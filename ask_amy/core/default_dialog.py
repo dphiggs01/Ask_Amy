@@ -17,9 +17,12 @@ class DefaultDialog(Dialog):
         logger.debug("**************** entering DefaultDialog.launch_request")
         try:
             self._intent_name = self._sc_intent_control['AMAZON.HelpIntent']
+            execute_method = self.intent_name
+            if 'method_name' in self._obj_dict[self.intent_name]:
+                    execute_method = self._obj_dict[self.intent_name]['method_name']
         except KeyError as error:
             raise IntentControlError("No Key found for IntentControl: AMAZON.HelpIntent") from error
-        return self.execute_method(self.intent_name)
+        return self.execute_method(execute_method)
 
     def session_ended_request(self):
         logger.debug("**************** entering DefaultDialog.session_ended_request")

@@ -1,13 +1,16 @@
 import sys
 from ask_amy.cli.cli_deploy import DeployCLI
+import os
 
 HELP_BLURB = (
     "ask-amy-cli provides a simple way to create, deploy and monitor "
     "your lambda functions. \nThe available commands are: \n"
     "\n"
     "  ask-amy-cli help\n"
-    "  ask-amy-cli create --deploy-json-file <filename>\n"
-    "  ask-amy-cli deploy --deploy-json-file <filename>\n"
+    "  ask-amy-cli create_role --role-name <name> \n"
+    "  ask-amy-cli create_template --skill-name <name> --role-name <name> --intent-schema-file <filename>\n"
+    "  ask-amy-cli create_lambda --deploy-json-file <filename>\n"
+    "  ask-amy-cli deploy_lambda --deploy-json-file <filename>\n"
     "  ask-amy-cli logs --log-group-name <name> [--tail-log]\n"
 )
 USAGE = (
@@ -20,7 +23,7 @@ USAGE = (
 
 
 class AMYCLI(object):
-    COMMANDS = ['help', 'deploy', 'create', 'logs']
+    COMMANDS = ['help', 'deploy_lambda', 'create_lambda', 'create_role', 'create_template', 'logs', ]
 
     def parse_command(self, args):
 
@@ -46,26 +49,38 @@ class AMYCLI(object):
                 return None
 
     # ask-amy-cli deploy --deploy-json-file config.json
-    def deploy_cmd(self, args):
+    def deploy_lambda_cmd(self, args):
         param = args.pop(0)
         expected_param = '--deploy-json-file'
         if expected_param == param:
             cli = DeployCLI()
-            ret_val = cli.deploy(args[0])
+            ret_val = cli.deploy_lambda(args[0])
         else:
-            sys.stderr.write("ERROR: expected ask-amy-cli deploy --deploy-json-file <filename> \n")
+            sys.stderr.write("ERROR: expected ask-amy-cli deploy_lambda --deploy-json-file <filename> \n")
             ret_val = None
         return ret_val
 
     #  ask-amy-cli create --deploy-json-file config.json
-    def create_cmd(self, args):
+    def create_lambda_cmd(self, args):
         param = args.pop(0)
         expected_param = '--deploy-json-file'
         if expected_param == param:
             cli = DeployCLI()
-            ret_val = cli.create(args[0])
+            ret_val = cli.create_lambda(args[0])
         else:
-            sys.stderr.write("ERROR: expected ask-amy-cli create --deploy-json-file <filename> \n")
+            sys.stderr.write("ERROR: expected ask-amy-cli create_lambda --deploy-json-file <filename> \n")
+            ret_val = None
+        return ret_val
+
+    #  ask-amy-cli create --deploy-json-file config.json
+    def create_role_cmd(self, args):
+        param = args.pop(0)
+        expected_param = '--role-name'
+        if expected_param == param:
+            cli = DeployCLI()
+            ret_val = cli.create_role(args[0])
+        else:
+            sys.stderr.write("ERROR: expected ask-amy-cli create_role --role-name <name> \n")
             ret_val = None
         return ret_val
 
@@ -87,6 +102,36 @@ class AMYCLI(object):
                 ret_val = cli.log(args[0])
         else:
             sys.stderr.write("ERROR: expected --log-group-name paramater \n")
+            ret_val = None
+        return ret_val
+
+    def create_template_cmd(self, args):
+        skill_name_kw = '--skill-name'
+        skill_name = None
+        role_name_kw =  '--role-name'
+        role_name = None
+        intent_schema_kw ='--intent-schema-file'
+        intent_schema = None
+
+        params_good=False
+        if skill_name_kw in args:
+            index = args.index(skill_name_kw)
+            skill_name = args.pop(index+1)
+            params_good=True
+
+        if role_name_kw in args:
+            index = args.index(role_name_kw)
+            role_name = args.pop(index+1)
+
+        if intent_schema_kw in args:
+            index = args.index(intent_schema_kw)
+            intent_schema = args.pop(index+1)
+
+        if params_good:
+            cli = DeployCLI()
+            ret_val = cli.create_template(skill_name, role_name, intent_schema)
+        else:
+            sys.stderr.write("ERROR: expected --skill-name paramater \n")
             ret_val = None
         return ret_val
 

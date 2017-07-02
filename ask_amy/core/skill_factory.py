@@ -9,7 +9,7 @@ logger = logging.getLogger()
 
 
 class SkillFactory(object):
-    SKILL_CONFIG = 'skill_configuration.json'
+    SKILL_CONFIG = 'skill_config.json'
 
     def __init__(self):
         pass
