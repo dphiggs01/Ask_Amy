@@ -50,29 +50,6 @@ class Dialog(ObjectDictionary):
         return self._obj_dict
     reply_dialog = property(_get_reply_dialog)
 
-    # todo deprecate replace with property 'reply_dialog'
-    def get_intent_details(self, intent_name):
-        return self.get_value_from_dict([intent_name])
-
-    def get_expected_intent_for_data(self, data_name):
-        return self.get_value_from_dict(['slots', data_name, 'expected_intent'])
-
-    def get_re_prompt_for_slot_data(self, data_name):
-        slot_data_details = self.get_value_from_dict(['slots', data_name])
-        if 're_prompt_text' in slot_data_details:
-            slot_data_details['speech_out_text'] = slot_data_details['re_prompt_text']
-            del slot_data_details['re_prompt_text']
-        if 're_prompt_ssml' in slot_data_details:
-            slot_data_details['speech_out_text'] = slot_data_details['re_prompt_ssml']
-            del slot_data_details['re_prompt_ssml']
-        slot_data_details['should_end_session'] = False
-        return slot_data_details
-
-    def get_slot_data_details(self, data_name):
-        slot_data_details = self.get_value_from_dict(['slots', data_name])
-        slot_data_details['should_end_session'] = False
-        return slot_data_details
-
     def begin(self, event_dict):
         logger.debug("**************** entering Dialog.begin")
         self._event = Event(event_dict)

@@ -99,6 +99,21 @@ class StackDialogManager(DefaultDialog):
             del dialog_stack[:]
         return ret_val
 
-    def execute_method(self, method_name):
-        method = getattr(self, method_name)
-        return method()
+    def get_expected_intent_for_data(self, data_name):
+        return self.get_value_from_dict(['slots', data_name, 'expected_intent'])
+
+    def get_re_prompt_for_slot_data(self, data_name):
+        slot_data_details = self.get_value_from_dict(['slots', data_name])
+        if 're_prompt_text' in slot_data_details:
+            slot_data_details['speech_out_text'] = slot_data_details['re_prompt_text']
+            del slot_data_details['re_prompt_text']
+        if 're_prompt_ssml' in slot_data_details:
+            slot_data_details['speech_out_text'] = slot_data_details['re_prompt_ssml']
+            del slot_data_details['re_prompt_ssml']
+        slot_data_details['should_end_session'] = False
+        return slot_data_details
+
+    def get_slot_data_details(self, data_name):
+        slot_data_details = self.get_value_from_dict(['slots', data_name])
+        slot_data_details['should_end_session'] = False
+        return slot_data_details
