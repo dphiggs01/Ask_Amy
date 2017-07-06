@@ -29,6 +29,20 @@ class Request(ObjectDictionary):
 
     timestamp = property(_timestamp)
 
+    def _attributes(self):
+        has_attributes = self.get_value_from_dict(['attributes'])
+        if has_attributes is None:
+            self._obj_dict['attributes'] = {}
+        return self._obj_dict['attributes']
+
+    attributes = property(_attributes)
+
+    def attribute_exists(self, attribute):
+        if attribute in self.attributes.keys():
+            return True
+        else:
+            return False
+
     @staticmethod
     def factory(request_dict):
         logger.debug("**************** entering Request.factory")

@@ -1,5 +1,6 @@
 import sys
 from ask_amy.cli.cli_deploy import DeployCLI
+from ask_amy.core.exceptions import ASKAmyError
 import os
 
 HELP_BLURB = (
@@ -35,18 +36,21 @@ class AMYCLI(object):
             sys.stdout.write(HELP_BLURB)
             return None
 
-        if len(args) >= 1:
-            if args[0] in AMYCLI.COMMANDS:
-                cmd = args.pop(0)
-                if len(args) >= 1:
-                    return self.execute_command(cmd, args)
+        try:
+            if len(args) >= 1:
+                if args[0] in AMYCLI.COMMANDS:
+                    cmd = args.pop(0)
+                    if len(args) >= 1:
+                        return self.execute_command(cmd, args)
+                    else:
+                        sys.stderr.write("ERROR: expected a valid parameter\n")
+                        sys.stderr.write("usage: %s\n" % USAGE)
                 else:
-                    sys.stderr.write("ERROR: expected a valid parameter\n")
+                    sys.stderr.write("ERROR: expected a valid command\n")
                     sys.stderr.write("usage: %s\n" % USAGE)
-            else:
-                sys.stderr.write("ERROR: expected a valid command\n")
-                sys.stderr.write("usage: %s\n" % USAGE)
-                return None
+                    return None
+        except ASKAmyError as error:
+            sys.stderr.write("Error: {0}\n".format(error))
 
     # ask-amy-cli deploy --deploy-json-file config.json
     def deploy_lambda_cmd(self, args):

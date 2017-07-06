@@ -1,7 +1,6 @@
 import logging
-import json
-import ask_amy.cli.code_gen.dicttoxml
-
+import os.path
+from ask_amy.core.exceptions import FileExistsError
 logger = logging.getLogger()
 
 
@@ -17,7 +16,9 @@ class CodeGenerator(object):
     def create_cli_config(self):
         # cwd = os.getcwd()
         CLI_CONFIG='./cli_config.json'
-        # todo need a good way to create this file writing a dict will not preserve the order
+        if os.path.isfile(CLI_CONFIG) :
+            raise FileExistsError("Attempting to OVERWRITE {}".format(CLI_CONFIG))
+
         with open(CLI_CONFIG, 'w') as f:
             f.write('{\n')
             f.write('    "skill_name": "{}",\n'.format(self._skill_name))
@@ -37,6 +38,9 @@ class CodeGenerator(object):
 
     def create_skill_config(self):
         SKILL_CONFIG='./skill_config.json'
+
+        if os.path.isfile(SKILL_CONFIG) :
+            raise FileExistsError("Attempting to OVERWRITE {}".format(SKILL_CONFIG))
 
         with open(SKILL_CONFIG, 'w') as file_ptr:
             file_ptr.write('{\n')
@@ -77,8 +81,8 @@ class CodeGenerator(object):
                     if method_name is not None:
                         file_ptr.write('      "{}": "{}",\n'.format(intent_nm, method_name))
         file_ptr.write('      "AMAZON.HelpIntent": "help_intent",\n')
-        file_ptr.write('      "AMAZON.CancelIntent": "handle_session_end_request",\n')
-        file_ptr.write('      "AMAZON.StopIntent": "handle_session_end_request"\n')
+        file_ptr.write('      "AMAZON.CancelIntent": "default_cancel_intent",\n')
+        file_ptr.write('      "AMAZON.StopIntent": "default_stop_intent"\n')
         file_ptr.write('    },\n')
 
 
@@ -141,9 +145,12 @@ class CodeGenerator(object):
 
 
     def create_skill_py(self):
-        SKILL_CONFIG='./'+self._skill_name+'.py'
+        SKILL_PY='./'+self._skill_name+'.py'
 
-        with open(SKILL_CONFIG, 'w') as file_ptr:
+        if os.path.isfile(SKILL_PY) :
+            raise FileExistsError("Attempting to OVERWRITE {}".format(SKILL_PY))
+
+        with open(SKILL_PY, 'w') as file_ptr:
             file_ptr.write('from ask_amy.state_mgr.stack_dialog_mgr import StackDialogManager\n')
             file_ptr.write('from ask_amy.core.reply import Reply\n')
             file_ptr.write('import logging\n')
@@ -162,7 +169,7 @@ class CodeGenerator(object):
                     intent_nm =intent_item['intent']
                     method_name = self.process_intent_nm(intent_nm)
                     if method_name is not None:
-                        file_ptr.write('    def {}(self):\n'.format(self.method_name(intent_nm)))
+                        file_ptr.write('    def {}(self):\n'.format(method_name))
                         file_ptr.write('        logger.debug("**************** entering {}.{}".format('
                                        'self.__class__.__name__, self.intent_name))\n')
                         file_ptr.write('        return self.handle_default_intent()\n')

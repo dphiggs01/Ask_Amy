@@ -167,6 +167,7 @@ class Card(CommunicationChannel):
         content = Card.concat_text_if_list(content)
         if session is not None:
             content = Card.inject_session_data(content, session)
+            title = Card.inject_session_data(title, session)
         card = {'type': 'Simple', 'title': title, 'content': content}
         return cls(card)
 
@@ -176,6 +177,7 @@ class Card(CommunicationChannel):
         content = Card.concat_text_if_list(content)
         if session is not None:
             content = Card.inject_session_data(content, session)
+            title = Card.inject_session_data(title, session)
         card = {'type': 'Standard', 'title': title, 'text': content}
         image = {}
         card['image'] = image

@@ -22,6 +22,11 @@ class DialogIntentError(ASKAmyError):
 class SkillLoadError(ASKAmyError):
     """Unable to load, bootstrap and execute the skill """
 
+class CustomTypeLoadError(ASKAmyError):
+    """Unable to load, a custom defined type"""
+
+class FileExistsError(ASKAmyError):
+    """Code Generator is attempting to write to a file that already exists """
 
 class SessionError(ASKAmyError):
     """Error in session """

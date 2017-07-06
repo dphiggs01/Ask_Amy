@@ -104,8 +104,6 @@ class TimeOfDay(object):
 
         utc = pytz.timezone('UTC')
         utc_date = utc.localize(now)
-        print("utc_date {}".format(utc_date.strftime("%a %b %d %H:%M:%S %Y")))
-        print("utcnow   {}".format(now.strftime("%a %b %d %H:%M:%S %Y")))
 
         us_tz_nms =['US/Alaska', 'US/Hawaii', 'US/Arizona', 'US/Pacific', 'US/Mountain', 'US/Central', 'US/Eastern']
 
