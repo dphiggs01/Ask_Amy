@@ -34,15 +34,7 @@ class Event(object):
                 # get the value for this name if available
                 value = self.request.value_for_slot_name(name)
                 if value is not None:
-                    # If this is a 'requested_value' do we have a field to map to?
-                    if name == 'requested_value':
-                        if self.session.attribute_exists('slot_name'):
-                            requested_value_nm = self.session.attributes['slot_name']
-                            self.session.attributes[requested_value_nm] = value
-                        else:
-                            self.session.attributes[name] = value
-                    else:
-                        self.session.attributes[name] = value
+                    self.session.attributes[name] = value
 
     def __str__(self):
         output = 'Event[\n\tsession = {}\n\trequest = {}\n]'.format(

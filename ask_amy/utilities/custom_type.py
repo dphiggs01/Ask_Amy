@@ -15,7 +15,7 @@ class Custom_Validator(object, metaclass=abc.ABCMeta):
 
     @staticmethod
     def class_from_str(dotted_path):
-        logger.debug("**************** entering SkillFactory.__import_class_from_str")
+        logger.debug("**************** entering Custom_Validator.__import_class_from_str")
         try:
             module_path, class_name = dotted_path.rsplit('.', 1)
             module = importlib.import_module(module_path)

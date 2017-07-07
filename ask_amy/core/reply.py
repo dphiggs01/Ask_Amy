@@ -19,43 +19,44 @@ class Reply(ObjectDictionary):
         return cls(reply)
 
     @staticmethod
-    def build(dialog_dict, session=None):
+    def build(dialog_dict, event=None):
         logger.debug("**************** entering Reply.build")
         prompt = None
         reprompt = None
         card = None
 
         if 'speech_out_text' in dialog_dict:
-            prompt = Prompt.text(dialog_dict['speech_out_text'], session)
+            prompt = Prompt.text(dialog_dict['speech_out_text'], event)
         if 're_prompt_text' in dialog_dict:
-            reprompt = Prompt.text(dialog_dict['re_prompt_text'], session)
+            reprompt = Prompt.text(dialog_dict['re_prompt_text'], event)
         if 'speech_out_ssml' in dialog_dict:
-            prompt = Prompt.ssml(dialog_dict['speech_out_ssml'], session)
+            prompt = Prompt.ssml(dialog_dict['speech_out_ssml'], event)
         if 're_prompt_ssml' in dialog_dict:
-            reprompt = Prompt.ssml(dialog_dict['re_prompt_ssml'], session)
+            reprompt = Prompt.ssml(dialog_dict['re_prompt_ssml'], event)
         if 'should_end_session' in dialog_dict:
             should_end_session = dialog_dict['should_end_session']
         else:
             should_end_session = True
         if 'card_title' in dialog_dict:
-            card = Card.simple(dialog_dict['card_title'], dialog_dict['speech_out_text'], session)
+            card = Card.simple(dialog_dict['card_title'], dialog_dict['speech_out_text'], event)
 
         if 'card' in dialog_dict:
             card_dict = dialog_dict['card']
             if 'small_image' in card_dict:
                 card = Card.standard(card_dict['title'], card_dict['content'], card_dict['small_image'],
-                                     card_dict['large_image'], session)
+                                     card_dict['large_image'], event)
             elif 'type' in card_dict:
 
                 card = Card.link_account(None, None)
             else:
-                card = Card.simple(card_dict['title'], card_dict['content'], session)
+                card = Card.simple(card_dict['title'], card_dict['content'], event)
 
         response = Response.constr(prompt, reprompt, card, should_end_session)
 
         attributes = {}
-        if session is not None:
-            attributes = session.attributes
+        if event is not None:
+            if event.session is not None:
+                attributes = event.session.attributes
 
         reply = Reply.constr(response, attributes)
         return reply.json()
@@ -97,7 +98,7 @@ class CommunicationChannel(ObjectDictionary):
         return text_str
 
     @staticmethod
-    def inject_session_data(text, session):
+    def inject_event_data(text, event):
         logger.debug("**************** entering OutText.inject_session_data")
         if text is None:
             return text
@@ -117,7 +118,7 @@ class CommunicationChannel(ObjectDictionary):
                 text = text[end_token_index + 1:len(text)]
                 if fragment != '':
                     out_list.append(fragment)
-                out_list.append(CommunicationChannel.process_token(token, session))
+                out_list.append(CommunicationChannel.process_token(token, event))
                 if text.find("{") == -1:
                     if text != '':
                         out_list.append(text)
@@ -125,10 +126,12 @@ class CommunicationChannel(ObjectDictionary):
         return "".join(out_list)
 
     @staticmethod
-    def process_token(token, session):
+    def process_token(token, event):
         logger.debug("**************** entering OutText.process_token")
-        if session.attribute_exists(token):
-            value = session.attributes[token]
+        if event.request.attribute_exists(token):
+            value = event.request.attributes[token]
+        elif event.session.attribute_exists(token):
+            value = event.session.attributes[token]
         else:
             value = ''
         return str(value)
@@ -139,20 +142,20 @@ class Prompt(CommunicationChannel):
         super().__init__(card_dict)
 
     @classmethod
-    def ssml(cls, ssml, session=None):
+    def ssml(cls, ssml, event=None):
         logger.debug("**************** entering Prompt.ssml")
         ssml = Prompt.concat_text_if_list(ssml)
-        if session is not None:
-            ssml = Prompt.inject_session_data(ssml, session)
+        if event is not None:
+            ssml = Prompt.inject_event_data(ssml, event)
         prompt = {'type': 'SSML', 'ssml': "<speak>{}</speak>".format(ssml)}
         return cls(prompt)
 
     @classmethod
-    def text(cls, text, session=None):
+    def text(cls, text, event=None):
         logger.debug("**************** entering Prompt.text")
         text = Prompt.concat_text_if_list(text)
-        if session is not None:
-            text = Prompt.inject_session_data(text, session)
+        if event is not None:
+            text = Prompt.inject_event_data(text, event)
         prompt = {'type': 'PlainText', 'text': text}
         return cls(prompt)
 
@@ -162,22 +165,22 @@ class Card(CommunicationChannel):
         super().__init__(card_dict)
 
     @classmethod
-    def simple(cls, title, content, session=None):
+    def simple(cls, title, content, event=None):
         logger.debug("**************** entering Card.simple")
         content = Card.concat_text_if_list(content)
-        if session is not None:
-            content = Card.inject_session_data(content, session)
-            title = Card.inject_session_data(title, session)
+        if event is not None:
+            content = Card.inject_event_data(content, event)
+            title = Card.inject_event_data(title, event)
         card = {'type': 'Simple', 'title': title, 'content': content}
         return cls(card)
 
     @classmethod
-    def standard(cls, title, content, small_image_url, large_image_url, session=None):
+    def standard(cls, title, content, small_image_url, large_image_url, event=None):
         logger.debug("**************** entering Card.standard")
         content = Card.concat_text_if_list(content)
-        if session is not None:
-            content = Card.inject_session_data(content, session)
-            title = Card.inject_session_data(title, session)
+        if event is not None:
+            content = Card.inject_event_data(content, event)
+            title = Card.inject_event_data(title, event)
         card = {'type': 'Standard', 'title': title, 'text': content}
         image = {}
         card['image'] = image
@@ -186,10 +189,10 @@ class Card(CommunicationChannel):
         return cls(card)
 
     @classmethod
-    def link_account(cls, title, content, session=None):
+    def link_account(cls, title, content, event=None):
         logger.debug("**************** entering Card.link_account")
         content = Card.concat_text_if_list(content)
-        if session is not None:
-            content = Card.inject_session_data(content, session)
+        if event is not None:
+            content = Card.inject_event_data(content, event)
         card = {'type': 'LinkAccount'}
         return cls(card)

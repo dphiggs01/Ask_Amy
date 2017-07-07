@@ -72,5 +72,5 @@ class DefaultDialog(Dialog):
             else:
                 raise DialogIntentError("No key found for Intent in Dialog: {}".format(self.intent_name)) from error
 
-        reply = Reply.build(reply_dialog, self.session)
+        reply = Reply.build(reply_dialog, self.event)
         return reply
