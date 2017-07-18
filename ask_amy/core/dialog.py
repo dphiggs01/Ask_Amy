@@ -5,7 +5,7 @@ from ask_amy.core.exceptions import ApplicationIdError
 from ask_amy.core.object_dictionary import ObjectDictionary
 
 logger = logging.getLogger()
-
+import json
 
 class Dialog(ObjectDictionary):
     def __init__(self, dialog_dict=None):
@@ -52,8 +52,9 @@ class Dialog(ObjectDictionary):
 
     def begin(self, event_dict):
         logger.debug("**************** entering Dialog.begin")
+        logger.debug("Event=={}".format(json.dumps(event_dict, sort_keys=True, indent=4)))
+
         self._event = Event(event_dict)
-        logger.debug("####### event={}".format(self._event))
 
         # If we have and application id in our configuration see if it matches the
         # application id in the event

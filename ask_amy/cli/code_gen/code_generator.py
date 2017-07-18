@@ -28,7 +28,7 @@ class CodeGenerator(object):
             f.write('    "aws_role": "{}",\n\n'.format(self._aws_role))
             f.write('    "lambda_runtime": "python3.6",\n'.format('',''))
             f.write('    "lambda_handler": "ask_amy.lambda_function.lambda_handler",\n')
-            f.write('    "lambda_timeout": "3",\n')
+            f.write('    "lambda_timeout": "5",\n')
             f.write('    "lambda_memory": "128",\n')
             f.write('    "lambda_zip": "alexa_skill.zip",\n\n')
             f.write('    "ask_amy_dev": false,\n')

@@ -11,12 +11,6 @@ import time
 class DeployCLI(object):
 
     def create_template(self, skill_name, aws_role='', intent_schema_nm=None):
-        #base_dir = self.module_path()
-        # cli_config_path = base_dir + '/code_gen/templates/cli_config.json'
-        # cli_config_dict = self.load_json_file(cli_config_path)
-        # print(cli_config_dict)
-        # cli_config_dict['skill_name'] = skill_name
-
         with open(intent_schema_nm) as json_data:
              intent_schema = json.load(json_data)
         code_generator =  CodeGenerator(skill_name, aws_role, intent_schema)

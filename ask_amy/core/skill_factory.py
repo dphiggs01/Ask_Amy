@@ -11,9 +11,6 @@ logger = logging.getLogger()
 class SkillFactory(object):
     SKILL_CONFIG = 'skill_config.json'
 
-    def __init__(self):
-        pass
-
     @staticmethod
     def build(config_file_name=None):
         logger.warn("**************** entering SkillFactory.build")

@@ -6,6 +6,7 @@ from ask_amy.core.exceptions import ASKAmyError
 from ask_amy.core.skill_factory import SkillFactory
 from ask_amy.core.reply import Reply
 
+
 logger = logging.getLogger()
 logger.setLevel(logging.WARN)
 
@@ -13,6 +14,7 @@ logger.setLevel(logging.WARN)
 def lambda_handler(event_dict, context):
     logger.warn("**************** entering NEW lambda_handler")
     try:
+
         dialog_obj = SkillFactory.build()
         response = dialog_obj.begin(event_dict)
     except ASKAmyError as error:
@@ -23,3 +25,9 @@ def lambda_handler(event_dict, context):
         response = Reply.build(response_dict)
 
     return response
+
+
+if __name__ == "__main__":
+    event = []
+    context = []
+    lambda_handler(event, context)

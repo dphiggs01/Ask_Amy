@@ -204,6 +204,21 @@ class StackDialogManager(DefaultDialog):
                             name = intent_attributes['slot_name']
                     intent_attributes[name] = value
 
+    def required_fields_in_session_attributes_to_intent_attributes(self, required_fields):
+        """
+        Move session data into intent state data. This will stage the data we have already collected
+        that is required to execute the intent.
+        :return:
+        """
+        logger.debug("**************** entering StackDialogManager.required_fields_in_session_attributes_to_intent_attributes")
+        # If we have an Intent Request map the slot values to the session
+        if isinstance(self.event.request, IntentRequest):
+            intent_attributes = self.peek_established_dialog()
+            for name in required_fields:
+                if self.session.attribute_exists(name):
+                    intent_attributes[name] = self.session.attributes[name]
+
+
     def intent_attributes_to_request_attributes(self):
         dialog_state = self.peek_established_dialog()
         for key in dialog_state.keys():
@@ -248,6 +263,7 @@ def required_fields(fields):
             if isinstance(obj,StackDialogManager):
                 if obj.is_good_state():
                     obj.slot_data_to_intent_attributes()
+                    obj.required_fields_in_session_attributes_to_intent_attributes(fields)
                     need_additional_data = obj.required_fields_process(fields)
                     if need_additional_data is not None:
                         return need_additional_data

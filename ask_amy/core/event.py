@@ -11,7 +11,9 @@ class Event(object):
     def __init__(self, event_dict):
         self._request = Request.factory(event_dict['request'])
         self._session = Session(event_dict['session'])
-        self._version = event_dict['version']
+        if 'version' in event_dict:
+            self._version = event_dict['version']
+        self._version = '1.0'
 
     def _get_session(self):
         return self._session
