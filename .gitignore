@@ -9,6 +9,7 @@ __pycache__/
 # Setuptools distribution folder.
 /dist/
 /docs/_build/
+/docs/ask_amy_api/
 
 # Python egg metadata, regenerated from source files by setuptools.
 /*.egg-info
