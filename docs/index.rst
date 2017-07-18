@@ -11,6 +11,7 @@ Welcome to ask amy's documentation!
    :caption: Contents:
 
    modules.rst
+   models.rst
 
 
 Indices and tables

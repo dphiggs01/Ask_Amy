@@ -85,6 +85,8 @@ Prerequisites and Optional Install's
 
 
 
-
+.. |more| image:: _static/more.png
+          :align: middle
+          :alt: more info
 
 
