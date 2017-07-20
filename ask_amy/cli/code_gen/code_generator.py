@@ -46,8 +46,8 @@ class CodeGenerator(object):
             file_ptr.write('{\n')
             file_ptr.write('  "Skill" : {\n')
             file_ptr.write('    "version": "1.0",\n')
-            file_ptr.write('    "className": "{}.{}",\n'.format(self._skill_name,self.class_name()))
-            file_ptr.write('    "loggingLevel": "debug"\n')
+            file_ptr.write('    "class_name": "{}.{}",\n'.format(self._skill_name,self.class_name()))
+            file_ptr.write('    "logging_level": "debug"\n')
             file_ptr.write('  },\n')
             file_ptr.write('  "Session": {\n')
             file_ptr.write('    "persistence": false\n')
@@ -71,7 +71,7 @@ class CodeGenerator(object):
         return name
 
     def intent_control(self,file_ptr):
-        file_ptr.write('    "intentControl": {\n')
+        file_ptr.write('    "intent_control": {\n')
 
         if 'intents' in self._intent_schema:
             for intent_item in self._intent_schema['intents']:

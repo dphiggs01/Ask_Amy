@@ -20,7 +20,7 @@ class Dialog(ObjectDictionary):
             "IntentRequest": "intent_request",
             "SessionEndedRequest": "session_ended_request"
         }
-        self._sc_intent_control = self.get_value_from_dict(['intentControl'])
+        self._sc_intent_control = self.get_value_from_dict(['intent_control'])
 
     def _get_event(self):
         return self._event

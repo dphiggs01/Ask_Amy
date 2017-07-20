@@ -36,7 +36,7 @@ class DefaultDialog(Dialog):
     def intent_request(self):
         """
         Executes the method related to the intent sent from Alexa.
-        The methods are mapped in the skill_configuration.json file under the attribute name 'intentControl'
+        The methods are mapped in the skill_configuration.json file under the attribute name 'intent_control'
 
         Returns: Response object
 

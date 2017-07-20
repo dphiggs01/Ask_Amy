@@ -262,8 +262,8 @@ def required_fields(fields):
             obj = args[0]
             if isinstance(obj,StackDialogManager):
                 if obj.is_good_state():
-                    obj.slot_data_to_intent_attributes()
                     obj.required_fields_in_session_attributes_to_intent_attributes(fields)
+                    obj.slot_data_to_intent_attributes()
                     need_additional_data = obj.required_fields_process(fields)
                     if need_additional_data is not None:
                         return need_additional_data

@@ -1,7 +1,8 @@
 from __future__ import print_function
 
 import logging
-
+import sys
+import json
 from ask_amy.core.exceptions import ASKAmyError
 from ask_amy.core.skill_factory import SkillFactory
 from ask_amy.core.reply import Reply
@@ -28,6 +29,11 @@ def lambda_handler(event_dict, context):
 
 
 if __name__ == "__main__":
-    event = []
-    context = []
-    lambda_handler(event, context)
+    with open(sys.argv[1], 'r') as file_ptr:
+            event = json.load(file_ptr)
+
+    reply = lambda_handler(event, None)
+    print(reply)
+
+# To test your function locally run the below in your project directory
+# PYTHONPATH=./alexa_skill.zip python  ./dist/ask_amy/lambda_function.py ./event.json

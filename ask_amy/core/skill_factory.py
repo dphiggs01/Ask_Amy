@@ -19,7 +19,7 @@ class SkillFactory(object):
         config_dict = SkillFactory.__load(config_file_name)
 
         skill_dict = config_dict['Skill']
-        skill_class_name = skill_dict['className']
+        skill_class_name = skill_dict['class_name']
         SkillFactory.set_logging_level(skill_dict)
         skill_obj = SkillFactory.__import_class_from_str(skill_class_name)
         dialog_dict = config_dict['Dialog']
@@ -37,7 +37,7 @@ class SkillFactory(object):
             "CRITICAL": logging.CRITICAL
         }
         try:
-            logging_level = skill_dict['loggingLevel']
+            logging_level = skill_dict['logging_level']
             logging_level = logging_level.upper()
             if logging_level == 'NONE':
                 root_logger = logging.getLogger()
@@ -85,6 +85,7 @@ class SkillFactory(object):
         logger.debug("**************** entering SkillFactory.__import_class_from_str")
         try:
             module_path, class_name = dotted_path.rsplit('.', 1)
+            logger.critical("QQQQQQQ dotted_path={}, module_path={}, class_name={} ".format(dotted_path, module_path, class_name))
             module = importlib.import_module(module_path)
         except ValueError as error:
             logger.critical("Error SkillFactory.__import_class_from_str")
