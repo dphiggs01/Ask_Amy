@@ -11,7 +11,7 @@ Welcome
    "ASK Amy is an easy to use framework with plenty of **goodies** to help accelerate development!"
 
 ASK Amy adheres to a number of simple design principles that helps new developer create skills quickly and advanced
-developer leverage leverage the ASK API to its full extent.
+developer leverage the Alexa Skills Kit API to its full extent.
 
 
 
@@ -47,7 +47,7 @@ developer leverage leverage the ASK API to its full extent.
    :maxdepth: 2
    :caption: Contents:
 
-   modules.rst
+   prerequisites.rst
    models.rst
 
 

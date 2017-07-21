@@ -1,4 +1,6 @@
-:orphan:
+
+
+.. _install-ask-amy-label:
 
 Installing Ask Amy
 ==================
@@ -8,12 +10,6 @@ Skills developed with ASK Amy can be hosted on any Alexa compatible environment
 however the toolkit is optimized for deployment on AWS Lambda which is currently
 supporting Python 3.6
 
-ASK Amy packages are available on the `Python Package Index
-<https://pypi.python.org/pypi/ask_amy>`_.
-
-You can also download a snapshot from the Git repository:
-
-* Releases can be found `here <https://github.com/dphiggs01/ask_amy/releases>`__
 
 .. contents::
    :depth: 1
@@ -42,8 +38,8 @@ Mac OSX & Linux
    $ pip install ask_amy
 
 
-Prerequisites and Optional Install's
-------------------------------------
+Python Prerequisites and Optional Install's
+-------------------------------------------
 
 * Install Python (Prerequisite)
 
@@ -67,21 +63,19 @@ Prerequisites and Optional Install's
 
 * Install Git (Optional)
 
- + If you plan on contributing to the code base you will need to clone the repo
+ + If you plan on contributing to the code base you will need to clone `the repo <https://github.com/dphiggs01/ask_amy>`_
 
  + https://git-scm.com/download/win
-
-* Install and configure AWS cli (Highly Recommended)
-
- + install http://docs.aws.amazon.com/cli/latest/userguide/installing.html
-
- + configure http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html
 
 
 .. note::
 
-   When configuring AWS CLI provide credentials that have the appropriate level of authority
-   to deploy lambda functions.
+   For those interested in source code snapshots.
+
+   ASK Amy packages are available on the `Python Package Index <https://pypi.python.org/pypi/ask_amy>`_.
+
+   You can also download from the `Git repository <https://github.com/dphiggs01/ask_amy/releases>`_
+
 
 
 
