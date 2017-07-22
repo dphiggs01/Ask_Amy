@@ -1,0 +1,37 @@
+ask\_amy\.cli package
+=====================
+
+Subpackages
+-----------
+
+.. toctree::
+
+    ask_amy.cli.code_gen
+
+Submodules
+----------
+
+ask\_amy\.cli\.cli\_deploy module
+---------------------------------
+
+.. automodule:: ask_amy.cli.cli_deploy
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+ask\_amy\.cli\.command\_line module
+-----------------------------------
+
+.. automodule:: ask_amy.cli.command_line
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: ask_amy.cli
+    :members:
+    :undoc-members:
+    :show-inheritance:

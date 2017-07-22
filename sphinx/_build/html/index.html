@@ -1,0 +1,235 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome &#8212; ASK Amy  documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinx13.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Prerequisites" href="prerequisites.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+ 
+    <style type="text/css">
+      table.right { float: right; margin-left: 20px; }
+      table.right td { border: 1px solid #ccc; }
+      
+      .related { display: none; }
+      
+    </style>
+    <script type="text/javascript">
+      // intelligent scrolling of the sidebar content
+      $(window).scroll(function() {
+        var sb = $('.sphinxsidebarwrapper');
+        var win = $(window);
+        var sbh = sb.height();
+        var offset = $('.sphinxsidebar').position()['top'];
+        var wintop = win.scrollTop();
+        var winbot = wintop + win.innerHeight();
+        var curtop = sb.position()['top'];
+        var curbot = curtop + sbh;
+        // does sidebar fit in window?
+        if (sbh < win.innerHeight()) {
+          // yes: easy case -- always keep at the top
+          sb.css('top', $u.min([$u.max([0, wintop - offset - 10]),
+                                $(document).height() - sbh - 200]));
+        } else {
+          // no: only scroll if top/bottom edge of sidebar is at
+          // top/bottom edge of window
+          if (curtop > wintop && curbot > winbot) {
+            sb.css('top', $u.max([wintop - offset - 10, 0]));
+          } else if (curtop < wintop && curbot < winbot) {
+            sb.css('top', $u.min([winbot - sbh - offset - 20,
+                                  $(document).height() - sbh - 200]));
+          }
+        }
+      });
+    </script>
+
+  </head>
+  <body>
+<div class="pageheader">
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="install.html">Get it</a></li>
+    <li><a href="contents.html">Docs</a></li>
+    <li><a href="develop.html">Extend/Develop</a></li>
+  </ul>
+  <div>
+    <a href="#">
+      <img src="_static/askamyheader.png" alt="ASK Amy" />
+    </a>
+  </div>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="prerequisites.html" title="Prerequisites"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">ASK Amy home</a>&#160;|</li>
+        <li><a href="contents.html">Documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome</a><ul>
+<li><a class="reference internal" href="#design-design-principles"> Design Principles:</a></li>
+<li><a class="reference internal" href="#features-features"> Features:</a></li>
+<li><a class="reference internal" href="#benefits-key-benefits"> Key Benefits:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="prerequisites.html"
+                        title="next chapter">Prerequisites</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome">
+<h1>Welcome<a class="headerlink" href="#welcome" title="Permalink to this headline">¶</a></h1>
+<div class="sidebar">
+<p class="first sidebar-title"><em>What users say</em></p>
+<p class="last">“ASK Amy is an easy to use framework with plenty of <strong>goodies</strong> to help accelerate development!”</p>
+</div>
+<p>ASK Amy adheres to a number of simple design principles that helps new developers create skills quickly and advanced
+developer leverage the Alexa Skills Kit API to its full extent.</p>
+<div class="section" id="design-design-principles">
+<h2><a class="reference internal" href="_images/icon-design.png"><img alt="design" class="align-middle" src="_images/icon-design.png" style="width: 40px; height: 30px;" /></a> Design Principles:<a class="headerlink" href="#design-design-principles" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>Separation of Concern</strong> abstracting the text / speech of intent responses into a JSON document and providing a clear demarcation of intent processing user experience (UX) code from application code</li>
+<li><strong>Paradigm Consistency</strong> using similar terminology and design patterns as found in the <em>Alexa Service</em> allows for a more seamless development flow between <em>intent schema</em> and <em>ASK Amy Skill</em> development</li>
+<li><strong>Extensible Framework</strong> supports plug-able components to support <em>state machines</em> or additional <em>databases</em></li>
+<li><strong>Microservices</strong> approach to skill development and application integration enhances reusability of code</li>
+</ul>
+</div>
+<div class="section" id="features-features">
+<h2><a class="reference internal" href="_images/icon-features.png"><img alt="features" class="align-middle" src="_images/icon-features.png" style="width: 50px; height: 40px;" /></a> Features:<a class="headerlink" href="#features-features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>Template Skill Code Generation</strong> creates a deploy-able skill template from a JSON intent schema</li>
+<li><strong>AWS CLI Wrapper</strong> simplifies Lambda function creation, deployment, and CloudWatch log file dumps</li>
+<li><strong>No Code Persistence of attributes</strong> provides automatic saving and restoration of session state across skill invocations</li>
+<li><strong>Multiple Data Scopes</strong> supporting Request, Intent, Session, and Application scopes enhances data visibility</li>
+<li><strong>JSON to Object Marshalling</strong> automatically converts JSON Events into Objects and Converts Reply Objects into JSON</li>
+<li><strong>State Manager</strong> provides a simple yet powerful finite state machine that manages expected intents and required field processing</li>
+<li><strong>Sample Applications</strong> Full functioning applications implement Amazons blueprint samples that from there Java and Node.JS github</li>
+<li><strong>Logging and log level throttling</strong> comprehensive logging and log level setting to support development, debug, &amp; production monitoring</li>
+</ul>
+</div>
+<div class="section" id="benefits-key-benefits">
+<h2><a class="reference internal" href="_images/icon-benefits.png"><img alt="benefits" class="align-middle" src="_images/icon-benefits.png" style="width: 50px; height: 30px;" /></a> Key Benefits:<a class="headerlink" href="#benefits-key-benefits" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>Enhanced Developer Productivity</strong> the ASK Amy framework encapsulates much of the boiler plate enabling developers to focus on the core skill functionality</li>
+<li><strong>Enhanced User Experience Design Productivity</strong> as the UX can be developed an tweaked independent of the code</li>
+<li><strong>Improved Agility</strong></li>
+<li><strong>Simplified Deploy and Debug Cycles</strong></li>
+</ul>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Prerequisites</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html#users-accounts">Users Accounts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html#pip-installs">Pip Installs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html#add-aws-user">Add AWS User</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html#aws-cli-configure">AWS CLI Configure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html#aws-lambda-role">AWS Lambda Role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html#congratulation">Congratulation!!</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">ASK Amy Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="models.html#alexa-interaction-diagram">Alexa Interaction Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#ask-amy-framework">ASK Amy Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#alexa-event-model">Alexa Event Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#alexa-reply-model">Alexa Reply Model</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="prerequisites.html" title="Prerequisites"
+             >next</a> |</li>
+        <li><a href="#">ASK Amy home</a>&#160;|</li>
+        <li><a href="contents.html">Documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Dan Higgins.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

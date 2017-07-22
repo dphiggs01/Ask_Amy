@@ -1,0 +1,22 @@
+ask\_amy\.tests\.cli package
+============================
+
+Submodules
+----------
+
+ask\_amy\.tests\.cli\.test\_code\_gen module
+--------------------------------------------
+
+.. automodule:: ask_amy.tests.cli.test_code_gen
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: ask_amy.tests.cli
+    :members:
+    :undoc-members:
+    :show-inheritance:

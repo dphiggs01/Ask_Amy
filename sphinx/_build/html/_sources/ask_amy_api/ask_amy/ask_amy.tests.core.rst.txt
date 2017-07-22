@@ -1,0 +1,54 @@
+ask\_amy\.tests\.core package
+=============================
+
+Submodules
+----------
+
+ask\_amy\.tests\.core\.test\_dialog module
+------------------------------------------
+
+.. automodule:: ask_amy.tests.core.test_dialog
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+ask\_amy\.tests\.core\.test\_event module
+-----------------------------------------
+
+.. automodule:: ask_amy.tests.core.test_event
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+ask\_amy\.tests\.core\.test\_reply module
+-----------------------------------------
+
+.. automodule:: ask_amy.tests.core.test_reply
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+ask\_amy\.tests\.core\.test\_request module
+-------------------------------------------
+
+.. automodule:: ask_amy.tests.core.test_request
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+ask\_amy\.tests\.core\.test\_session module
+-------------------------------------------
+
+.. automodule:: ask_amy.tests.core.test_session
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: ask_amy.tests.core
+    :members:
+    :undoc-members:
+    :show-inheritance:
