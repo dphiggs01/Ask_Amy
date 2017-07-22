@@ -1,3 +1,2 @@
 include README.md
-include docs/*.md
-include ask_amy/*.json
+include ask_amy/cli/code_gen/templates/alexa_lambda_role.json

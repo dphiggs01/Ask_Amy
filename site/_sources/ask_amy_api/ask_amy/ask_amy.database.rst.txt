@@ -1,0 +1,22 @@
+ask\_amy\.database package
+==========================
+
+Submodules
+----------
+
+ask\_amy\.database\.database module
+-----------------------------------
+
+.. automodule:: ask_amy.database.database
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: ask_amy.database
+    :members:
+    :undoc-members:
+    :show-inheritance:

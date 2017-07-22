@@ -1,0 +1,32 @@
+ask\_amy\.tests package
+=======================
+
+Subpackages
+-----------
+
+.. toctree::
+
+    ask_amy.tests.cli
+    ask_amy.tests.core
+    ask_amy.tests.database
+    ask_amy.tests.utilities
+
+Submodules
+----------
+
+ask\_amy\.tests\.utility module
+-------------------------------
+
+.. automodule:: ask_amy.tests.utility
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: ask_amy.tests
+    :members:
+    :undoc-members:
+    :show-inheritance:

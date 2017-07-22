@@ -1,0 +1,227 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ask_amy.database package &#8212; ASK Amy  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinx13.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+ 
+    <style type="text/css">
+      table.right { float: right; margin-left: 20px; }
+      table.right td { border: 1px solid #ccc; }
+      
+    </style>
+    <script type="text/javascript">
+      // intelligent scrolling of the sidebar content
+      $(window).scroll(function() {
+        var sb = $('.sphinxsidebarwrapper');
+        var win = $(window);
+        var sbh = sb.height();
+        var offset = $('.sphinxsidebar').position()['top'];
+        var wintop = win.scrollTop();
+        var winbot = wintop + win.innerHeight();
+        var curtop = sb.position()['top'];
+        var curbot = curtop + sbh;
+        // does sidebar fit in window?
+        if (sbh < win.innerHeight()) {
+          // yes: easy case -- always keep at the top
+          sb.css('top', $u.min([$u.max([0, wintop - offset - 10]),
+                                $(document).height() - sbh - 200]));
+        } else {
+          // no: only scroll if top/bottom edge of sidebar is at
+          // top/bottom edge of window
+          if (curtop > wintop && curbot > winbot) {
+            sb.css('top', $u.max([wintop - offset - 10, 0]));
+          } else if (curtop < wintop && curbot < winbot) {
+            sb.css('top', $u.min([winbot - sbh - offset - 20,
+                                  $(document).height() - sbh - 200]));
+          }
+        }
+      });
+    </script>
+
+  </head>
+  <body>
+<div class="pageheader">
+  <ul>
+    <li><a href="../../index.html">Home</a></li>
+    <li><a href="../../install.html">Get it</a></li>
+    <li><a href="../../contents.html">Docs</a></li>
+    <li><a href="../../develop.html">Extend/Develop</a></li>
+  </ul>
+  <div>
+    <a href="../../index.html">
+      <img src="../../_static/askamyheader.png" alt="ASK Amy" />
+    </a>
+  </div>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">ASK Amy home</a>&#160;|</li>
+        <li><a href="../../contents.html">Documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ask_amy.database package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-ask_amy.database.database">ask_amy.database.database module</a></li>
+<li><a class="reference internal" href="#module-ask_amy.database">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/ask_amy_api/ask_amy/ask_amy.database.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ask-amy-database-package">
+<h1>ask_amy.database package<a class="headerlink" href="#ask-amy-database-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-ask_amy.database.database">
+<span id="ask-amy-database-database-module"></span><h2>ask_amy.database.database module<a class="headerlink" href="#module-ask_amy.database.database" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ask_amy.database.database.DynamoDB">
+<em class="property">class </em><code class="descclassname">ask_amy.database.database.</code><code class="descname">DynamoDB</code><span class="sig-paren">(</span><em>table_name</em>, <em>endpoint_url=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.database.database.DynamoDB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="ask_amy.database.database.DynamoDB.NAME">
+<code class="descname">NAME</code><em class="property"> = ‘key’</em><a class="headerlink" href="#ask_amy.database.database.DynamoDB.NAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.database.database.DynamoDB.SESSION_DATA">
+<code class="descname">SESSION_DATA</code><em class="property"> = ‘dialog_fields’</em><a class="headerlink" href="#ask_amy.database.database.DynamoDB.SESSION_DATA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.database.database.DynamoDB.create_table">
+<code class="descname">create_table</code><span class="sig-paren">(</span><em>read_capacity_units=1</em>, <em>write_capacity_units=1</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.database.database.DynamoDB.create_table" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.database.database.DynamoDB.delete_item">
+<code class="descname">delete_item</code><span class="sig-paren">(</span><em>user_id</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.database.database.DynamoDB.delete_item" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.database.database.DynamoDB.get_attribute">
+<code class="descname">get_attribute</code><span class="sig-paren">(</span><em>attributes</em>, <em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.database.database.DynamoDB.get_attribute" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.database.database.DynamoDB.get_item">
+<code class="descname">get_item</code><span class="sig-paren">(</span><em>user_id</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.database.database.DynamoDB.get_item" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.database.database.DynamoDB.load">
+<code class="descname">load</code><span class="sig-paren">(</span><em>user_id</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.database.database.DynamoDB.load" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.database.database.DynamoDB.query_by_userid">
+<code class="descname">query_by_userid</code><span class="sig-paren">(</span><em>user_id</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.database.database.DynamoDB.query_by_userid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.database.database.DynamoDB.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>user_id</em>, <em>fields_to_persist</em>, <em>session_data</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.database.database.DynamoDB.save" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.database.database.DynamoDB.update_data">
+<code class="descname">update_data</code><span class="sig-paren">(</span><em>user_id</em>, <em>name</em>, <em>attribute</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.database.database.DynamoDB.update_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ask_amy.database">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ask_amy.database" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">ASK Amy home</a>&#160;|</li>
+        <li><a href="../../contents.html">Documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Dan Higgins.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>
