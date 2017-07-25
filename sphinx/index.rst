@@ -48,6 +48,7 @@ developer leverage the Alexa Skills Kit API to its full extent.
    :caption: Contents:
 
    prerequisites.rst
+   getting_started.rst
    models.rst
 
 

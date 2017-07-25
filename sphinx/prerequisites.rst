@@ -1,8 +1,17 @@
 Prerequisites
-===============
+=============
+
+.. sidebar:: *Expected Time 25 Minutes*
+
+   If you have a functioning Python 3.+ environment and are familiar with executing at the command line expect to spend
+   approximately 25 Minutes to install and configure the prerequisites described below. This estimate includes the time
+   to create and secure the two Amazon accounts.
+
 
 |prereq| Before diving in there are a few prerequisites that must be satisfied. Happily, once these prerequisites are satisfied
-we can focus on coding our Alexa Skills and not the environment.
+we can focus on coding our Alexa Skills and not focus the environment. Let's get started.
+
+
 
 Users Accounts
 --------------
@@ -10,10 +19,19 @@ Users Accounts
 * We will need an `Amazon Developer account <https://developer.amazon.com/>`_ to design and deploy our skills *voice user interface*.
 * An `AWS (Amazon Web Services) Account <https://aws.amazon.com/>`_ to deploy our skills *execution code* (we will be deploying on `AWS Lambda <https://aws.amazon.com/lambda/>`_).
 
-.. note::
+.. seealso::
 
     Additional beneficial reading on getting started with Alexa Skill development can be found here with
     the `Amazon provided documentation <https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/requirements-to-build-a-skill>`_.
+
+
+.. note::
+
+    The AWS Account creation will require a *credit card* however the Free Tier should be sufficient for getting started
+    with all our Alexa Skills.
+
+    Also **note** that although not strictly required it is a best practice to secure your `AWS Root account
+    <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html>`_.
 
 
 Pip Installs
@@ -114,7 +132,7 @@ AWS CLI Configure
 
 With our newly created user we are now ready to configure the **AWS CLI environment**. To do so enter a *command shell* and type
 `aws configure`. If this is your first time executing aws configure it will look similar to the below shell window.
-Open the use credentials .cvs file that we downloaded in the last step and copy and paste the *Access Key ID* and
+Open the credentials .cvs file that we downloaded in the last step and copy and paste the *Access Key ID* and
 *Secret Access Key* into the appropriate prompts. select *us-east-1* for your default region and *text* as the default
 output format.
 
@@ -126,6 +144,7 @@ output format.
    Default region name [None]: us-east-1
    Default output format [None]: text
 
+.. _aws-lambda-role-label:
 
 AWS Lambda Role
 ---------------
@@ -171,7 +190,7 @@ will provide permission to *DynamoDB* and *Cloudwatch Logs*. You can create the 
 
 Congratulation!!
 ----------------
-Congratulations you now have a fully configured ASK Amy environment and you are ready to accelerate your coding of
+Congratulations you now have a fully configured **ASK Amy** environment and you are ready to accelerate your coding of
 Alexa Skills!
 
 

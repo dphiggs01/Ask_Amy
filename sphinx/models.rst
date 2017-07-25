@@ -1,8 +1,12 @@
 ASK Amy Overview
-=======================
+================
 
-This document is meant to give a high-level overview of the ASK Amy model. Additional some advanced and utility features
- are left out intentionally to help provide a clarity to important initial concepts.
+This document is meant to give a high-level overview of the ASK Amy model.
+
+.. note::
+
+    In the below model a number of advanced objects and utility features are left out intentionally to help provide
+    emphasise fundamental concepts.
 
 
 Alexa Interaction Diagram
@@ -32,7 +36,8 @@ if needed.
     Figure 2.
 
 Alexa Event Model
--------------------
+^^^^^^^^^^^^^^^^^
+
 Figure 3.
 
 .. figure:: _static/event_model.png
@@ -43,7 +48,8 @@ Figure 3.
     Figure 3.
 
 Alexa Reply Model
--------------------
+^^^^^^^^^^^^^^^^^
+
 Figure 4.
 
 .. figure:: _static/reply_model.png
