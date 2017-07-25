@@ -1,0 +1,209 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ASK Amy Overview &#8212; ASK Amy  documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinx13.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Getting Started" href="getting_started.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+ 
+    <style type="text/css">
+      table.right { float: right; margin-left: 20px; }
+      table.right td { border: 1px solid #ccc; }
+      
+    </style>
+    <script type="text/javascript">
+      // intelligent scrolling of the sidebar content
+      $(window).scroll(function() {
+        var sb = $('.sphinxsidebarwrapper');
+        var win = $(window);
+        var sbh = sb.height();
+        var offset = $('.sphinxsidebar').position()['top'];
+        var wintop = win.scrollTop();
+        var winbot = wintop + win.innerHeight();
+        var curtop = sb.position()['top'];
+        var curbot = curtop + sbh;
+        // does sidebar fit in window?
+        if (sbh < win.innerHeight()) {
+          // yes: easy case -- always keep at the top
+          sb.css('top', $u.min([$u.max([0, wintop - offset - 10]),
+                                $(document).height() - sbh - 200]));
+        } else {
+          // no: only scroll if top/bottom edge of sidebar is at
+          // top/bottom edge of window
+          if (curtop > wintop && curbot > winbot) {
+            sb.css('top', $u.max([wintop - offset - 10, 0]));
+          } else if (curtop < wintop && curbot < winbot) {
+            sb.css('top', $u.min([winbot - sbh - offset - 20,
+                                  $(document).height() - sbh - 200]));
+          }
+        }
+      });
+    </script>
+
+  </head>
+  <body>
+<div class="pageheader">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="install.html">Get it</a></li>
+    <li><a href="contents.html">Docs</a></li>
+    <li><a href="develop.html">Extend/Develop</a></li>
+  </ul>
+  <div>
+    <a href="index.html">
+      <img src="_static/askamyheader.png" alt="ASK Amy" />
+    </a>
+  </div>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="getting_started.html" title="Getting Started"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">ASK Amy home</a>&#160;|</li>
+        <li><a href="contents.html">Documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ASK Amy Overview</a><ul>
+<li><a class="reference internal" href="#alexa-interaction-diagram">Alexa Interaction Diagram</a></li>
+<li><a class="reference internal" href="#ask-amy-framework">ASK Amy Framework</a><ul>
+<li><a class="reference internal" href="#alexa-event-model">Alexa Event Model</a></li>
+<li><a class="reference internal" href="#alexa-reply-model">Alexa Reply Model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="getting_started.html"
+                        title="previous chapter">Getting Started</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/models.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ask-amy-overview">
+<h1>ASK Amy Overview<a class="headerlink" href="#ask-amy-overview" title="Permalink to this headline">¶</a></h1>
+<p>This document is meant to give a high-level overview of the ASK Amy model.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In the below model a number of advanced objects and utility features are left out intentionally to help provide
+emphasise fundamental concepts.</p>
+</div>
+<div class="section" id="alexa-interaction-diagram">
+<h2>Alexa Interaction Diagram<a class="headerlink" href="#alexa-interaction-diagram" title="Permalink to this headline">¶</a></h2>
+<p>Figure 1.</p>
+<div class="align-center figure" id="id1">
+<img alt="ASK Amy Framework" src="_images/interaction_diagram.png" />
+<p class="caption"><span class="caption-text">Figure 1.</span></p>
+</div>
+</div>
+<div class="section" id="ask-amy-framework">
+<h2>ASK Amy Framework<a class="headerlink" href="#ask-amy-framework" title="Permalink to this headline">¶</a></h2>
+<p>Figure 2. Shows that high-level object model. It is important to note that although the model greatly simplifies the
+use of the Event dictionary that is sent from the Alex Service the developer always has complete access to this data
+if needed.</p>
+<div class="align-center figure" id="id2">
+<img alt="ASK Amy Framework" src="_images/ask_amy_framework.png" />
+<p class="caption"><span class="caption-text">Figure 2.</span></p>
+</div>
+<div class="section" id="alexa-event-model">
+<h3>Alexa Event Model<a class="headerlink" href="#alexa-event-model" title="Permalink to this headline">¶</a></h3>
+<p>Figure 3.</p>
+<div class="align-center figure" id="id3">
+<img alt="Alexa Event Model" src="_images/event_model.png" />
+<p class="caption"><span class="caption-text">Figure 3.</span></p>
+</div>
+</div>
+<div class="section" id="alexa-reply-model">
+<h3>Alexa Reply Model<a class="headerlink" href="#alexa-reply-model" title="Permalink to this headline">¶</a></h3>
+<p>Figure 4.</p>
+<div class="align-center figure" id="id4">
+<img alt="Alexa Reply Model" src="_images/reply_model.png" />
+<p class="caption"><span class="caption-text">Figure 4.</span></p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="getting_started.html" title="Getting Started"
+             >previous</a> |</li>
+        <li><a href="index.html">ASK Amy home</a>&#160;|</li>
+        <li><a href="contents.html">Documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Dan Higgins.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

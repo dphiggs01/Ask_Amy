@@ -1,0 +1,298 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting Started &#8212; ASK Amy  documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinx13.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ASK Amy Overview" href="models.html" />
+    <link rel="prev" title="Prerequisites" href="prerequisites.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+ 
+    <style type="text/css">
+      table.right { float: right; margin-left: 20px; }
+      table.right td { border: 1px solid #ccc; }
+      
+    </style>
+    <script type="text/javascript">
+      // intelligent scrolling of the sidebar content
+      $(window).scroll(function() {
+        var sb = $('.sphinxsidebarwrapper');
+        var win = $(window);
+        var sbh = sb.height();
+        var offset = $('.sphinxsidebar').position()['top'];
+        var wintop = win.scrollTop();
+        var winbot = wintop + win.innerHeight();
+        var curtop = sb.position()['top'];
+        var curbot = curtop + sbh;
+        // does sidebar fit in window?
+        if (sbh < win.innerHeight()) {
+          // yes: easy case -- always keep at the top
+          sb.css('top', $u.min([$u.max([0, wintop - offset - 10]),
+                                $(document).height() - sbh - 200]));
+        } else {
+          // no: only scroll if top/bottom edge of sidebar is at
+          // top/bottom edge of window
+          if (curtop > wintop && curbot > winbot) {
+            sb.css('top', $u.max([wintop - offset - 10, 0]));
+          } else if (curtop < wintop && curbot < winbot) {
+            sb.css('top', $u.min([winbot - sbh - offset - 20,
+                                  $(document).height() - sbh - 200]));
+          }
+        }
+      });
+    </script>
+
+  </head>
+  <body>
+<div class="pageheader">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="install.html">Get it</a></li>
+    <li><a href="contents.html">Docs</a></li>
+    <li><a href="develop.html">Extend/Develop</a></li>
+  </ul>
+  <div>
+    <a href="index.html">
+      <img src="_static/askamyheader.png" alt="ASK Amy" />
+    </a>
+  </div>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="models.html" title="ASK Amy Overview"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="prerequisites.html" title="Prerequisites"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">ASK Amy home</a>&#160;|</li>
+        <li><a href="contents.html">Documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Getting Started</a><ul>
+<li><a class="reference internal" href="#deploying-our-first-skill">Deploying our first skill</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="prerequisites.html"
+                        title="previous chapter">Prerequisites</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="models.html"
+                        title="next chapter">ASK Amy Overview</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/getting_started.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="getting-started">
+<span id="getting-started-label"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>The typical first application a programmer writes when working with a new language or framework is the <em>Hello World</em>
+application in which we get a minimal thread of execute to demonstrate base functionality. For our first skill we will
+be deploying an simple Fact telling skill, this is essentially the <em>Hello World</em> of Alexa skills but since the facts can
+be easily changed and updated this is actually a useful and fun initial skill to deploy and later modify.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Our fact skill is based upon the <a class="reference external" href="https://github.com/amzn/alexa-skills-kit-java/tree/master/samples/src/main/java/spacegeek">Space Geek Skill</a>
+a demo skill written by the Amazon developer team for the Java programming language.</p>
+</div>
+<div class="section" id="deploying-our-first-skill">
+<h2>Deploying our first skill<a class="headerlink" href="#deploying-our-first-skill" title="Permalink to this headline">¶</a></h2>
+<div class="sidebar">
+<p class="first sidebar-title"><em>Expected Time Under 10 Minutes</em></p>
+<p class="last">Once you have a functioning <strong>ASK Amy</strong> environment the time to create and deploy a pre build skill is <em>under 10 minutes</em>
+and with a little bit of experience it can be <em>under 5 minutes</em>.</p>
+</div>
+<p>There are two primary tasks in building and deploying a skill the <strong>first</strong> is constructing the <em>User Interaction Model</em>
+and the <strong>second</strong> is <em>coding</em> of the behavior of the interactions.</p>
+<p>The Alexa interaction with our skill would be similar to the below:</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><strong>User</strong>: “Alexa, ask Obama fact to give me a fact.”</div>
+<div class="line"><strong>Alexa</strong>: “Did you know : …”</div>
+</div>
+</div></blockquote>
+<p>To deploy our example skill:</p>
+<ul>
+<li><p class="first">Clone the <strong>ASK Amy</strong> examples.</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span></span>$ git clone https://github.com/dphiggs01/ask_amy_example_skills.git
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Edit the <cite>alexa_obama_fact_skill/cli_config.json</cite> and update aws_role with your <a class="reference internal" href="prerequisites.html#aws-lambda-role-label"><span class="std std-ref">AWS Lambda Role</span></a>.</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;skill_name&quot;</span><span class="p">:</span> <span class="s2">&quot;alexa_obama_fact_skill&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;skill_home_dir&quot;</span><span class="p">:</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws_region&quot;</span><span class="p">:</span> <span class="s2">&quot;us-east-1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws_profile&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws_role&quot;</span><span class="p">:</span> <span class="s2">&quot;arn:aws:iam::***********:role/alexa_skill_role&quot;</span><span class="p">,</span>
+
+    <span class="s2">&quot;lambda_runtime&quot;</span><span class="p">:</span> <span class="s2">&quot;python3.6&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;lambda_handler&quot;</span><span class="p">:</span> <span class="s2">&quot;ask_amy.lambda_function.lambda_handler&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;lambda_timeout&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;lambda_memory&quot;</span><span class="p">:</span> <span class="s2">&quot;128&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;lambda_zip&quot;</span><span class="p">:</span> <span class="s2">&quot;alexa_skill.zip&quot;</span><span class="p">,</span>
+
+    <span class="s2">&quot;ask_amy_dev&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;ask_amy_home_dir&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Create the AWS Lambda Function by executing the <cite>ask-amy-cli create_lambda …</cite> command below.</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span></span>$ ask-amy-cli create_lambda --deploy-json-file cli_config.json
+<span class="o">{</span>
+    <span class="s2">&quot;add_trigger&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;Statement&quot;</span>: <span class="s2">&quot;{\&quot;Sid\&quot;:\&quot;al....</span>
+<span class="s2">    },</span>
+<span class="s2">    &quot;</span>create_function<span class="s2">&quot;: {</span>
+<span class="s2">        &quot;</span>Role<span class="s2">&quot;: &quot;</span>arn:aws:iam::095547219887:role/alexa_skill_role<span class="s2">&quot;,</span>
+<span class="s2">        &quot;</span>MemorySize<span class="s2">&quot;: 128,</span>
+<span class="s2">        &quot;</span>CodeSize<span class="s2">&quot;: 69157,</span>
+<span class="s2">        &quot;</span>Description<span class="s2">&quot;: &quot;</span>alexa_obama_fact_skill<span class="s2">&quot;,</span>
+<span class="s2">        &quot;</span>Runtime<span class="s2">&quot;: &quot;</span>python3.6<span class="s2">&quot;,</span>
+<span class="s2">        &quot;</span>FunctionName<span class="s2">&quot;: &quot;</span>alexa_obama_fact_skill<span class="s2">&quot;,</span>
+<span class="s2">        &quot;</span>TracingConfig<span class="s2">&quot;: {</span>
+<span class="s2">            &quot;</span>Mode<span class="s2">&quot;: &quot;</span>PassThrough<span class="s2">&quot;</span>
+<span class="s2">        },</span>
+<span class="s2">        &quot;</span>Version<span class="s2">&quot;: &quot;</span><span class="nv">$LATEST</span><span class="s2">&quot;,</span>
+<span class="s2">        &quot;</span>FunctionArn<span class="s2">&quot;: &quot;</span>arn:aws:lambda:us-east-1:095547219887:function:alexa_obama_fact_skill<span class="s2">&quot;,</span>
+<span class="s2">        &quot;</span>CodeSha256<span class="s2">&quot;: &quot;</span>JZ/7XolvjCmxaYHUELY7ezuPGJWQs1os6Udhwv1rG9Y<span class="o">=</span><span class="s2">&quot;,</span>
+<span class="s2">        &quot;</span>LastModified<span class="s2">&quot;: &quot;</span><span class="m">2017</span>-07-23T17:17:05.962+0000<span class="s2">&quot;,</span>
+<span class="s2">        &quot;</span>Handler<span class="s2">&quot;: &quot;</span>ask_amy.lambda_function.lambda_handler<span class="s2">&quot;,</span>
+<span class="s2">        &quot;</span>Timeout<span class="s2">&quot;: 5</span>
+<span class="s2">    }</span>
+<span class="s2">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">subsequent calls would use <em>deploy_lambda</em> inplace of <em>create_lambda</em> i.e
+<cite>ask-amy-cli deploy_lambda –deploy-json-file cli_config.json</cite></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Logon to <a class="reference external" href="https://developer.amazon.com/alexa">Alex Development Portal</a>. Select <cite>Add New Skill</cite></p>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/tut_1_01_add_new_skill.png"><img alt="_images/tut_1_01_add_new_skill.png" src="_images/tut_1_01_add_new_skill.png" style="width: 600px; height: 203px;" /></a>
+</div></blockquote>
+</li>
+<li><p class="first">In <strong>Skill Information</strong> set <em>Name</em> to <cite>Obama Fact</cite> and set <em>Invocation Name</em> to <cite>Obama Fact</cite>, click <cite>Save</cite>
+and <cite>Next</cite></p>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/tut_1_02_skill_information.png"><img alt="_images/tut_1_02_skill_information.png" src="_images/tut_1_02_skill_information.png" style="width: 600px; height: 478px;" /></a>
+</div></blockquote>
+</li>
+<li><p class="first">In <strong>Intercation Model</strong> copy the contents of the <cite>alexa_obama_fact_skill/speech_assests/intent_schema.json</cite> to
+<strong>Intent Schema</strong> and <cite>alexa_obama_fact_skill/speech_assests/utterance.txt</cite> to <strong>Sample Utterances</strong>, click <cite>Save</cite>
+and <cite>Next</cite></p>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/tut_1_03_a_interaction_model.png"><img alt="_images/tut_1_03_a_interaction_model.png" src="_images/tut_1_03_a_interaction_model.png" style="width: 600px; height: 339px;" /></a>
+<a class="reference internal image-reference" href="_images/tut_1_03_b_interaction_model.png"><img alt="_images/tut_1_03_b_interaction_model.png" src="_images/tut_1_03_b_interaction_model.png" style="width: 600px; height: 244px;" /></a>
+</div></blockquote>
+</li>
+<li><p class="first">In <strong>Configuration</strong> click <cite>AWS Lambda ARN</cite>, <cite>North America</cite> and paste the <em>FunctionArn</em> from step three above
+into the Service Endpoint Field, click <cite>Save</cite> and <cite>Next</cite></p>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/tut_1_04_configuration.png"><img alt="_images/tut_1_04_configuration.png" src="_images/tut_1_04_configuration.png" style="width: 600px; height: 617px;" /></a>
+</div></blockquote>
+</li>
+<li><p class="first">In <strong>Test</strong> <em>Enter Utterance</em> <cite>Give me a fact</cite> and click <cite>Ask Obama Fact</cite> note the <em>Lambda Response</em></p>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/tut_1_05_test.png"><img alt="_images/tut_1_05_test.png" src="_images/tut_1_05_test.png" style="width: 600px; height: 611px;" /></a>
+</div></blockquote>
+</li>
+<li><p class="first">Congratulations, You have deployed your first ASK Amy based skill!</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="models.html" title="ASK Amy Overview"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="prerequisites.html" title="Prerequisites"
+             >previous</a> |</li>
+        <li><a href="index.html">ASK Amy home</a>&#160;|</li>
+        <li><a href="contents.html">Documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Dan Higgins.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>
