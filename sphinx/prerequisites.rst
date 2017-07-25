@@ -157,30 +157,30 @@ will provide permission to *DynamoDB* and *Cloudwatch Logs*. You can create the 
 
    $ ask-amy-cli create_role --role-name alexa_skill_role
    {
-    "iam_create_role": {
-        "Role": {
-            "RoleName": "alexa_skill_role",
-            "Arn": "arn:aws:iam::280056172273:role/alexa_skill_role",
-            "Path": "/",
-            "AssumeRolePolicyDocument": {
-                "Version": "2012-10-17",
-                "Statement": [
-                    {
-                        "Effect": "Allow",
-                        "Principal": {
-                            "Service": "lambda.amazonaws.com"
-                        },
-                        "Action": "sts:AssumeRole"
-                    }
-                ]
-            },
-            "RoleId": "AROAI4NG2EMC5HHRBYID4",
-            "CreateDate": "2017-07-22T14:59:57.594Z"
-        }
-    },
-    "iam_attach_policy_cloud_watch": {},
-    "iam_attach_policy_dynamo": {}
-}
+        "iam_create_role": {
+            "Role": {
+                "RoleName": "alexa_skill_role",
+                "Arn": "arn:aws:iam::280056172273:role/alexa_skill_role",
+                "Path": "/",
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                            },
+                            "Action": "sts:AssumeRole"
+                        }
+                    ]
+                },
+                "RoleId": "AROAI4NG2EMC5HHRBYID4",
+                "CreateDate": "2017-07-22T14:59:57.594Z"
+            }
+        },
+        "iam_attach_policy_cloud_watch": {},
+        "iam_attach_policy_dynamo": {}
+    }
 
 
 .. note::

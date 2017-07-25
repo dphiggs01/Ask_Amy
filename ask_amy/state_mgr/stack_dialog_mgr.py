@@ -9,30 +9,33 @@ import logging
 
 logger = logging.getLogger()
 
+
 class StackDialogManager(DefaultDialog):
-
-
-
     def requested_value_intent(self):
-        """
-        This intent is expected to be called when we need to capture a bit of info the we may have failed
-        to capture on a one shot.
-        :return:
-        """
-        logger.debug('**************** entering StackDialogManager.requested_value_intent')
-
+        logger.debug("**************** StackDialogManager.requested_value_intent")
+        # is this a good state?
         established_dialog = self.peek_established_dialog()
-        if established_dialog != self.intent_name:
-            # we should not come here unless directed by another intent
-            return self.handle_session_end_confused()
+        state_good = True
+        if established_dialog is None:
+            state_good = False
         else:
-            self.pop_established_dialog()
+            if established_dialog['intent_name'] != self.intent_name:
+                state_good = False
+
+        if state_good:
+            self.slot_data_to_intent_attributes()
+            current_dialog = self.pop_established_dialog()
+            slot_name = current_dialog['slot_name']
+            requested_value = current_dialog['requested_value']
+
             established_dialog = self.peek_established_dialog()
-            self._intent_name = established_dialog
-            return self.execute_method(established_dialog)
+            established_dialog[slot_name] = requested_value
+            self._intent_name = established_dialog['intent_name']
+            return self.execute_method(self._intent_name)
+        else:
+            return self.handle_session_end_confused()
 
-
-    def redirect_to_initialize_dialog(self,intent_name):
+    def redirect_to_initialize_dialog(self, intent_name):
         """
         Simple redirect. We use this if an intent is called but a prior intent was expected
         :param intent_name:
@@ -40,7 +43,6 @@ class StackDialogManager(DefaultDialog):
         """
         self._intent_name = intent_name
         return self.execute_method(intent_name)
-
 
     def get_expected_intent_for_data(self, data_name):
         return self.get_value_from_dict(['slots', data_name, 'expected_intent'])
@@ -55,6 +57,9 @@ class StackDialogManager(DefaultDialog):
         logger.debug('**************** entering StackDialogManager.handle_session_end_confused')
         # can we re_prompt?
         dialog_state = self.peek_established_dialog()
+        if dialog_state is None:
+            dialog_state = {}
+
         if 'retry_attempted' not in dialog_state.keys():
             prompt_dict = {"speech_out_text": "Could you please repeat or say help.",
                            "should_end_session": False}
@@ -117,12 +122,12 @@ class StackDialogManager(DefaultDialog):
         :param intent_name:
         :return:
         """
-        logger.debug("**************** entering Dialog.push_established_dialog")
-        new_intent_attributes={"intent_name": intent_name}
+        logger.debug("**************** entering StackDialogManager.push_established_dialog")
+        new_intent_attributes = {"intent_name": intent_name}
         # If we dont have an established_dialog create one
         if 'established_dialog' not in self.session.attributes.keys():
             self.session.attributes['established_dialog'] = [new_intent_attributes]
-            return
+            return new_intent_attributes
 
         dialog_stack = self.session.attributes['established_dialog']
 
@@ -136,6 +141,8 @@ class StackDialogManager(DefaultDialog):
             # if so add it otherwise just use the one that is established
             if active_intent_attributes['intent_name'] != intent_name:
                 dialog_stack.append(new_intent_attributes)
+
+        return new_intent_attributes
 
     def pop_established_dialog(self):
         """
@@ -166,14 +173,16 @@ class StackDialogManager(DefaultDialog):
         :param required_fields:
         :return:
         """
+        logger.debug("**************** entering StackDialogManager.required_fields_process")
         reply_dict = None
         intent_attributes = self.peek_established_dialog()
         for key in required_fields:
             if key not in intent_attributes.keys():
                 expected_intent = self.get_expected_intent_for_data(key)
-                self.push_established_dialog(expected_intent)
-                intent_attributes['slot_name'] = key
+                new_intent_attributes = self.push_established_dialog(expected_intent)
+                new_intent_attributes['slot_name'] = key
                 reply_slot_dict = self.get_slot_data_details(key)
+                logger.debug("requesting more data EVENT={}".format(self.event))
                 return Reply.build(reply_slot_dict, self.event)
 
         return reply_dict
@@ -199,9 +208,9 @@ class StackDialogManager(DefaultDialog):
                 value = self.request.value_for_slot_name(name)
                 if value is not None:
                     # If this is a 'requested_value' do we have a field to map to?
-                    if name == 'requested_value':
-                        if 'slot_name' in intent_attributes.keys():
-                            name = intent_attributes['slot_name']
+                    # if name == 'requested_value':
+                    #    if 'slot_name' in intent_attributes.keys():
+                    #        name = intent_attributes['slot_name']
                     intent_attributes[name] = value
 
     def required_fields_in_session_attributes_to_intent_attributes(self, required_fields):
@@ -210,7 +219,8 @@ class StackDialogManager(DefaultDialog):
         that is required to execute the intent.
         :return:
         """
-        logger.debug("**************** entering StackDialogManager.required_fields_in_session_attributes_to_intent_attributes")
+        logger.debug(
+            "**************** entering StackDialogManager.required_fields_in_session_attributes_to_intent_attributes")
         # If we have an Intent Request map the slot values to the session
         if isinstance(self.event.request, IntentRequest):
             intent_attributes = self.peek_established_dialog()
@@ -218,11 +228,10 @@ class StackDialogManager(DefaultDialog):
                 if self.session.attribute_exists(name):
                     intent_attributes[name] = self.session.attributes[name]
 
-
     def intent_attributes_to_request_attributes(self):
         dialog_state = self.peek_established_dialog()
         for key in dialog_state.keys():
-            self.request.attributes[key]= dialog_state[key]
+            self.request.attributes[key] = dialog_state[key]
 
     def validate_slot_data_type(self, name, value):
         """
@@ -235,7 +244,7 @@ class StackDialogManager(DefaultDialog):
         slot_type = self.get_value_from_dict(['slots', name, 'type'])
         valid = True
         if slot_type is None:
-            return valid # If type is not defined skip validation test
+            return valid  # If type is not defined skip validation test
         else:
             if slot_type.startswith('AMAZON.'):
                 valid = ISO8601_Validator.is_valid_value(value, slot_type)
@@ -250,7 +259,7 @@ class StackDialogManager(DefaultDialog):
         return valid
 
 
-def required_fields(fields):
+def required_fields(fields, user_managed=False):
     """
     Required fields decorator manages the state of the intent
     :param fields:
@@ -259,8 +268,11 @@ def required_fields(fields):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
+            logger.debug("XXXXXXXX wrapper args={}".format(args))
+            for x in args:
+                logger.debug("XXXXXXXX wrapper arg type={}".format(type(x)))
             obj = args[0]
-            if isinstance(obj,StackDialogManager):
+            if isinstance(obj, StackDialogManager):
                 if obj.is_good_state():
                     obj.required_fields_in_session_attributes_to_intent_attributes(fields)
                     obj.slot_data_to_intent_attributes()
@@ -270,11 +282,16 @@ def required_fields(fields):
                 else:
                     return obj.handle_session_end_confused()
 
+                logger.debug("XXXXXXXX Seems we have all the required fields!!")
                 obj.intent_attributes_to_request_attributes()
+                logger.debug("past that ugly part.....")
                 ret_val = func(*args, **kwargs)
-                obj.pop_established_dialog()
+                if not user_managed:
+                    obj.pop_established_dialog()
             else:
                 ret_val = func(*args, **kwargs)
             return ret_val
+
         return wrapper
+
     return decorator

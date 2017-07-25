@@ -29,7 +29,7 @@ class ObjectDictionary(object):
                     val = None
 
         except KeyError:
-            self.logger.critical("ObjectDictionary failed to find [{}] in dict".format(path))
+            self.logger.debug("ObjectDictionary failed to find={} in dict={}".format(path, val))
             val = None
         return val
 

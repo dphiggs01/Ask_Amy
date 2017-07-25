@@ -44,11 +44,11 @@ class TimeOfDay(object):
         today1130 = now.replace(hour=11, minute=30, second=0, microsecond=0)
         today430pm = now.replace(hour=12 + 4, minute=30, second=0, microsecond=0)
         if today430am < now < today1130:
-            return TimeOfDay.Breakfast
+            return 'breakfast'
         elif today1130 < now < today430pm:
-            return TimeOfDay.Lunch
+            return 'lunch'
         else:
-            return TimeOfDay.Dinner
+            return 'dinner'
 
     @staticmethod
     def day_night(time_adj, now=datetime.utcnow()):
@@ -65,9 +65,9 @@ class TimeOfDay(object):
         today5am = now.replace(hour=5, minute=0, second=0, microsecond=0)
         today8pm = now.replace(hour=12 + 8, minute=0, second=0, microsecond=0)
         if today5am < now < today8pm:
-            return TimeOfDay.Daytime
+            return 'day'
         else:
-            return TimeOfDay.Nighttime
+            return 'night'
 
     @staticmethod
     def time_adj(time_str, time_am_pm, now=datetime.utcnow()):
