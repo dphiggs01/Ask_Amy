@@ -85,7 +85,6 @@ class SkillFactory(object):
         logger.debug("**************** entering SkillFactory.__import_class_from_str")
         try:
             module_path, class_name = dotted_path.rsplit('.', 1)
-            logger.critical("QQQQQQQ dotted_path={}, module_path={}, class_name={} ".format(dotted_path, module_path, class_name))
             module = importlib.import_module(module_path)
         except ValueError as error:
             logger.critical("Error SkillFactory.__import_class_from_str")

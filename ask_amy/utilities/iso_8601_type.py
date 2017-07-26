@@ -1,9 +1,10 @@
 import logging
+from ask_amy.utilities.slot_validator import Slot_Validator
 
 logger = logging.getLogger()
 
 
-class ISO8601_Validator(object):
+class ISO8601_Validator(Slot_Validator):
     @staticmethod
     def is_valid_value(value, iso_type):
         status = -1

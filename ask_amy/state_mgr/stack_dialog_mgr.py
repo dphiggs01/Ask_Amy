@@ -2,8 +2,8 @@ from ask_amy.core.default_dialog import DefaultDialog
 from ask_amy.core.request import IntentRequest
 from ask_amy.core.reply import Reply
 from ask_amy.utilities.iso_8601_type import ISO8601_Validator
-from ask_amy.utilities.custom_type import Custom_Validator
-from ask_amy.core.exceptions import CustomTypeLoadError
+from ask_amy.utilities.slot_validator import Slot_Validator
+from ask_amy.core.exceptions import SlotValidatorLoadError
 from functools import wraps
 import logging
 
@@ -182,7 +182,6 @@ class StackDialogManager(DefaultDialog):
                 new_intent_attributes = self.push_established_dialog(expected_intent)
                 new_intent_attributes['slot_name'] = key
                 reply_slot_dict = self.get_slot_data_details(key)
-                logger.debug("requesting more data EVENT={}".format(self.event))
                 return Reply.build(reply_slot_dict, self.event)
 
         return reply_dict
@@ -199,19 +198,44 @@ class StackDialogManager(DefaultDialog):
         :return:
         """
         logger.debug("**************** entering StackDialogManager.slot_data_to_intent_attributes")
-        # If we have an Intent Request map the slot values to the session
+        # If we have an Intent Request map the slot values to the intent dialog
+        validation_errors = None
         if isinstance(self.event.request, IntentRequest):
             slots_dict = self.event.request.slots
+            logger.debug("ZZZZZZZZZZ before slots_dict={}".format(slots_dict))
             intent_attributes = self.peek_established_dialog()
+            logger.debug("ZZZZZZZZZZ intent_attributes={}".format(intent_attributes))
             for name in slots_dict.keys():
-                # get the value for this name if available
+                # get the value for this slot name if available
                 value = self.request.value_for_slot_name(name)
+                logger.debug("ZZZZZZZZZZ name={} value={}".format(name, value))
                 if value is not None:
-                    # If this is a 'requested_value' do we have a field to map to?
-                    # if name == 'requested_value':
-                    #    if 'slot_name' in intent_attributes.keys():
-                    #        name = intent_attributes['slot_name']
                     intent_attributes[name] = value
+                    slot_validation = self.get_value_from_dict(['slots', name, 'validation'])
+                    if slot_validation is not None:
+                        status_code = self.is_valid_slot_data_type(name, value, slot_validation['type_validator'])
+                        if status_code != 0:
+                            if validation_errors is None:
+                                validation_errors = []
+                            validation_error = (name, status_code)
+                            validation_errors.append(validation_error)
+
+        return validation_errors
+
+    def need_valid_data(self, validation_errors):
+        logger.debug("**************** entering StackDialogManager.need_valid_data")
+        for validation_error in validation_errors:
+            slot_name = validation_error[0]
+            status_code = validation_error[1]
+            expected_intent = self.get_expected_intent_for_data(slot_name)
+            new_intent_attributes = self.push_established_dialog(expected_intent)
+            new_intent_attributes['slot_name'] = slot_name
+
+            slot_details = self.get_value_from_dict(['slots', slot_name])
+            slot_details['should_end_session'] = False
+            msg_text = 'msg_{0:02d}_text'.format(status_code)
+            slot_details['speech_out_text'] = slot_details['validation'][msg_text]
+            return Reply.build(slot_details, self.event)
 
     def required_fields_in_session_attributes_to_intent_attributes(self, required_fields):
         """
@@ -233,27 +257,27 @@ class StackDialogManager(DefaultDialog):
         for key in dialog_state.keys():
             self.request.attributes[key] = dialog_state[key]
 
-    def validate_slot_data_type(self, name, value):
+    def is_valid_slot_data_type(self, name, value, type_validator):
         """
         Delegates to the appropriate validator if a type check is defined in the dialog_dict
         :param name:
         :param value:
         :return:
         """
-        logger.debug("**************** entering StackDialogManager.validate_slot_data_type")
-        slot_type = self.get_value_from_dict(['slots', name, 'type'])
+        logger.debug("**************** entering StackDialogManager.is_valid_slot_data_type")
         valid = True
-        if slot_type is None:
+        if type_validator is None:
             return valid  # If type is not defined skip validation test
         else:
-            if slot_type.startswith('AMAZON.'):
-                valid = ISO8601_Validator.is_valid_value(value, slot_type)
+            if type_validator.startswith('AMAZON.'):
+                valid = ISO8601_Validator.is_valid_value(value, type_validator)
             else:
                 try:
-                    validator = Custom_Validator.class_from_str(slot_type)
-                    valid = validator.is_valid_value(value)
-                except CustomTypeLoadError:
-                    logger.debug("Unable to load {}".format(slot_type))
+                    validator = Slot_Validator.class_from_str(type_validator)
+                    valid = validator().is_valid_value(value)
+                except SlotValidatorLoadError:
+                    logger.debug("Unable to load {}".format(type_validator))
+                    # Skip validation
                     valid = True
 
         return valid
@@ -265,26 +289,25 @@ def required_fields(fields, user_managed=False):
     :param fields:
     :return:
     """
+
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            logger.debug("XXXXXXXX wrapper args={}".format(args))
-            for x in args:
-                logger.debug("XXXXXXXX wrapper arg type={}".format(type(x)))
             obj = args[0]
             if isinstance(obj, StackDialogManager):
                 if obj.is_good_state():
                     obj.required_fields_in_session_attributes_to_intent_attributes(fields)
-                    obj.slot_data_to_intent_attributes()
+                    not_valid_slots = obj.slot_data_to_intent_attributes()
+                    if not_valid_slots is not None:
+                        return obj.need_valid_data(not_valid_slots)
+
                     need_additional_data = obj.required_fields_process(fields)
                     if need_additional_data is not None:
                         return need_additional_data
                 else:
                     return obj.handle_session_end_confused()
 
-                logger.debug("XXXXXXXX Seems we have all the required fields!!")
                 obj.intent_attributes_to_request_attributes()
-                logger.debug("past that ugly part.....")
                 ret_val = func(*args, **kwargs)
                 if not user_managed:
                     obj.pop_established_dialog()

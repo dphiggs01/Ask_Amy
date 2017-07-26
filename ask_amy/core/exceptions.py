@@ -22,7 +22,7 @@ class DialogIntentError(ASKAmyError):
 class SkillLoadError(ASKAmyError):
     """Unable to load, bootstrap and execute the skill """
 
-class CustomTypeLoadError(ASKAmyError):
+class SlotValidatorLoadError(ASKAmyError):
     """Unable to load, a custom defined type"""
 
 class FileExistsError(ASKAmyError):
