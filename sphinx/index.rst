@@ -10,7 +10,7 @@ Welcome
 
    "ASK Amy is an easy to use framework with plenty of **goodies** to help accelerate development!"
 
-ASK Amy adheres to a number of simple design principles that helps new developers create skills quickly and advanced
+ASK Amy is a fun and easy to use framework for writing Alexa Skills. Ask Amy adheres to a number of simple design principles that helps new developers create skills quickly and advanced
 developer leverage the Alexa Skills Kit API to its full extent.
 
 

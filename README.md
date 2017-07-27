@@ -17,3 +17,6 @@ ask-amy-cli create_template --skill-name alexa_scorekeeper_skill --role-name arn
 
 sphinx-apidoc -o ask_amy/ ~/Code/AWS/alexa/ask_amy/ask_amy
 find . -type d -name dist -exec rm -rf {} \;
+
+
+
