@@ -1,7 +1,6 @@
 from ask_amy.core.default_dialog import DefaultDialog
 from ask_amy.core.request import IntentRequest
 from ask_amy.core.reply import Reply
-from ask_amy.utilities.iso_8601_type import ISO8601_Validator
 from ask_amy.utilities.slot_validator import Slot_Validator
 from ask_amy.core.exceptions import SlotValidatorLoadError
 from functools import wraps
@@ -269,17 +268,15 @@ class StackDialogManager(DefaultDialog):
         if type_validator is None:
             return valid  # If type is not defined skip validation test
         else:
-            if type_validator.startswith('AMAZON.'):
-                valid = ISO8601_Validator.is_valid_value(value, type_validator)
-            else:
-                try:
-                    validator = Slot_Validator.class_from_str(type_validator)
-                    valid = validator().is_valid_value(value)
-                except SlotValidatorLoadError:
-                    logger.debug("Unable to load {}".format(type_validator))
-                    # Skip validation
-                    valid = True
-
+            try:
+                if type_validator.startswith('AMAZON'):
+                    type_validator = "ask_amy.utilities.iso_8601_validator.{}".format(type_validator)
+                validator = Slot_Validator.class_from_str(type_validator)
+                valid = validator().is_valid_value(value)
+            except SlotValidatorLoadError:
+                logger.debug("Unable to load {}".format(type_validator))
+                # Skip validation
+                valid = True
         return valid
 
 
