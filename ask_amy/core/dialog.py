@@ -22,37 +22,36 @@ class Dialog(ObjectDictionary):
         }
         self._sc_intent_control = self.get_value_from_dict(['intent_control'])
 
-    def _get_event(self):
+    @property
+    def event(self):
         return self._event
-    event = property(_get_event)
 
-    def _get_session(self):
+    @property
+    def session(self):
         return self._event.session
-    session = property(_get_session)
 
-    def _get_request(self):
+    @property
+    def request(self):
         return self._event.request
-    request = property(_get_request)
 
-    def _get_version(self):
+    @property
+    def version(self):
         return self._event.version
-    version = property(_get_version)
 
-    def _get_application_id(self):
+    @property
+    def application_id(self):
         return self._sc_application_id
-    application_id = property(_get_application_id)
 
-    def _get_intent_name(self):
+    @property
+    def intent_name(self):
         return self._intent_name
-    intent_name = property(_get_intent_name)
 
-    def _get_reply_dialog(self):
+    @property
+    def reply_dialog(self):
         return self._obj_dict
-    reply_dialog = property(_get_reply_dialog)
 
     def begin(self, event_dict):
         logger.debug("**************** entering Dialog.begin")
-        logger.debug("Event=={}".format(json.dumps(event_dict, sort_keys=True, indent=4)))
 
         self._event = Event(event_dict)
 

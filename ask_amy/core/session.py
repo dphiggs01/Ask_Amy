@@ -21,43 +21,36 @@ class Session(ObjectDictionary):
                 if self.get_value_from_dict(['new']):  # if new session load data
                     self.load()
 
-    def _session_id(self):
+    @property
+    def session_id(self):
         return self.get_value_from_dict(['sessionId'])
 
-    session_id = property(_session_id)
-
-    def _application_id(self):
+    @property
+    def application_id(self):
         return self.get_value_from_dict(['application', 'applicationId'])
 
-    application_id = property(_application_id)
-
-    def _is_new_session(self):
+    @property
+    def is_new_session(self):
         return self.get_value_from_dict(['new'])
 
-    is_new_session = property(_is_new_session)
-
-    def _user_id(self):
+    @property
+    def user_id(self):
         return self.get_value_from_dict(['user', 'userId'])
 
-    user_id = property(_user_id)
-
-    def _access_token(self):
+    @property
+    def access_token(self):
         return self.get_value_from_dict(['user', 'accessToken'])
 
-    access_token = property(_access_token)
-
-    def _consent_token(self):
+    @property
+    def consent_token(self):
         return self.get_value_from_dict(['user', 'permissions', 'consentToken'])
 
-    consent_token = property(_consent_token)
-
-    def _attributes(self):
+    @property
+    def attributes(self):
         has_attributes = self.get_value_from_dict(['attributes'])
         if has_attributes is None:
             self._obj_dict['attributes'] = {}
         return self._obj_dict['attributes']
-
-    attributes = property(_attributes)
 
     def attribute_exists(self, attribute):
         if attribute in self.attributes.keys():

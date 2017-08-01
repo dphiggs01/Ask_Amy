@@ -1,6 +1,7 @@
 import logging
 
 from ask_amy.core.session import Session
+from ask_amy.core.context import Context
 from ask_amy.core.request import Request, IntentRequest
 
 
@@ -11,21 +12,27 @@ class Event(object):
     def __init__(self, event_dict):
         self._request = Request.factory(event_dict['request'])
         self._session = Session(event_dict['session'])
+        if 'context' in event_dict:
+            self._context = Context(event_dict['context'])
         if 'version' in event_dict:
             self._version = event_dict['version']
         self._version = '1.0'
 
-    def _get_session(self):
+    @property
+    def context(self):
+        return self._context
+
+    @property
+    def session(self):
         return self._session
-    session = property(_get_session)
 
-    def _get_request(self):
+    @property
+    def request(self):
         return self._request
-    request = property(_get_request)
 
-    def _get_version(self):
+    @property
+    def version(self):
         return self._version
-    version = property(_get_version)
 
     def slot_data_to_session_attributes(self):
         logger.debug("**************** entering Event.slot_data_to_session_attributes")

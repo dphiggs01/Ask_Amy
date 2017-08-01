@@ -1,6 +1,7 @@
 import logging
 
 from ask_amy.core.object_dictionary import ObjectDictionary
+from ask_amy.core.directive import AudioPlayer
 
 logger = logging.getLogger()
 
@@ -25,14 +26,15 @@ class Reply(ObjectDictionary):
         reprompt = None
         card = None
 
-        if 'speech_out_text' in dialog_dict:
-            prompt = Prompt.text(dialog_dict['speech_out_text'], event)
-        if 're_prompt_text' in dialog_dict:
-            reprompt = Prompt.text(dialog_dict['re_prompt_text'], event)
         if 'speech_out_ssml' in dialog_dict:
             prompt = Prompt.ssml(dialog_dict['speech_out_ssml'], event)
         if 're_prompt_ssml' in dialog_dict:
             reprompt = Prompt.ssml(dialog_dict['re_prompt_ssml'], event)
+        # Note speech_out_text will take precedence over speech_out_ssml
+        if 'speech_out_text' in dialog_dict:
+            prompt = Prompt.text(dialog_dict['speech_out_text'], event)
+        if 're_prompt_text' in dialog_dict:
+            reprompt = Prompt.text(dialog_dict['re_prompt_text'], event)
         if 'should_end_session' in dialog_dict:
             should_end_session = dialog_dict['should_end_session']
         else:
@@ -61,6 +63,29 @@ class Reply(ObjectDictionary):
         reply = Reply.constr(response, attributes)
         return reply.json()
 
+    @staticmethod
+    def build_audio(dialog_dict, event=None):
+        logger.debug("**************** entering Reply.build")
+        prompt = None
+        card = None
+        command = event.request.attributes['command']
+        if command == 'play':
+            url = event.session.attributes['active_url']
+            offset = event.session.attributes['offset']
+            audio_player = AudioPlayer.play(url, offset)
+        else:  # command must be stop
+            audio_player = AudioPlayer.stop()
+
+        response = Response.audio_play(audio_player, prompt, card)
+
+        attributes = {}
+        if event is not None:
+            if event.session is not None:
+                attributes = event.session.attributes
+
+        reply = Reply.constr(response, attributes)
+        return reply.json()
+
 
 class Response(ObjectDictionary):
     def __init__(self, card_dict=None):
@@ -79,6 +104,36 @@ class Response(ObjectDictionary):
             response['card'] = card.json()
         if should_end_session is not None:
             response['shouldEndSession'] = should_end_session
+        return cls(response)
+
+    @classmethod
+    def audio_play(cls, audio_player, out_speech=None, card=None):
+        logger.debug("**************** entering Response.audio_play")
+        response = {}
+        if out_speech is not None:
+            response['outputSpeech'] = out_speech.json()
+
+        if card is not None:
+            response['card'] = card.json()
+
+        response['directives'] = []
+        response['directives'].append(audio_player.json())
+        response['shouldEndSession'] = True
+        return cls(response)
+
+    @classmethod
+    def audio_stop(cls, audio_stop, out_speech=None, card=None):
+        logger.debug("**************** entering Response.audio_play")
+        response = {}
+        if out_speech is not None:
+            response['outputSpeech'] = out_speech.json()
+
+        if card is not None:
+            response['card'] = card.json()
+
+        response['directives'] = []
+        response['directives'].append(audio_stop.json())
+        response['shouldEndSession'] = True
         return cls(response)
 
 

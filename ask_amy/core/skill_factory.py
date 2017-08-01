@@ -13,7 +13,7 @@ class SkillFactory(object):
 
     @staticmethod
     def build(config_file_name=None):
-        logger.warn("**************** entering SkillFactory.build")
+        logger.warning("**************** entering SkillFactory.build")
         if config_file_name is None:
             config_file_name = SkillFactory.SKILL_CONFIG
         config_dict = SkillFactory.__load(config_file_name)

@@ -13,11 +13,12 @@ logger.setLevel(logging.WARN)
 
 
 def lambda_handler(event_dict, context):
-    logger.warn("**************** entering NEW lambda_handler")
+    logger.warning("**************** entering NEW lambda_handler")
     try:
-
+        logger.warning("REQUEST {}".format(json.dumps(event_dict, sort_keys=True, indent=4)))
         dialog_obj = SkillFactory.build()
         response = dialog_obj.begin(event_dict)
+        logger.warning("REPLY {}".format(json.dumps(response, sort_keys=True, indent=4)))
     except ASKAmyError as error:
         logger.critical("ASK Amy failed with critical Error: {}".format(error))
         response_dict = {

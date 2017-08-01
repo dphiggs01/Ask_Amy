@@ -5,11 +5,39 @@ from ask_amy.utilities.slot_validator import Slot_Validator
 from ask_amy.core.exceptions import SlotValidatorLoadError
 from functools import wraps
 import logging
+import json
 
 logger = logging.getLogger()
 
 
 class StackDialogManager(DefaultDialog):
+    def no_intent(self):
+        logger.debug("**************** StackDialogManager.no_intent")
+        return self.confirmation_intent('no')
+
+    def yes_intent(self):
+        logger.debug("**************** StackDialogManager.yes_intent")
+        return self.confirmation_intent('yes')
+
+    def confirmation_intent(self, confirmation):
+        logger.debug("**************** StackDialogManager.confirmation_intent")
+        established_dialog = self.peek_established_dialog()
+        state_good = True
+        if established_dialog is None:
+            state_good = False
+        else:
+            if established_dialog['intent_name'] != 'confirmation_intent':
+                state_good = False
+
+        if state_good:
+            self.pop_established_dialog()
+            established_dialog = self.peek_established_dialog()
+            self._intent_name = established_dialog['intent_name']
+            established_dialog['confirmation'] = confirmation
+            return self.execute_method(self.intent_name)
+        else:
+            return self.handle_session_end_confused()
+
     def requested_value_intent(self):
         logger.debug("**************** StackDialogManager.requested_value_intent")
         # is this a good state?
@@ -21,8 +49,15 @@ class StackDialogManager(DefaultDialog):
             if established_dialog['intent_name'] != self.intent_name:
                 state_good = False
 
+        not_valid_slots = self.slot_data_to_intent_attributes()
+        if not_valid_slots is not None:
+            self.pop_established_dialog()
+            return self.need_valid_data(not_valid_slots)
+
+        if 'requested_value' not in established_dialog:
+            state_good = False
+
         if state_good:
-            self.slot_data_to_intent_attributes()
             current_dialog = self.pop_established_dialog()
             slot_name = current_dialog['slot_name']
             requested_value = current_dialog['requested_value']
@@ -55,11 +90,15 @@ class StackDialogManager(DefaultDialog):
         """
         logger.debug('**************** entering StackDialogManager.handle_session_end_confused')
         # can we re_prompt?
+        MAX_RETRY = 4
         dialog_state = self.peek_established_dialog()
         if dialog_state is None:
             dialog_state = {}
 
         if 'retry_attempted' not in dialog_state.keys():
+            dialog_state['retry_attempted'] = 1
+
+        if dialog_state['retry_attempted'] <= MAX_RETRY:
             prompt_dict = {"speech_out_text": "Could you please repeat or say help.",
                            "should_end_session": False}
 
@@ -67,7 +106,7 @@ class StackDialogManager(DefaultDialog):
                 requested_value_nm = dialog_state['slot_name']
                 prompt_dict = self.get_re_prompt_for_slot_data(requested_value_nm)
 
-            dialog_state['retry_attempted'] = True
+            dialog_state['retry_attempted'] += 1
             return Reply.build(prompt_dict, self.event)
         else:
             # we are done
@@ -196,26 +235,30 @@ class StackDialogManager(DefaultDialog):
         execute the initial intent. (i.e. similar to flow state in JSF)
         :return:
         """
-        logger.debug("**************** entering StackDialogManager.slot_data_to_intent_attributes")
+        logger.debug("****************! entering StackDialogManager.slot_data_to_intent_attributes")
         # If we have an Intent Request map the slot values to the intent dialog
         validation_errors = None
         if isinstance(self.event.request, IntentRequest):
             slots_dict = self.event.request.slots
-            logger.debug("ZZZZZZZZZZ before slots_dict={}".format(slots_dict))
             intent_attributes = self.peek_established_dialog()
-            logger.debug("ZZZZZZZZZZ intent_attributes={}".format(intent_attributes))
             for name in slots_dict.keys():
                 # get the value for this slot name if available
                 value = self.request.value_for_slot_name(name)
-                logger.debug("ZZZZZZZZZZ name={} value={}".format(name, value))
+
                 if value is not None:
                     intent_attributes[name] = value
+
+                    if name == 'requested_value' and 'slot_name' in intent_attributes:
+                        name = intent_attributes['slot_name']
+
                     slot_validation = self.get_value_from_dict(['slots', name, 'validation'])
                     if slot_validation is not None:
                         status_code = self.is_valid_slot_data_type(name, value, slot_validation['type_validator'])
                         if status_code != 0:
+
                             if validation_errors is None:
                                 validation_errors = []
+
                             validation_error = (name, status_code)
                             validation_errors.append(validation_error)
 
@@ -226,6 +269,7 @@ class StackDialogManager(DefaultDialog):
         for validation_error in validation_errors:
             slot_name = validation_error[0]
             status_code = validation_error[1]
+
             expected_intent = self.get_expected_intent_for_data(slot_name)
             new_intent_attributes = self.push_established_dialog(expected_intent)
             new_intent_attributes['slot_name'] = slot_name
@@ -234,7 +278,8 @@ class StackDialogManager(DefaultDialog):
             slot_details['should_end_session'] = False
             msg_text = 'msg_{0:02d}_text'.format(status_code)
             slot_details['speech_out_text'] = slot_details['validation'][msg_text]
-            return Reply.build(slot_details, self.event)
+            reply = Reply.build(slot_details, self.event)
+            return reply
 
     def required_fields_in_session_attributes_to_intent_attributes(self, required_fields):
         """
@@ -284,6 +329,7 @@ def required_fields(fields, user_managed=False):
     """
     Required fields decorator manages the state of the intent
     :param fields:
+    :param user_managed:
     :return:
     """
 
@@ -308,6 +354,39 @@ def required_fields(fields, user_managed=False):
                 ret_val = func(*args, **kwargs)
                 if not user_managed:
                     obj.pop_established_dialog()
+            else:
+                ret_val = func(*args, **kwargs)
+            return ret_val
+
+        return wrapper
+
+    return decorator
+
+
+def with_confirmation():
+    """
+    Required fields decorator manages the state of the intent
+    :return:
+    """
+
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            obj = args[0]
+            if isinstance(obj, StackDialogManager):
+                established_dialog = obj.peek_established_dialog()
+                if established_dialog is None:
+                    obj.push_established_dialog(obj.intent_name)
+                    obj.push_established_dialog('confirmation_intent')
+                    reply_dialog = obj.reply_dialog[obj.intent_name]
+                    return Reply.build(reply_dialog['conditions']['confirmation'], obj.event)
+                else:
+                    if established_dialog['intent_name'] != obj.intent_name:
+                        return obj.handle_session_end_confused()
+                    if established_dialog['confirmation'] not in ['yes', 'no']:
+                        return obj.handle_session_end_confused()
+
+                    ret_val = func(*args, **kwargs)
             else:
                 ret_val = func(*args, **kwargs)
             return ret_val

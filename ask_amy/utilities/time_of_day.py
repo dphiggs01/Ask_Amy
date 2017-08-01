@@ -105,7 +105,7 @@ class TimeOfDay(object):
         utc = pytz.timezone('UTC')
         utc_date = utc.localize(now)
 
-        us_tz_nms =['US/Alaska', 'US/Hawaii', 'US/Arizona', 'US/Pacific', 'US/Mountain', 'US/Central', 'US/Eastern']
+        # us_tz_nms =['US/Alaska', 'US/Hawaii', 'US/Arizona', 'US/Pacific', 'US/Mountain', 'US/Central', 'US/Eastern']
 
         pytz_timezone = pytz.timezone(time_zone)
         adjusted_date = utc_date.astimezone(pytz_timezone)
