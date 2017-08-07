@@ -42,32 +42,31 @@ class StackDialogManager(DefaultDialog):
         logger.debug("**************** StackDialogManager.requested_value_intent")
         # is this a good state?
         established_dialog = self.peek_established_dialog()
-        state_good = True
+
         if established_dialog is None:
-            state_good = False
+            return self.handle_session_end_confused()
         else:
             if established_dialog['intent_name'] != self.intent_name:
-                state_good = False
+                return self.handle_session_end_confused()
 
         not_valid_slots = self.slot_data_to_intent_attributes()
         if not_valid_slots is not None:
             self.pop_established_dialog()
             return self.need_valid_data(not_valid_slots)
 
-        if 'requested_value' not in established_dialog:
-            state_good = False
 
-        if state_good:
-            current_dialog = self.pop_established_dialog()
-            slot_name = current_dialog['slot_name']
-            requested_value = current_dialog['requested_value']
 
-            established_dialog = self.peek_established_dialog()
-            established_dialog[slot_name] = requested_value
-            self._intent_name = established_dialog['intent_name']
-            return self.execute_method(self._intent_name)
-        else:
+        current_dialog = self.pop_established_dialog()
+        if 'requested_value' not in current_dialog:
             return self.handle_session_end_confused()
+
+        slot_name = current_dialog['slot_name']
+        requested_value = current_dialog['requested_value']
+
+        established_dialog = self.peek_established_dialog()
+        established_dialog[slot_name] = requested_value
+        self._intent_name = established_dialog['intent_name']
+        return self.execute_method(self._intent_name)
 
     def redirect_to_initialize_dialog(self, intent_name):
         """
@@ -119,7 +118,7 @@ class StackDialogManager(DefaultDialog):
             slot_data_details['speech_out_text'] = slot_data_details['re_prompt_text']
             del slot_data_details['re_prompt_text']
         if 're_prompt_ssml' in slot_data_details:
-            slot_data_details['speech_out_text'] = slot_data_details['re_prompt_ssml']
+            slot_data_details['speech_out_ssml'] = slot_data_details['re_prompt_ssml']
             del slot_data_details['re_prompt_ssml']
         slot_data_details['should_end_session'] = False
         return slot_data_details
