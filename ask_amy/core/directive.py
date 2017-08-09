@@ -26,7 +26,6 @@ class AudioPlayer(ObjectDictionary):
         }
         #if play_behavior == 'ENQUEUE':
         #    directive["audioItem"]["stream"]["expectedPreviousToken"] = expected_previous_token
-        logger.debug("XXXXXX {}".format(directive))
         return cls(directive)
 
     @classmethod

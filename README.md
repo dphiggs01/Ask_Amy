@@ -10,6 +10,10 @@ with ask_amy accelerators
 * python setup.py sdist
 * python setup.py sdist upload
 
+
+pip install --upgrade ask_amy
+
+
 ask-amy-cli create_lambda --deploy-json-file cli_config.json
 ask-amy-cli deploy_lambda --deploy-json-file cli_config.json
 ask-amy-cli logs --log-group-name /aws/lambda/insulin_calc_skill

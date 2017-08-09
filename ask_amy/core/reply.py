@@ -68,6 +68,8 @@ class Reply(ObjectDictionary):
         logger.debug("**************** entering Reply.build")
         prompt = None
         card = None
+        should_end_session = True
+
         command = event.request.attributes['command']
         if command == 'play':
             url = event.session.attributes['active_url']
@@ -75,6 +77,21 @@ class Reply(ObjectDictionary):
             audio_player = AudioPlayer.play(url, offset)
         else:  # command must be stop
             audio_player = AudioPlayer.stop()
+
+        if 'speech_out_ssml' in dialog_dict:
+            prompt = Prompt.ssml(dialog_dict['speech_out_ssml'], event)
+        # Note speech_out_text will take precedence over speech_out_ssml
+        if 'speech_out_text' in dialog_dict:
+            prompt = Prompt.text(dialog_dict['speech_out_text'], event)
+        if 'card_title' in dialog_dict:
+            card = Card.simple(dialog_dict['card_title'], dialog_dict['speech_out_text'], event)
+        if 'card' in dialog_dict:
+            card_dict = dialog_dict['card']
+            if 'small_image' in card_dict:
+                card = Card.standard(card_dict['title'], card_dict['content'], card_dict['small_image'],
+                                     card_dict['large_image'], event)
+            else:
+                card = Card.simple(card_dict['title'], card_dict['content'], event)
 
         response = Response.audio_play(audio_player, prompt, card)
 
