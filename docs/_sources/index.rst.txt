@@ -52,6 +52,7 @@ Alex Request JSON is always available for interrogation for niche cases.
 
    prerequisites.rst
    getting_started.rst
+   example_skills.rst
    models.rst
 
 

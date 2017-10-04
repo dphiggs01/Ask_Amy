@@ -1,0 +1,254 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ASK Amy Example Skills &#8212; ASK Amy  documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinx13.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ASK Amy Overview" href="models.html" />
+    <link rel="prev" title="Getting Started" href="getting_started.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+ 
+    <style type="text/css">
+      table.right { float: right; margin-left: 20px; }
+      table.right td { border: 1px solid #ccc; }
+      
+    </style>
+    <script type="text/javascript">
+      // intelligent scrolling of the sidebar content
+      $(window).scroll(function() {
+        var sb = $('.sphinxsidebarwrapper');
+        var win = $(window);
+        var sbh = sb.height();
+        var offset = $('.sphinxsidebar').position()['top'];
+        var wintop = win.scrollTop();
+        var winbot = wintop + win.innerHeight();
+        var curtop = sb.position()['top'];
+        var curbot = curtop + sbh;
+        // does sidebar fit in window?
+        if (sbh < win.innerHeight()) {
+          // yes: easy case -- always keep at the top
+          sb.css('top', $u.min([$u.max([0, wintop - offset - 10]),
+                                $(document).height() - sbh - 200]));
+        } else {
+          // no: only scroll if top/bottom edge of sidebar is at
+          // top/bottom edge of window
+          if (curtop > wintop && curbot > winbot) {
+            sb.css('top', $u.max([wintop - offset - 10, 0]));
+          } else if (curtop < wintop && curbot < winbot) {
+            sb.css('top', $u.min([winbot - sbh - offset - 20,
+                                  $(document).height() - sbh - 200]));
+          }
+        }
+      });
+    </script>
+
+  </head>
+  <body>
+<div class="pageheader">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="install.html">Get it</a></li>
+    <li><a href="contents.html">Docs</a></li>
+    <li><a href="develop.html">Extend/Develop</a></li>
+  </ul>
+  <div>
+    <a href="index.html">
+      <img src="_static/askamyheader.png" alt="ASK Amy" />
+    </a>
+  </div>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="models.html" title="ASK Amy Overview"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="getting_started.html" title="Getting Started"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">ASK Amy home</a>&#160;|</li>
+        <li><a href="contents.html">Documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ASK Amy Example Skills</a><ul>
+<li><a class="reference internal" href="#source-code-available-skills"> Available Skills:</a></li>
+<li><a class="reference internal" href="#github-get-the-example-code"> Get the Example code:</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="getting_started.html"
+                        title="previous chapter">Getting Started</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="models.html"
+                        title="next chapter">ASK Amy Overview</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/example_skills.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ask-amy-example-skills">
+<h1>ASK Amy Example Skills<a class="headerlink" href="#ask-amy-example-skills" title="Permalink to this headline">¶</a></h1>
+<p>To help accelerate your development and deployment with ASK Amy we have rewritten many of the popular tutorial skills
+using ASK Amy. Once you have your ASK Amy environment setup deploying and running any of these skills can be done in
+less than 10 minutes. Each skill highlights different features of ASK Amy.</p>
+<div class="section" id="source-code-available-skills">
+<h2><a class="reference internal" href="_images/icon-source_code.png"><img alt="source_code" class="align-middle" src="_images/icon-source_code.png" style="width: 40px; height: 30px;" /></a> Available Skills:<a class="headerlink" href="#source-code-available-skills" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Skill</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>1:</strong> Alexa Obama Fact Skill</td>
+<td>Have Alexa read interesting random facts on any subject of your choosing
+this skill just happens to be about presidential facts. Here is an interesting fact
+using ASK Amy this skill is written in less than 25 lines of code!</td>
+</tr>
+<tr class="row-odd"><td><strong>2:</strong> Alexa High Low Skill</td>
+<td>Simple number guessing game that saves the history of number of games played.
+This skill introduces how easy persistence and session management is with ASK Amy.</td>
+</tr>
+<tr class="row-even"><td><strong>3:</strong> Alexa Scorekeeper Skill</td>
+<td>A Scorekeeper for multiple player games. Demonstrates a slightly more complex
+persistence model than the <em>Alexa High Low Skill</em> and introduces custom validators for
+slots. ASK Amy uses custom validators to automatically re-prompt if the data is not
+what is expected.</td>
+</tr>
+<tr class="row-odd"><td><strong>4:</strong> Alexa Tide Skill</td>
+<td>The Tide Pooler example demonstrates connecting to a web API to retrieve tide
+information. The example also outputs SSML with audio (the sound of a crashing wave).
+It also uses ASK Amy state management for required slots, re-prompting the user when
+necessary without requiring any additional code to accomplish this.</td>
+</tr>
+<tr class="row-even"><td><strong>5:</strong> Alexa History Buff Skill</td>
+<td>Have Alexa tell interesting facts about what happened on this day in history. Another
+web API interface but with more data and paging of the content (“tell me more”).</td>
+</tr>
+<tr class="row-odd"><td><strong>6:</strong> Alexa Wise Guy Skill</td>
+<td>Knock Knock Joke Skill. Demonstrates multiple user interactions.</td>
+</tr>
+<tr class="row-even"><td><strong>7:</strong> Alexa Account Link Skill</td>
+<td>An example of how to accomplish Account Linking with ASK Amy.</td>
+</tr>
+<tr class="row-odd"><td><strong>8:</strong> Alexa Podcast Skill</td>
+<td>A Podcast player. Demonstrating integrating with Alexa’s Audio / Music management.</td>
+</tr>
+<tr class="row-even"><td><strong>9:</strong> Alexa Session Skill</td>
+<td>Simple example showing how to manage a users interactions in a session with ASK Amy.</td>
+</tr>
+<tr class="row-odd"><td><strong>10:</strong> Alexa Hello Skill</td>
+<td>A template for getting started. This is not needed in most cases as ASK Amy has a
+<strong>Template Skill Code Generator</strong> that will create an executable stub skill from an
+intent schema file.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="github-get-the-example-code">
+<h2><a class="reference internal" href="_images/icon-github.png"><img alt="github" class="align-middle" src="_images/icon-github.png" style="width: 40px; height: 30px;" /></a> Get the Example code:<a class="headerlink" href="#github-get-the-example-code" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Clone the <strong>ASK Amy</strong> examples.</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span></span>$ git clone https://github.com/dphiggs01/ask_amy_example_skills.git
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="models.html" title="ASK Amy Overview"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="getting_started.html" title="Getting Started"
+             >previous</a> |</li>
+        <li><a href="index.html">ASK Amy home</a>&#160;|</li>
+        <li><a href="contents.html">Documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Dan Higgins.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>
