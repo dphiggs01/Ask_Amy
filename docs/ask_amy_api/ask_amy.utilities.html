@@ -1,0 +1,310 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ask_amy.utilities package &#8212; ASK Amy  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+ 
+    <style type="text/css">
+      table.right { float: right; margin-left: 20px; }
+      table.right td { border: 1px solid #ccc; }
+      
+    </style>
+    <script type="text/javascript">
+      // intelligent scrolling of the sidebar content
+      $(window).scroll(function() {
+        var sb = $('.sphinxsidebarwrapper');
+        var win = $(window);
+        var sbh = sb.height();
+        var offset = $('.sphinxsidebar').position()['top'];
+        var wintop = win.scrollTop();
+        var winbot = wintop + win.innerHeight();
+        var curtop = sb.position()['top'];
+        var curbot = curtop + sbh;
+        // does sidebar fit in window?
+        if (sbh < win.innerHeight()) {
+          // yes: easy case -- always keep at the top
+          sb.css('top', $u.min([$u.max([0, wintop - offset - 10]),
+                                $(document).height() - sbh - 200]));
+        } else {
+          // no: only scroll if top/bottom edge of sidebar is at
+          // top/bottom edge of window
+          if (curtop > wintop && curbot > winbot) {
+            sb.css('top', $u.max([wintop - offset - 10, 0]));
+          } else if (curtop < wintop && curbot < winbot) {
+            sb.css('top', $u.min([winbot - sbh - offset - 20,
+                                  $(document).height() - sbh - 200]));
+          }
+        }
+      });
+    </script>
+
+  </head>
+  <body>
+<div class="pageheader">
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../install.html">Get it</a></li>
+    <li><a href="../contents.html">Docs</a></li>
+    <li><a href="../develop.html">Extend/Develop</a></li>
+  </ul>
+  <div>
+    <a href="../index.html">
+      <img src="../_static/askamyheader.png" alt="ASK Amy" />
+    </a>
+  </div>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">ASK Amy home</a>&#160;|</li>
+        <li><a href="../contents.html">Documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ask_amy.utilities package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-ask_amy.utilities.account_link">ask_amy.utilities.account_link module</a></li>
+<li><a class="reference internal" href="#module-ask_amy.utilities.iso_8601_validator">ask_amy.utilities.iso_8601_validator module</a></li>
+<li><a class="reference internal" href="#module-ask_amy.utilities.slot_validator">ask_amy.utilities.slot_validator module</a></li>
+<li><a class="reference internal" href="#module-ask_amy.utilities.time_of_day">ask_amy.utilities.time_of_day module</a></li>
+<li><a class="reference internal" href="#module-ask_amy.utilities">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/ask_amy_api/ask_amy.utilities.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ask-amy-utilities-package">
+<h1>ask_amy.utilities package<a class="headerlink" href="#ask-amy-utilities-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-ask_amy.utilities.account_link">
+<span id="ask-amy-utilities-account-link-module"></span><h2>ask_amy.utilities.account_link module<a class="headerlink" href="#module-ask_amy.utilities.account_link" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ask_amy.utilities.account_link.AmazonProfile">
+<em class="property">class </em><code class="descclassname">ask_amy.utilities.account_link.</code><code class="descname">AmazonProfile</code><span class="sig-paren">(</span><em>access_token=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.utilities.account_link.AmazonProfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="ask_amy.utilities.account_link.AmazonProfile.get_profile">
+<code class="descname">get_profile</code><span class="sig-paren">(</span><em>access_token</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.utilities.account_link.AmazonProfile.get_profile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.utilities.account_link.AmazonProfile.get_zip_code">
+<code class="descname">get_zip_code</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.utilities.account_link.AmazonProfile.get_zip_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ask_amy.utilities.iso_8601_validator">
+<span id="ask-amy-utilities-iso-8601-validator-module"></span><h2>ask_amy.utilities.iso_8601_validator module<a class="headerlink" href="#module-ask_amy.utilities.iso_8601_validator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ask_amy.utilities.iso_8601_validator.AMAZON_NUMBER">
+<em class="property">class </em><code class="descclassname">ask_amy.utilities.iso_8601_validator.</code><code class="descname">AMAZON_NUMBER</code><a class="headerlink" href="#ask_amy.utilities.iso_8601_validator.AMAZON_NUMBER" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.utilities.slot_validator.Slot_Validator" title="ask_amy.utilities.slot_validator.Slot_Validator"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.utilities.slot_validator.Slot_Validator</span></code></a></p>
+<dl class="method">
+<dt id="ask_amy.utilities.iso_8601_validator.AMAZON_NUMBER.is_valid_value">
+<code class="descname">is_valid_value</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.utilities.iso_8601_validator.AMAZON_NUMBER.is_valid_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ask_amy.utilities.iso_8601_validator.AMAZON_TIME">
+<em class="property">class </em><code class="descclassname">ask_amy.utilities.iso_8601_validator.</code><code class="descname">AMAZON_TIME</code><a class="headerlink" href="#ask_amy.utilities.iso_8601_validator.AMAZON_TIME" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.utilities.slot_validator.Slot_Validator" title="ask_amy.utilities.slot_validator.Slot_Validator"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.utilities.slot_validator.Slot_Validator</span></code></a></p>
+<dl class="method">
+<dt id="ask_amy.utilities.iso_8601_validator.AMAZON_TIME.is_valid_value">
+<code class="descname">is_valid_value</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.utilities.iso_8601_validator.AMAZON_TIME.is_valid_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ask_amy.utilities.slot_validator">
+<span id="ask-amy-utilities-slot-validator-module"></span><h2>ask_amy.utilities.slot_validator module<a class="headerlink" href="#module-ask_amy.utilities.slot_validator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ask_amy.utilities.slot_validator.Slot_Validator">
+<em class="property">class </em><code class="descclassname">ask_amy.utilities.slot_validator.</code><code class="descname">Slot_Validator</code><a class="headerlink" href="#ask_amy.utilities.slot_validator.Slot_Validator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="staticmethod">
+<dt id="ask_amy.utilities.slot_validator.Slot_Validator.class_from_str">
+<em class="property">static </em><code class="descname">class_from_str</code><span class="sig-paren">(</span><em>dotted_path</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.utilities.slot_validator.Slot_Validator.class_from_str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.utilities.slot_validator.Slot_Validator.is_valid_value">
+<code class="descname">is_valid_value</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.utilities.slot_validator.Slot_Validator.is_valid_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ask_amy.utilities.time_of_day">
+<span id="ask-amy-utilities-time-of-day-module"></span><h2>ask_amy.utilities.time_of_day module<a class="headerlink" href="#module-ask_amy.utilities.time_of_day" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ask_amy.utilities.time_of_day.TimeOfDay">
+<em class="property">class </em><code class="descclassname">ask_amy.utilities.time_of_day.</code><code class="descname">TimeOfDay</code><a class="headerlink" href="#ask_amy.utilities.time_of_day.TimeOfDay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="ask_amy.utilities.time_of_day.TimeOfDay.Breakfast">
+<code class="descname">Breakfast</code><em class="property"> = 0</em><a class="headerlink" href="#ask_amy.utilities.time_of_day.TimeOfDay.Breakfast" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.utilities.time_of_day.TimeOfDay.Daytime">
+<code class="descname">Daytime</code><em class="property"> = 3</em><a class="headerlink" href="#ask_amy.utilities.time_of_day.TimeOfDay.Daytime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.utilities.time_of_day.TimeOfDay.Dinner">
+<code class="descname">Dinner</code><em class="property"> = 2</em><a class="headerlink" href="#ask_amy.utilities.time_of_day.TimeOfDay.Dinner" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.utilities.time_of_day.TimeOfDay.Lunch">
+<code class="descname">Lunch</code><em class="property"> = 1</em><a class="headerlink" href="#ask_amy.utilities.time_of_day.TimeOfDay.Lunch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.utilities.time_of_day.TimeOfDay.Nighttime">
+<code class="descname">Nighttime</code><em class="property"> = 4</em><a class="headerlink" href="#ask_amy.utilities.time_of_day.TimeOfDay.Nighttime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="ask_amy.utilities.time_of_day.TimeOfDay.current_time">
+<em class="property">static </em><code class="descname">current_time</code><span class="sig-paren">(</span><em>time_adj</em>, <em>now=datetime.datetime(2017</em>, <em>10</em>, <em>4</em>, <em>13</em>, <em>20</em>, <em>3</em>, <em>625139)</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.utilities.time_of_day.TimeOfDay.current_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>current time with an offset applied
+:param time_adj: a positive or negative int to offset current time
+:param now: current time or passed time used for testing
+:return: a str version of time showing hours:minutes and am pm</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="ask_amy.utilities.time_of_day.TimeOfDay.day_night">
+<em class="property">static </em><code class="descname">day_night</code><span class="sig-paren">(</span><em>time_adj</em>, <em>now=datetime.datetime(2017</em>, <em>10</em>, <em>4</em>, <em>13</em>, <em>20</em>, <em>3</em>, <em>625146)</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.utilities.time_of_day.TimeOfDay.day_night" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate if it Daytime or Nighttime after applying and hours offset
+:param time_adj:
+:param now: current time or passed time used for testing
+:return:</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="ask_amy.utilities.time_of_day.TimeOfDay.meal_time">
+<em class="property">static </em><code class="descname">meal_time</code><span class="sig-paren">(</span><em>time_adj</em>, <em>now=datetime.datetime(2017</em>, <em>10</em>, <em>4</em>, <em>13</em>, <em>20</em>, <em>3</em>, <em>625145)</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.utilities.time_of_day.TimeOfDay.meal_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate if its breakfast, lunch or dinner time after applying and hours offset
+:param time_adj:
+:param now: current time or passed time used for testing
+:return: Breakfast, Lunch, Dinner enumeration</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="ask_amy.utilities.time_of_day.TimeOfDay.time_adj">
+<em class="property">static </em><code class="descname">time_adj</code><span class="sig-paren">(</span><em>time_str</em>, <em>time_am_pm</em>, <em>now=datetime.datetime(2017</em>, <em>10</em>, <em>4</em>, <em>13</em>, <em>20</em>, <em>3</em>, <em>625148)</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.utilities.time_of_day.TimeOfDay.time_adj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a time calculate how many hours different it is from the current system time
+:param time_str: HH:MM
+:param time_am_pm: AM or PM
+:param now: current time or passed time used for testing
+:return: int value positive or negative hours different from now()</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="ask_amy.utilities.time_of_day.TimeOfDay.time_adj_given_tz">
+<em class="property">static </em><code class="descname">time_adj_given_tz</code><span class="sig-paren">(</span><em>time_zone</em>, <em>now=datetime.datetime(2017</em>, <em>10</em>, <em>4</em>, <em>13</em>, <em>20</em>, <em>3</em>, <em>625149)</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.utilities.time_of_day.TimeOfDay.time_adj_given_tz" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ask_amy.utilities">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ask_amy.utilities" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">ASK Amy home</a>&#160;|</li>
+        <li><a href="../contents.html">Documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Dan Higgins.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

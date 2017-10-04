@@ -1,0 +1,210 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ask_amy &#8212; ASK Amy  documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinx13.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+ 
+    <style type="text/css">
+      table.right { float: right; margin-left: 20px; }
+      table.right td { border: 1px solid #ccc; }
+      
+    </style>
+    <script type="text/javascript">
+      // intelligent scrolling of the sidebar content
+      $(window).scroll(function() {
+        var sb = $('.sphinxsidebarwrapper');
+        var win = $(window);
+        var sbh = sb.height();
+        var offset = $('.sphinxsidebar').position()['top'];
+        var wintop = win.scrollTop();
+        var winbot = wintop + win.innerHeight();
+        var curtop = sb.position()['top'];
+        var curbot = curtop + sbh;
+        // does sidebar fit in window?
+        if (sbh < win.innerHeight()) {
+          // yes: easy case -- always keep at the top
+          sb.css('top', $u.min([$u.max([0, wintop - offset - 10]),
+                                $(document).height() - sbh - 200]));
+        } else {
+          // no: only scroll if top/bottom edge of sidebar is at
+          // top/bottom edge of window
+          if (curtop > wintop && curbot > winbot) {
+            sb.css('top', $u.max([wintop - offset - 10, 0]));
+          } else if (curtop < wintop && curbot < winbot) {
+            sb.css('top', $u.min([winbot - sbh - offset - 20,
+                                  $(document).height() - sbh - 200]));
+          }
+        }
+      });
+    </script>
+
+  </head>
+  <body>
+<div class="pageheader">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="install.html">Get it</a></li>
+    <li><a href="#">Docs</a></li>
+    <li><a href="develop.html">Extend/Develop</a></li>
+  </ul>
+  <div>
+    <a href="index.html">
+      <img src="_static/askamyheader.png" alt="ASK Amy" />
+    </a>
+  </div>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">ASK Amy home</a>&#160;|</li>
+        <li><a href="#">Documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/contents.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ask-amy">
+<h1>ask_amy<a class="headerlink" href="#ask-amy" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ask_amy_api/ask_amy.html">ask_amy package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ask_amy_api/ask_amy.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ask_amy_api/ask_amy.cli.html">ask_amy.cli package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.cli.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.cli.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.cli.html#module-ask_amy.cli.cli_deploy">ask_amy.cli.cli_deploy module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.cli.html#module-ask_amy.cli.command_line">ask_amy.cli.command_line module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.cli.html#module-ask_amy.cli">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ask_amy_api/ask_amy.core.html">ask_amy.core package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.core.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.core.html#module-ask_amy.core.context">ask_amy.core.context module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.core.html#module-ask_amy.core.default_dialog">ask_amy.core.default_dialog module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.core.html#module-ask_amy.core.dialog">ask_amy.core.dialog module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.core.html#module-ask_amy.core.directive">ask_amy.core.directive module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.core.html#module-ask_amy.core.event">ask_amy.core.event module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.core.html#module-ask_amy.core.exceptions">ask_amy.core.exceptions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.core.html#module-ask_amy.core.object_dictionary">ask_amy.core.object_dictionary module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.core.html#module-ask_amy.core.reply">ask_amy.core.reply module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.core.html#module-ask_amy.core.request">ask_amy.core.request module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.core.html#module-ask_amy.core.session">ask_amy.core.session module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.core.html#module-ask_amy.core.skill_factory">ask_amy.core.skill_factory module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.core.html#module-ask_amy.core">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ask_amy_api/ask_amy.database.html">ask_amy.database package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.database.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.database.html#module-ask_amy.database.database">ask_amy.database.database module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.database.html#module-ask_amy.database">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ask_amy_api/ask_amy.state_mgr.html">ask_amy.state_mgr package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.state_mgr.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.state_mgr.html#module-ask_amy.state_mgr.stack_dialog_mgr">ask_amy.state_mgr.stack_dialog_mgr module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.state_mgr.html#module-ask_amy.state_mgr">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ask_amy_api/ask_amy.utilities.html">ask_amy.utilities package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.utilities.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.utilities.html#module-ask_amy.utilities.account_link">ask_amy.utilities.account_link module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.utilities.html#module-ask_amy.utilities.iso_8601_validator">ask_amy.utilities.iso_8601_validator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.utilities.html#module-ask_amy.utilities.slot_validator">ask_amy.utilities.slot_validator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.utilities.html#module-ask_amy.utilities.time_of_day">ask_amy.utilities.time_of_day module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ask_amy_api/ask_amy.utilities.html#module-ask_amy.utilities">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ask_amy_api/ask_amy.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ask_amy_api/ask_amy.html#module-ask_amy.lambda_function">ask_amy.lambda_function module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ask_amy_api/ask_amy.html#module-ask_amy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">ASK Amy home</a>&#160;|</li>
+        <li><a href="#">Documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Dan Higgins.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

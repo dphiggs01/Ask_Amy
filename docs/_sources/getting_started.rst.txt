@@ -4,8 +4,8 @@ Getting Started
 ===============
 
 The typical first application a programmer writes when working with a new language or framework is the *Hello World*
-application in which we get a minimal thread of execute to demonstrate base functionality. For our first skill we will
-be deploying an simple Fact telling skill, this is essentially the *Hello World* of Alexa skills but since the facts can
+application in which we enable a minimum thread of execution to demonstrate base functionality. For our first skill we will
+be deploying an simple fact telling skill, this is essentially the *Hello World* of Alexa skills but since the facts can
 be easily changed and updated this is actually a useful and fun initial skill to deploy and later modify.
 
 .. note::
@@ -24,8 +24,8 @@ Deploying our first skill
    Once you have a functioning **ASK Amy** environment the time to create and deploy a pre build skill is *under 10 minutes*
    and with a little bit of experience it can be *under 5 minutes*.
 
-There are two primary tasks in building and deploying a skill the **first** is constructing the *User Interaction Model*
-and the **second** is *coding* of the behavior of the interactions.
+There are two primary tasks in deploying an Alexa Skill. The **first** is deploying the *User Interaction Model* in
+the Amazon Developer Portal and the **second** is deploying the skill implementation code to AWS Lambda.
 
 The Alexa interaction with our skill would be similar to the below:
 

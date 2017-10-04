@@ -1,0 +1,326 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ask_amy.state_mgr package &#8212; ASK Amy  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+ 
+    <style type="text/css">
+      table.right { float: right; margin-left: 20px; }
+      table.right td { border: 1px solid #ccc; }
+      
+    </style>
+    <script type="text/javascript">
+      // intelligent scrolling of the sidebar content
+      $(window).scroll(function() {
+        var sb = $('.sphinxsidebarwrapper');
+        var win = $(window);
+        var sbh = sb.height();
+        var offset = $('.sphinxsidebar').position()['top'];
+        var wintop = win.scrollTop();
+        var winbot = wintop + win.innerHeight();
+        var curtop = sb.position()['top'];
+        var curbot = curtop + sbh;
+        // does sidebar fit in window?
+        if (sbh < win.innerHeight()) {
+          // yes: easy case -- always keep at the top
+          sb.css('top', $u.min([$u.max([0, wintop - offset - 10]),
+                                $(document).height() - sbh - 200]));
+        } else {
+          // no: only scroll if top/bottom edge of sidebar is at
+          // top/bottom edge of window
+          if (curtop > wintop && curbot > winbot) {
+            sb.css('top', $u.max([wintop - offset - 10, 0]));
+          } else if (curtop < wintop && curbot < winbot) {
+            sb.css('top', $u.min([winbot - sbh - offset - 20,
+                                  $(document).height() - sbh - 200]));
+          }
+        }
+      });
+    </script>
+
+  </head>
+  <body>
+<div class="pageheader">
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../install.html">Get it</a></li>
+    <li><a href="../contents.html">Docs</a></li>
+    <li><a href="../develop.html">Extend/Develop</a></li>
+  </ul>
+  <div>
+    <a href="../index.html">
+      <img src="../_static/askamyheader.png" alt="ASK Amy" />
+    </a>
+  </div>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">ASK Amy home</a>&#160;|</li>
+        <li><a href="../contents.html">Documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ask_amy.state_mgr package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-ask_amy.state_mgr.stack_dialog_mgr">ask_amy.state_mgr.stack_dialog_mgr module</a></li>
+<li><a class="reference internal" href="#module-ask_amy.state_mgr">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/ask_amy_api/ask_amy.state_mgr.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ask-amy-state-mgr-package">
+<h1>ask_amy.state_mgr package<a class="headerlink" href="#ask-amy-state-mgr-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-ask_amy.state_mgr.stack_dialog_mgr">
+<span id="ask-amy-state-mgr-stack-dialog-mgr-module"></span><h2>ask_amy.state_mgr.stack_dialog_mgr module<a class="headerlink" href="#module-ask_amy.state_mgr.stack_dialog_mgr" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager">
+<em class="property">class </em><code class="descclassname">ask_amy.state_mgr.stack_dialog_mgr.</code><code class="descname">StackDialogManager</code><span class="sig-paren">(</span><em>dialog_dict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="ask_amy.core.html#ask_amy.core.default_dialog.DefaultDialog" title="ask_amy.core.default_dialog.DefaultDialog"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.default_dialog.DefaultDialog</span></code></a></p>
+<dl class="method">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.confirmation_intent">
+<code class="descname">confirmation_intent</code><span class="sig-paren">(</span><em>confirmation</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.confirmation_intent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.get_expected_intent_for_data">
+<code class="descname">get_expected_intent_for_data</code><span class="sig-paren">(</span><em>data_name</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.get_expected_intent_for_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.get_re_prompt_for_slot_data">
+<code class="descname">get_re_prompt_for_slot_data</code><span class="sig-paren">(</span><em>data_name</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.get_re_prompt_for_slot_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.get_slot_data_details">
+<code class="descname">get_slot_data_details</code><span class="sig-paren">(</span><em>data_name</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.get_slot_data_details" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.handle_session_end_confused">
+<code class="descname">handle_session_end_confused</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.handle_session_end_confused" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called if we are in an intent but don’t have the info to move forward
+and are not sure how or why alex called us here (obviously this should not
+be a common occurrence.)
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.intent_attributes_to_request_attributes">
+<code class="descname">intent_attributes_to_request_attributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.intent_attributes_to_request_attributes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.is_good_state">
+<code class="descname">is_good_state</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.is_good_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks the state of the dialog and establish a conversation if this is the first
+interaction on a multi step intent
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.is_valid_slot_data_type">
+<code class="descname">is_valid_slot_data_type</code><span class="sig-paren">(</span><em>name</em>, <em>value</em>, <em>type_validator</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.is_valid_slot_data_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delegates to the appropriate validator if a type check is defined in the dialog_dict
+:param name:
+:param value:
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.need_valid_data">
+<code class="descname">need_valid_data</code><span class="sig-paren">(</span><em>validation_errors</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.need_valid_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.no_intent">
+<code class="descname">no_intent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.no_intent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.peek_established_dialog">
+<code class="descname">peek_established_dialog</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.peek_established_dialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>peek at the current intent state
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.pop_established_dialog">
+<code class="descname">pop_established_dialog</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.pop_established_dialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>pop an intent state from the stack
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.push_established_dialog">
+<code class="descname">push_established_dialog</code><span class="sig-paren">(</span><em>intent_name</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.push_established_dialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Push an intent and its state  onto the stack
+:param intent_name:
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.redirect_to_initialize_dialog">
+<code class="descname">redirect_to_initialize_dialog</code><span class="sig-paren">(</span><em>intent_name</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.redirect_to_initialize_dialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple redirect. We use this if an intent is called but a prior intent was expected
+:param intent_name:
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.requested_value_intent">
+<code class="descname">requested_value_intent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.requested_value_intent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.required_fields_in_session_attributes_to_intent_attributes">
+<code class="descname">required_fields_in_session_attributes_to_intent_attributes</code><span class="sig-paren">(</span><em>required_fields</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.required_fields_in_session_attributes_to_intent_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move session data into intent state data. This will stage the data we have already collected
+that is required to execute the intent.
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.required_fields_process">
+<code class="descname">required_fields_process</code><span class="sig-paren">(</span><em>required_fields</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.required_fields_process" title="Permalink to this definition">¶</a></dt>
+<dd><p>review the required fields to process this intent if we have all the data move forward
+if not create a reply that will call an appropriate intent to get the missing data
+:param required_fields:
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.reset_established_dialog">
+<code class="descname">reset_established_dialog</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.reset_established_dialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>reset the whole intent dialog stack
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.slot_data_to_intent_attributes">
+<code class="descname">slot_data_to_intent_attributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.slot_data_to_intent_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move slot data into intent state data. This will collect the data required to
+execute the initial intent. (i.e. similar to flow state in JSF)
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.yes_intent">
+<code class="descname">yes_intent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.StackDialogManager.yes_intent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.required_fields">
+<code class="descclassname">ask_amy.state_mgr.stack_dialog_mgr.</code><code class="descname">required_fields</code><span class="sig-paren">(</span><em>fields</em>, <em>user_managed=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.required_fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Required fields decorator manages the state of the intent
+:param fields:
+:param user_managed:
+:return:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ask_amy.state_mgr.stack_dialog_mgr.with_confirmation">
+<code class="descclassname">ask_amy.state_mgr.stack_dialog_mgr.</code><code class="descname">with_confirmation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.state_mgr.stack_dialog_mgr.with_confirmation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Required fields decorator manages the state of the intent
+:return:</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-ask_amy.state_mgr">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ask_amy.state_mgr" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">ASK Amy home</a>&#160;|</li>
+        <li><a href="../contents.html">Documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Dan Higgins.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

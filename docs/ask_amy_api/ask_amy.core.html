@@ -1,0 +1,858 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ask_amy.core package &#8212; ASK Amy  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+ 
+    <style type="text/css">
+      table.right { float: right; margin-left: 20px; }
+      table.right td { border: 1px solid #ccc; }
+      
+    </style>
+    <script type="text/javascript">
+      // intelligent scrolling of the sidebar content
+      $(window).scroll(function() {
+        var sb = $('.sphinxsidebarwrapper');
+        var win = $(window);
+        var sbh = sb.height();
+        var offset = $('.sphinxsidebar').position()['top'];
+        var wintop = win.scrollTop();
+        var winbot = wintop + win.innerHeight();
+        var curtop = sb.position()['top'];
+        var curbot = curtop + sbh;
+        // does sidebar fit in window?
+        if (sbh < win.innerHeight()) {
+          // yes: easy case -- always keep at the top
+          sb.css('top', $u.min([$u.max([0, wintop - offset - 10]),
+                                $(document).height() - sbh - 200]));
+        } else {
+          // no: only scroll if top/bottom edge of sidebar is at
+          // top/bottom edge of window
+          if (curtop > wintop && curbot > winbot) {
+            sb.css('top', $u.max([wintop - offset - 10, 0]));
+          } else if (curtop < wintop && curbot < winbot) {
+            sb.css('top', $u.min([winbot - sbh - offset - 20,
+                                  $(document).height() - sbh - 200]));
+          }
+        }
+      });
+    </script>
+
+  </head>
+  <body>
+<div class="pageheader">
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../install.html">Get it</a></li>
+    <li><a href="../contents.html">Docs</a></li>
+    <li><a href="../develop.html">Extend/Develop</a></li>
+  </ul>
+  <div>
+    <a href="../index.html">
+      <img src="../_static/askamyheader.png" alt="ASK Amy" />
+    </a>
+  </div>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">ASK Amy home</a>&#160;|</li>
+        <li><a href="../contents.html">Documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ask_amy.core package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-ask_amy.core.context">ask_amy.core.context module</a></li>
+<li><a class="reference internal" href="#module-ask_amy.core.default_dialog">ask_amy.core.default_dialog module</a></li>
+<li><a class="reference internal" href="#module-ask_amy.core.dialog">ask_amy.core.dialog module</a></li>
+<li><a class="reference internal" href="#module-ask_amy.core.directive">ask_amy.core.directive module</a></li>
+<li><a class="reference internal" href="#module-ask_amy.core.event">ask_amy.core.event module</a></li>
+<li><a class="reference internal" href="#module-ask_amy.core.exceptions">ask_amy.core.exceptions module</a></li>
+<li><a class="reference internal" href="#module-ask_amy.core.object_dictionary">ask_amy.core.object_dictionary module</a></li>
+<li><a class="reference internal" href="#module-ask_amy.core.reply">ask_amy.core.reply module</a></li>
+<li><a class="reference internal" href="#module-ask_amy.core.request">ask_amy.core.request module</a></li>
+<li><a class="reference internal" href="#module-ask_amy.core.session">ask_amy.core.session module</a></li>
+<li><a class="reference internal" href="#module-ask_amy.core.skill_factory">ask_amy.core.skill_factory module</a></li>
+<li><a class="reference internal" href="#module-ask_amy.core">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/ask_amy_api/ask_amy.core.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ask-amy-core-package">
+<h1>ask_amy.core package<a class="headerlink" href="#ask-amy-core-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-ask_amy.core.context">
+<span id="ask-amy-core-context-module"></span><h2>ask_amy.core.context module<a class="headerlink" href="#module-ask_amy.core.context" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ask_amy.core.context.AudioPlayer">
+<em class="property">class </em><code class="descclassname">ask_amy.core.context.</code><code class="descname">AudioPlayer</code><span class="sig-paren">(</span><em>request_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.context.AudioPlayer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.object_dictionary.ObjectDictionary" title="ask_amy.core.object_dictionary.ObjectDictionary"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.object_dictionary.ObjectDictionary</span></code></a></p>
+<dl class="attribute">
+<dt id="ask_amy.core.context.AudioPlayer.PLAYER_ACTIVITIES">
+<code class="descname">PLAYER_ACTIVITIES</code><em class="property"> = [‘IDLE’, ‘PAUSED’, ‘PLAYING’, ‘BUFFER_UNDERRUN’, ‘FINISHED’, ‘STOPPED’]</em><a class="headerlink" href="#ask_amy.core.context.AudioPlayer.PLAYER_ACTIVITIES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.context.AudioPlayer.offset_in_milliseconds">
+<code class="descname">offset_in_milliseconds</code><a class="headerlink" href="#ask_amy.core.context.AudioPlayer.offset_in_milliseconds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.context.AudioPlayer.player_activity">
+<code class="descname">player_activity</code><a class="headerlink" href="#ask_amy.core.context.AudioPlayer.player_activity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.context.AudioPlayer.token">
+<code class="descname">token</code><a class="headerlink" href="#ask_amy.core.context.AudioPlayer.token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ask_amy.core.context.Context">
+<em class="property">class </em><code class="descclassname">ask_amy.core.context.</code><code class="descname">Context</code><span class="sig-paren">(</span><em>context_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.context.Context" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.object_dictionary.ObjectDictionary" title="ask_amy.core.object_dictionary.ObjectDictionary"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.object_dictionary.ObjectDictionary</span></code></a></p>
+<dl class="attribute">
+<dt id="ask_amy.core.context.Context.audio_player">
+<code class="descname">audio_player</code><a class="headerlink" href="#ask_amy.core.context.Context.audio_player" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.context.Context.system">
+<code class="descname">system</code><a class="headerlink" href="#ask_amy.core.context.Context.system" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ask_amy.core.context.System">
+<em class="property">class </em><code class="descclassname">ask_amy.core.context.</code><code class="descname">System</code><span class="sig-paren">(</span><em>request_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.context.System" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.object_dictionary.ObjectDictionary" title="ask_amy.core.object_dictionary.ObjectDictionary"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.object_dictionary.ObjectDictionary</span></code></a></p>
+<dl class="attribute">
+<dt id="ask_amy.core.context.System.api_endpoint">
+<code class="descname">api_endpoint</code><a class="headerlink" href="#ask_amy.core.context.System.api_endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.context.System.application_id">
+<code class="descname">application_id</code><a class="headerlink" href="#ask_amy.core.context.System.application_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.context.System.consent_token">
+<code class="descname">consent_token</code><a class="headerlink" href="#ask_amy.core.context.System.consent_token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.context.System.device_id">
+<code class="descname">device_id</code><a class="headerlink" href="#ask_amy.core.context.System.device_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.context.System.supported_interfaces">
+<code class="descname">supported_interfaces</code><a class="headerlink" href="#ask_amy.core.context.System.supported_interfaces" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.context.System.user_access_token">
+<code class="descname">user_access_token</code><a class="headerlink" href="#ask_amy.core.context.System.user_access_token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.context.System.user_id">
+<code class="descname">user_id</code><a class="headerlink" href="#ask_amy.core.context.System.user_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ask_amy.core.default_dialog">
+<span id="ask-amy-core-default-dialog-module"></span><h2>ask_amy.core.default_dialog module<a class="headerlink" href="#module-ask_amy.core.default_dialog" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ask_amy.core.default_dialog.DefaultDialog">
+<em class="property">class </em><code class="descclassname">ask_amy.core.default_dialog.</code><code class="descname">DefaultDialog</code><span class="sig-paren">(</span><em>dialog_dict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.default_dialog.DefaultDialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.dialog.Dialog" title="ask_amy.core.dialog.Dialog"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.dialog.Dialog</span></code></a></p>
+<dl class="method">
+<dt id="ask_amy.core.default_dialog.DefaultDialog.default_cancel_intent">
+<code class="descname">default_cancel_intent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.default_dialog.DefaultDialog.default_cancel_intent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.core.default_dialog.DefaultDialog.default_stop_intent">
+<code class="descname">default_stop_intent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.default_dialog.DefaultDialog.default_stop_intent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.core.default_dialog.DefaultDialog.handle_default_intent">
+<code class="descname">handle_default_intent</code><span class="sig-paren">(</span><em>use_default_message=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.default_dialog.DefaultDialog.handle_default_intent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.core.default_dialog.DefaultDialog.intent_request">
+<code class="descname">intent_request</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.default_dialog.DefaultDialog.intent_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes the method related to the intent sent from Alexa.
+The methods are mapped in the skill_configuration.json file under the attribute name ‘intent_control’</p>
+<p>Returns: Response object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.core.default_dialog.DefaultDialog.launch_request">
+<code class="descname">launch_request</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.default_dialog.DefaultDialog.launch_request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.core.default_dialog.DefaultDialog.new_session_started">
+<code class="descname">new_session_started</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.default_dialog.DefaultDialog.new_session_started" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.core.default_dialog.DefaultDialog.session_ended_request">
+<code class="descname">session_ended_request</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.default_dialog.DefaultDialog.session_ended_request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ask_amy.core.dialog">
+<span id="ask-amy-core-dialog-module"></span><h2>ask_amy.core.dialog module<a class="headerlink" href="#module-ask_amy.core.dialog" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ask_amy.core.dialog.Dialog">
+<em class="property">class </em><code class="descclassname">ask_amy.core.dialog.</code><code class="descname">Dialog</code><span class="sig-paren">(</span><em>dialog_dict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.dialog.Dialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.object_dictionary.ObjectDictionary" title="ask_amy.core.object_dictionary.ObjectDictionary"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.object_dictionary.ObjectDictionary</span></code></a></p>
+<dl class="attribute">
+<dt id="ask_amy.core.dialog.Dialog.application_id">
+<code class="descname">application_id</code><a class="headerlink" href="#ask_amy.core.dialog.Dialog.application_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.core.dialog.Dialog.begin">
+<code class="descname">begin</code><span class="sig-paren">(</span><em>event_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.dialog.Dialog.begin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.dialog.Dialog.event">
+<code class="descname">event</code><a class="headerlink" href="#ask_amy.core.dialog.Dialog.event" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.core.dialog.Dialog.execute_method">
+<code class="descname">execute_method</code><span class="sig-paren">(</span><em>method_name</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.dialog.Dialog.execute_method" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.dialog.Dialog.intent_name">
+<code class="descname">intent_name</code><a class="headerlink" href="#ask_amy.core.dialog.Dialog.intent_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.dialog.Dialog.reply_dialog">
+<code class="descname">reply_dialog</code><a class="headerlink" href="#ask_amy.core.dialog.Dialog.reply_dialog" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.dialog.Dialog.request">
+<code class="descname">request</code><a class="headerlink" href="#ask_amy.core.dialog.Dialog.request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.dialog.Dialog.session">
+<code class="descname">session</code><a class="headerlink" href="#ask_amy.core.dialog.Dialog.session" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.dialog.Dialog.version">
+<code class="descname">version</code><a class="headerlink" href="#ask_amy.core.dialog.Dialog.version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ask_amy.core.directive">
+<span id="ask-amy-core-directive-module"></span><h2>ask_amy.core.directive module<a class="headerlink" href="#module-ask_amy.core.directive" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ask_amy.core.directive.AudioPlayer">
+<em class="property">class </em><code class="descclassname">ask_amy.core.directive.</code><code class="descname">AudioPlayer</code><span class="sig-paren">(</span><em>audio_dict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.directive.AudioPlayer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.object_dictionary.ObjectDictionary" title="ask_amy.core.object_dictionary.ObjectDictionary"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.object_dictionary.ObjectDictionary</span></code></a></p>
+<dl class="classmethod">
+<dt id="ask_amy.core.directive.AudioPlayer.clear_queue">
+<em class="property">classmethod </em><code class="descname">clear_queue</code><span class="sig-paren">(</span><em>clear_behavior</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.directive.AudioPlayer.clear_queue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="ask_amy.core.directive.AudioPlayer.play">
+<em class="property">classmethod </em><code class="descname">play</code><span class="sig-paren">(</span><em>url</em>, <em>offset_in_milliseconds=0</em>, <em>token=‘0’</em>, <em>expected_previous_token=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.directive.AudioPlayer.play" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="ask_amy.core.directive.AudioPlayer.stop">
+<em class="property">classmethod </em><code class="descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.directive.AudioPlayer.stop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ask_amy.core.event">
+<span id="ask-amy-core-event-module"></span><h2>ask_amy.core.event module<a class="headerlink" href="#module-ask_amy.core.event" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ask_amy.core.event.Event">
+<em class="property">class </em><code class="descclassname">ask_amy.core.event.</code><code class="descname">Event</code><span class="sig-paren">(</span><em>event_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.event.Event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="ask_amy.core.event.Event.context">
+<code class="descname">context</code><a class="headerlink" href="#ask_amy.core.event.Event.context" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.event.Event.request">
+<code class="descname">request</code><a class="headerlink" href="#ask_amy.core.event.Event.request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.event.Event.session">
+<code class="descname">session</code><a class="headerlink" href="#ask_amy.core.event.Event.session" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.core.event.Event.slot_data_to_session_attributes">
+<code class="descname">slot_data_to_session_attributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.event.Event.slot_data_to_session_attributes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.event.Event.version">
+<code class="descname">version</code><a class="headerlink" href="#ask_amy.core.event.Event.version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ask_amy.core.exceptions">
+<span id="ask-amy-core-exceptions-module"></span><h2>ask_amy.core.exceptions module<a class="headerlink" href="#module-ask_amy.core.exceptions" title="Permalink to this headline">¶</a></h2>
+<p>Global exception and warning classes.</p>
+<dl class="exception">
+<dt id="ask_amy.core.exceptions.ASKAmyError">
+<em class="property">exception </em><code class="descclassname">ask_amy.core.exceptions.</code><code class="descname">ASKAmyError</code><a class="headerlink" href="#ask_amy.core.exceptions.ASKAmyError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>Common base class for all ASK Amy exceptions.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ask_amy.core.exceptions.ApplicationIdError">
+<em class="property">exception </em><code class="descclassname">ask_amy.core.exceptions.</code><code class="descname">ApplicationIdError</code><a class="headerlink" href="#ask_amy.core.exceptions.ApplicationIdError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.exceptions.ASKAmyError" title="ask_amy.core.exceptions.ASKAmyError"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.exceptions.ASKAmyError</span></code></a></p>
+<p>The application id provided does not match application id for this skill</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ask_amy.core.exceptions.DialogIntentError">
+<em class="property">exception </em><code class="descclassname">ask_amy.core.exceptions.</code><code class="descname">DialogIntentError</code><a class="headerlink" href="#ask_amy.core.exceptions.DialogIntentError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.exceptions.ASKAmyError" title="ask_amy.core.exceptions.ASKAmyError"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.exceptions.ASKAmyError</span></code></a></p>
+<p>The Method Name does not map to an Intent in the Dialog section for this skill</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ask_amy.core.exceptions.FileExistsError">
+<em class="property">exception </em><code class="descclassname">ask_amy.core.exceptions.</code><code class="descname">FileExistsError</code><a class="headerlink" href="#ask_amy.core.exceptions.FileExistsError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.exceptions.ASKAmyError" title="ask_amy.core.exceptions.ASKAmyError"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.exceptions.ASKAmyError</span></code></a></p>
+<p>Code Generator is attempting to write to a file that already exists</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ask_amy.core.exceptions.IntentControlError">
+<em class="property">exception </em><code class="descclassname">ask_amy.core.exceptions.</code><code class="descname">IntentControlError</code><a class="headerlink" href="#ask_amy.core.exceptions.IntentControlError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.exceptions.ASKAmyError" title="ask_amy.core.exceptions.ASKAmyError"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.exceptions.ASKAmyError</span></code></a></p>
+<p>The Intent Name does not map to an Intent in the IntentControl section for this skill</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ask_amy.core.exceptions.SessionError">
+<em class="property">exception </em><code class="descclassname">ask_amy.core.exceptions.</code><code class="descname">SessionError</code><a class="headerlink" href="#ask_amy.core.exceptions.SessionError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.exceptions.ASKAmyError" title="ask_amy.core.exceptions.ASKAmyError"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.exceptions.ASKAmyError</span></code></a></p>
+<p>Error in session</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ask_amy.core.exceptions.SkillLoadError">
+<em class="property">exception </em><code class="descclassname">ask_amy.core.exceptions.</code><code class="descname">SkillLoadError</code><a class="headerlink" href="#ask_amy.core.exceptions.SkillLoadError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.exceptions.ASKAmyError" title="ask_amy.core.exceptions.ASKAmyError"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.exceptions.ASKAmyError</span></code></a></p>
+<p>Unable to load, bootstrap and execute the skill</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ask_amy.core.exceptions.SlotValidatorLoadError">
+<em class="property">exception </em><code class="descclassname">ask_amy.core.exceptions.</code><code class="descname">SlotValidatorLoadError</code><a class="headerlink" href="#ask_amy.core.exceptions.SlotValidatorLoadError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.exceptions.ASKAmyError" title="ask_amy.core.exceptions.ASKAmyError"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.exceptions.ASKAmyError</span></code></a></p>
+<p>Unable to load, a custom defined type</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-ask_amy.core.object_dictionary">
+<span id="ask-amy-core-object-dictionary-module"></span><h2>ask_amy.core.object_dictionary module<a class="headerlink" href="#module-ask_amy.core.object_dictionary" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ask_amy.core.object_dictionary.ObjectDictionary">
+<em class="property">class </em><code class="descclassname">ask_amy.core.object_dictionary.</code><code class="descname">ObjectDictionary</code><span class="sig-paren">(</span><em>obj_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.object_dictionary.ObjectDictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="ask_amy.core.object_dictionary.ObjectDictionary.get_value_from_dict">
+<code class="descname">get_value_from_dict</code><span class="sig-paren">(</span><em>path</em>, <em>override_dict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.object_dictionary.ObjectDictionary.get_value_from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a value in a dictionary given a collection of keys that
+point to the value
+:param path: a list of keys in the dictionary
+:param override_dict: a dictionary to be used if provided overriding
+the base dictionary. (This is often a sub dictionary of the base but it
+does not need to be
+:return: None or the value found</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.core.object_dictionary.ObjectDictionary.json">
+<code class="descname">json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.object_dictionary.ObjectDictionary.json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.object_dictionary.ObjectDictionary.logger">
+<code class="descname">logger</code><em class="property"> = &lt;logging.RootLogger object&gt;</em><a class="headerlink" href="#ask_amy.core.object_dictionary.ObjectDictionary.logger" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ask_amy.core.reply">
+<span id="ask-amy-core-reply-module"></span><h2>ask_amy.core.reply module<a class="headerlink" href="#module-ask_amy.core.reply" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ask_amy.core.reply.Card">
+<em class="property">class </em><code class="descclassname">ask_amy.core.reply.</code><code class="descname">Card</code><span class="sig-paren">(</span><em>card_dict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.reply.Card" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.reply.CommunicationChannel" title="ask_amy.core.reply.CommunicationChannel"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.reply.CommunicationChannel</span></code></a></p>
+<dl class="classmethod">
+<dt id="ask_amy.core.reply.Card.link_account">
+<em class="property">classmethod </em><code class="descname">link_account</code><span class="sig-paren">(</span><em>title</em>, <em>content</em>, <em>event=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.reply.Card.link_account" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="ask_amy.core.reply.Card.simple">
+<em class="property">classmethod </em><code class="descname">simple</code><span class="sig-paren">(</span><em>title</em>, <em>content</em>, <em>event=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.reply.Card.simple" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="ask_amy.core.reply.Card.standard">
+<em class="property">classmethod </em><code class="descname">standard</code><span class="sig-paren">(</span><em>title</em>, <em>content</em>, <em>small_image_url</em>, <em>large_image_url</em>, <em>event=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.reply.Card.standard" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ask_amy.core.reply.CommunicationChannel">
+<em class="property">class </em><code class="descclassname">ask_amy.core.reply.</code><code class="descname">CommunicationChannel</code><span class="sig-paren">(</span><em>card_dict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.reply.CommunicationChannel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.object_dictionary.ObjectDictionary" title="ask_amy.core.object_dictionary.ObjectDictionary"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.object_dictionary.ObjectDictionary</span></code></a></p>
+<dl class="staticmethod">
+<dt id="ask_amy.core.reply.CommunicationChannel.concat_text_if_list">
+<em class="property">static </em><code class="descname">concat_text_if_list</code><span class="sig-paren">(</span><em>text_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.reply.CommunicationChannel.concat_text_if_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="ask_amy.core.reply.CommunicationChannel.inject_event_data">
+<em class="property">static </em><code class="descname">inject_event_data</code><span class="sig-paren">(</span><em>text</em>, <em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.reply.CommunicationChannel.inject_event_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="ask_amy.core.reply.CommunicationChannel.process_token">
+<em class="property">static </em><code class="descname">process_token</code><span class="sig-paren">(</span><em>token</em>, <em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.reply.CommunicationChannel.process_token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ask_amy.core.reply.Prompt">
+<em class="property">class </em><code class="descclassname">ask_amy.core.reply.</code><code class="descname">Prompt</code><span class="sig-paren">(</span><em>card_dict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.reply.Prompt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.reply.CommunicationChannel" title="ask_amy.core.reply.CommunicationChannel"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.reply.CommunicationChannel</span></code></a></p>
+<dl class="classmethod">
+<dt id="ask_amy.core.reply.Prompt.ssml">
+<em class="property">classmethod </em><code class="descname">ssml</code><span class="sig-paren">(</span><em>ssml</em>, <em>event=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.reply.Prompt.ssml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="ask_amy.core.reply.Prompt.text">
+<em class="property">classmethod </em><code class="descname">text</code><span class="sig-paren">(</span><em>text</em>, <em>event=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.reply.Prompt.text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ask_amy.core.reply.Reply">
+<em class="property">class </em><code class="descclassname">ask_amy.core.reply.</code><code class="descname">Reply</code><span class="sig-paren">(</span><em>card_dict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.reply.Reply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.object_dictionary.ObjectDictionary" title="ask_amy.core.object_dictionary.ObjectDictionary"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.object_dictionary.ObjectDictionary</span></code></a></p>
+<dl class="staticmethod">
+<dt id="ask_amy.core.reply.Reply.build">
+<em class="property">static </em><code class="descname">build</code><span class="sig-paren">(</span><em>dialog_dict</em>, <em>event=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.reply.Reply.build" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="ask_amy.core.reply.Reply.build_audio">
+<em class="property">static </em><code class="descname">build_audio</code><span class="sig-paren">(</span><em>dialog_dict</em>, <em>event=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.reply.Reply.build_audio" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="ask_amy.core.reply.Reply.constr">
+<em class="property">classmethod </em><code class="descname">constr</code><span class="sig-paren">(</span><em>response</em>, <em>session_attributes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.reply.Reply.constr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ask_amy.core.reply.Response">
+<em class="property">class </em><code class="descclassname">ask_amy.core.reply.</code><code class="descname">Response</code><span class="sig-paren">(</span><em>card_dict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.reply.Response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.object_dictionary.ObjectDictionary" title="ask_amy.core.object_dictionary.ObjectDictionary"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.object_dictionary.ObjectDictionary</span></code></a></p>
+<dl class="classmethod">
+<dt id="ask_amy.core.reply.Response.audio_play">
+<em class="property">classmethod </em><code class="descname">audio_play</code><span class="sig-paren">(</span><em>audio_player</em>, <em>out_speech=None</em>, <em>card=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.reply.Response.audio_play" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="ask_amy.core.reply.Response.audio_stop">
+<em class="property">classmethod </em><code class="descname">audio_stop</code><span class="sig-paren">(</span><em>audio_stop</em>, <em>out_speech=None</em>, <em>card=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.reply.Response.audio_stop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="ask_amy.core.reply.Response.constr">
+<em class="property">classmethod </em><code class="descname">constr</code><span class="sig-paren">(</span><em>out_speech</em>, <em>reprompt=None</em>, <em>card=None</em>, <em>should_end_session=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.reply.Response.constr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ask_amy.core.request">
+<span id="ask-amy-core-request-module"></span><h2>ask_amy.core.request module<a class="headerlink" href="#module-ask_amy.core.request" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ask_amy.core.request.IntentRequest">
+<em class="property">class </em><code class="descclassname">ask_amy.core.request.</code><code class="descname">IntentRequest</code><span class="sig-paren">(</span><em>request_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.request.IntentRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.request.Request" title="ask_amy.core.request.Request"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.request.Request</span></code></a></p>
+<dl class="attribute">
+<dt id="ask_amy.core.request.IntentRequest.CONFIRMATION_STATUSES">
+<code class="descname">CONFIRMATION_STATUSES</code><em class="property"> = [‘NONE’, ‘CONFIRMED’, ‘DENIED’]</em><a class="headerlink" href="#ask_amy.core.request.IntentRequest.CONFIRMATION_STATUSES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.request.IntentRequest.DIALOG_STATES">
+<code class="descname">DIALOG_STATES</code><em class="property"> = [‘STARTED’, ‘IN_PROGRESS’, ‘COMPLETED’]</em><a class="headerlink" href="#ask_amy.core.request.IntentRequest.DIALOG_STATES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.request.IntentRequest.confirmation_status">
+<code class="descname">confirmation_status</code><a class="headerlink" href="#ask_amy.core.request.IntentRequest.confirmation_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.request.IntentRequest.dialog_state">
+<code class="descname">dialog_state</code><a class="headerlink" href="#ask_amy.core.request.IntentRequest.dialog_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.request.IntentRequest.intent_name">
+<code class="descname">intent_name</code><a class="headerlink" href="#ask_amy.core.request.IntentRequest.intent_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.request.IntentRequest.slots">
+<code class="descname">slots</code><a class="headerlink" href="#ask_amy.core.request.IntentRequest.slots" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.core.request.IntentRequest.value_for_slot_name">
+<code class="descname">value_for_slot_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.request.IntentRequest.value_for_slot_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ask_amy.core.request.LaunchRequest">
+<em class="property">class </em><code class="descclassname">ask_amy.core.request.</code><code class="descname">LaunchRequest</code><span class="sig-paren">(</span><em>request_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.request.LaunchRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.request.Request" title="ask_amy.core.request.Request"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.request.Request</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="ask_amy.core.request.Request">
+<em class="property">class </em><code class="descclassname">ask_amy.core.request.</code><code class="descname">Request</code><span class="sig-paren">(</span><em>request_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.request.Request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.object_dictionary.ObjectDictionary" title="ask_amy.core.object_dictionary.ObjectDictionary"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.object_dictionary.ObjectDictionary</span></code></a></p>
+<dl class="method">
+<dt id="ask_amy.core.request.Request.attribute_exists">
+<code class="descname">attribute_exists</code><span class="sig-paren">(</span><em>attribute</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.request.Request.attribute_exists" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.request.Request.attributes">
+<code class="descname">attributes</code><a class="headerlink" href="#ask_amy.core.request.Request.attributes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="ask_amy.core.request.Request.factory">
+<em class="property">static </em><code class="descname">factory</code><span class="sig-paren">(</span><em>request_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.request.Request.factory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.request.Request.locale">
+<code class="descname">locale</code><a class="headerlink" href="#ask_amy.core.request.Request.locale" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.request.Request.request_id">
+<code class="descname">request_id</code><a class="headerlink" href="#ask_amy.core.request.Request.request_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.request.Request.request_type">
+<code class="descname">request_type</code><a class="headerlink" href="#ask_amy.core.request.Request.request_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.request.Request.timestamp">
+<code class="descname">timestamp</code><a class="headerlink" href="#ask_amy.core.request.Request.timestamp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ask_amy.core.request.SessionEndedRequest">
+<em class="property">class </em><code class="descclassname">ask_amy.core.request.</code><code class="descname">SessionEndedRequest</code><span class="sig-paren">(</span><em>request_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.request.SessionEndedRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.request.Request" title="ask_amy.core.request.Request"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.request.Request</span></code></a></p>
+<dl class="attribute">
+<dt id="ask_amy.core.request.SessionEndedRequest.ERROR_TYPES">
+<code class="descname">ERROR_TYPES</code><em class="property"> = [‘INVALID_RESPONSE’, ‘DEVICE_COMMUNICATION_ERROR’, ‘INTERNAL_ERROR’]</em><a class="headerlink" href="#ask_amy.core.request.SessionEndedRequest.ERROR_TYPES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.request.SessionEndedRequest.REASONS">
+<code class="descname">REASONS</code><em class="property"> = [‘USER_INITIATED’, ‘ERROR’, ‘EXCEEDED_MAX_REPROMPTS’]</em><a class="headerlink" href="#ask_amy.core.request.SessionEndedRequest.REASONS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.request.SessionEndedRequest.error_message">
+<code class="descname">error_message</code><a class="headerlink" href="#ask_amy.core.request.SessionEndedRequest.error_message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.request.SessionEndedRequest.error_type">
+<code class="descname">error_type</code><a class="headerlink" href="#ask_amy.core.request.SessionEndedRequest.error_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.request.SessionEndedRequest.reason">
+<code class="descname">reason</code><a class="headerlink" href="#ask_amy.core.request.SessionEndedRequest.reason" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ask_amy.core.request.Slot">
+<em class="property">class </em><code class="descclassname">ask_amy.core.request.</code><code class="descname">Slot</code><span class="sig-paren">(</span><em>slot_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.request.Slot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.object_dictionary.ObjectDictionary" title="ask_amy.core.object_dictionary.ObjectDictionary"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.object_dictionary.ObjectDictionary</span></code></a></p>
+<dl class="attribute">
+<dt id="ask_amy.core.request.Slot.CONFIRMATION">
+<code class="descname">CONFIRMATION</code><em class="property"> = [‘NONE’, ‘CONFIRMED’, ‘DENIED’]</em><a class="headerlink" href="#ask_amy.core.request.Slot.CONFIRMATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.request.Slot.confirmation_status">
+<code class="descname">confirmation_status</code><a class="headerlink" href="#ask_amy.core.request.Slot.confirmation_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.request.Slot.name">
+<code class="descname">name</code><a class="headerlink" href="#ask_amy.core.request.Slot.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.request.Slot.value">
+<code class="descname">value</code><a class="headerlink" href="#ask_amy.core.request.Slot.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ask_amy.core.session">
+<span id="ask-amy-core-session-module"></span><h2>ask_amy.core.session module<a class="headerlink" href="#module-ask_amy.core.session" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ask_amy.core.session.Session">
+<em class="property">class </em><code class="descclassname">ask_amy.core.session.</code><code class="descname">Session</code><span class="sig-paren">(</span><em>session_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.session.Session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ask_amy.core.object_dictionary.ObjectDictionary" title="ask_amy.core.object_dictionary.ObjectDictionary"><code class="xref py py-class docutils literal"><span class="pre">ask_amy.core.object_dictionary.ObjectDictionary</span></code></a></p>
+<dl class="attribute">
+<dt id="ask_amy.core.session.Session.access_token">
+<code class="descname">access_token</code><a class="headerlink" href="#ask_amy.core.session.Session.access_token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.session.Session.application_id">
+<code class="descname">application_id</code><a class="headerlink" href="#ask_amy.core.session.Session.application_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.core.session.Session.attribute_exists">
+<code class="descname">attribute_exists</code><span class="sig-paren">(</span><em>attribute</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.session.Session.attribute_exists" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.session.Session.attributes">
+<code class="descname">attributes</code><a class="headerlink" href="#ask_amy.core.session.Session.attributes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.session.Session.consent_token">
+<code class="descname">consent_token</code><a class="headerlink" href="#ask_amy.core.session.Session.consent_token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.session.Session.is_new_session">
+<code class="descname">is_new_session</code><a class="headerlink" href="#ask_amy.core.session.Session.is_new_session" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.core.session.Session.load">
+<code class="descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.session.Session.load" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.core.session.Session.reset_stored_values">
+<code class="descname">reset_stored_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.session.Session.reset_stored_values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ask_amy.core.session.Session.save">
+<code class="descname">save</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.session.Session.save" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.session.Session.session_id">
+<code class="descname">session_id</code><a class="headerlink" href="#ask_amy.core.session.Session.session_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ask_amy.core.session.Session.user_id">
+<code class="descname">user_id</code><a class="headerlink" href="#ask_amy.core.session.Session.user_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ask_amy.core.skill_factory">
+<span id="ask-amy-core-skill-factory-module"></span><h2>ask_amy.core.skill_factory module<a class="headerlink" href="#module-ask_amy.core.skill_factory" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ask_amy.core.skill_factory.SkillFactory">
+<em class="property">class </em><code class="descclassname">ask_amy.core.skill_factory.</code><code class="descname">SkillFactory</code><a class="headerlink" href="#ask_amy.core.skill_factory.SkillFactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="ask_amy.core.skill_factory.SkillFactory.SKILL_CONFIG">
+<code class="descname">SKILL_CONFIG</code><em class="property"> = ‘skill_config.json’</em><a class="headerlink" href="#ask_amy.core.skill_factory.SkillFactory.SKILL_CONFIG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="ask_amy.core.skill_factory.SkillFactory.build">
+<em class="property">static </em><code class="descname">build</code><span class="sig-paren">(</span><em>config_file_name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.skill_factory.SkillFactory.build" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="ask_amy.core.skill_factory.SkillFactory.load_configuartion">
+<em class="property">static </em><code class="descname">load_configuartion</code><span class="sig-paren">(</span><em>config_name</em>, <em>config_file_name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.skill_factory.SkillFactory.load_configuartion" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="ask_amy.core.skill_factory.SkillFactory.set_logging_level">
+<em class="property">static </em><code class="descname">set_logging_level</code><span class="sig-paren">(</span><em>skill_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#ask_amy.core.skill_factory.SkillFactory.set_logging_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ask_amy.core">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ask_amy.core" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">ASK Amy home</a>&#160;|</li>
+        <li><a href="../contents.html">Documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Dan Higgins.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>
