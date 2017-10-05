@@ -3,10 +3,10 @@
 Getting Started
 ===============
 
-The typical first application a programmer writes when working with a new language or framework is the *Hello World*
-application in which we enable a minimum thread of execution to demonstrate base functionality. For our first skill we will
-be deploying an simple fact telling skill, this is essentially the *Hello World* of Alexa skills but since the facts can
-be easily changed and updated this is actually a useful and fun initial skill to deploy and later modify.
+The typical first application a programmer writes when working with a new language or framework is the *"Hello World"*
+application in which we enable a minimum thread of execution to demonstrate base functionality. For our first skill,
+we will be deploying a simple fact telling skill, this is essentially the *"Hello World"* of Alexa skills but since the
+facts can be easily changed and updated this is a useful and fun initial skill to deploy and later modify.
 
 .. note::
 
@@ -68,6 +68,11 @@ To deploy our example skill:
     .. code-block:: bash
 
         $ ask-amy-cli create_lambda --deploy-json-file cli_config.json
+
+* After execution the output should be similar to the below content.
+
+    .. code-block:: bash
+
         {
             "add_trigger": {
                 "Statement": "{\"Sid\":\"al....

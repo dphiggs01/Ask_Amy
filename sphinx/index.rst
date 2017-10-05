@@ -20,30 +20,30 @@ Alex Request JSON is always available for interrogation for niche cases.
 
 |features| Key Features:
 ------------------------
-* The **Template Skill Code Generator** creates a deploy-able skill template from an Alexa Intent Schema json file.
+* The **Template Skill Code Generator** creates a deploy-able skill template from an Alexa Intent Schema JSON file.
 * A **AWS CLI Wrapper** simplifies Lambda function creation, deployment, and CloudWatch log file dumps.
 * The **No Code Persistence** provides automatic saving and restoration of session state attributes across skill invocations.
-* **Multiple Data Scopes** supports encapsulation of attributes at the Request, Intent, Session, and Application scopes which enhances data visibility and minimizes use of session scope attributes when it is not required or desired.
-* The **JSON to Object Marshalling** feature, automatically converts Alex json Events into Python Objects and Converts Python Reply Objects into Alex json format for return to the Alexa Service.
+* **Multiple Data Scopes** supports encapsulation of attributes at the Request, Intent, Session, and Application scopes which enhances data visibility and minimizes the use of session scope attributes when it is not required or desired.
+* The **JSON to Object Marshalling** feature, automatically converts Alex JSON Events into Python Objects and Converts Python Reply Objects into Alex JSON format for return to the Alexa Service.
 * The **State Manager** provides a simple yet powerful finite state machine that manages *expected intents* and *required field processing*.
-* Numerous **Sample Applications** are provided, demonstrating Amazon's blueprint samples from their Java and Node.JS github repos.
+* Numerous **Sample Applications** are provided, demonstrating Amazon's blueprint samples from their Java and Node.JS GitHub repos.
 * Comprehensive **Logging and log level throttling** is provided to support development, debug, & production monitoring.
 
 
 |benefits| Key Benefits:
 ------------------------
-* **Enhanced Developer Productivity** The ASK Amy framework encapsulates much of the boiler plate code required for skill deployment enabling developers to focus writing core skill functionality.
-* **Enhanced User Experience Design Productivity** With ASK AMY the user experience (UX) is provided in a separate json file which can be developed an tweaked independent of the skill code.
+* **Enhanced Developer Productivity** The ASK Amy framework encapsulates much of the boiler plate code required for skill deployment enabling developers to focus on writing core skill functionality.
+* **Enhanced User Experience Design Productivity** With ASK AMY the user experience (UX) is provided in a separate JSON file which can be developed and tweaked independent of the skill code.
 * **Improved Agility** The ASK Amy framework is designed with change in mind and can easily accommodate iterative and incremental development and deployment.
-* **Simplified Deploy and Debug Cycles** Ask Amy reduces developer frustration with AWS logs and browser based deployments with directed tools supporting the specific needs of Alexa Skill development.
+* **Simplified Deploy and Debug Cycles** Ask Amy reduces developer frustration with AWS logs and browser-based deployments with directed tools supporting the specific needs of Alexa Skill development.
 
 
 |design| Design Principles:
 ----------------------------
-* **Separation of Concern** abstracting the text / speech of intent responses into a JSON document and providing a clear demarcation of intent processing user experience (UX) code from application code
-* **Paradigm Consistency** using similar terminology and design patterns found in the *Alexa Service* development allows for a more seamless flow between *intent schema* and *ASK Amy Skill* development
-* **Extensible Framework** supports plug-able components to support *state machines* or additional *databases*
-* **Microservices** approach to skill development and application integration enhances reusability of code
+* **Separation of Concern** abstracting the text/speech of intent responses into a JSON document and providing a clear demarcation of intent processing, user experience (UX) and application specific code.
+* **Paradigm Consistency** using similar terminology and design patterns found in the *Alexa Service* development allows for a more seamless flow between *intent schema* and *ASK Amy Skill* development.
+* **Extensible Framework** provides plug-able components to support additional *state machines* or different *databases*.
+* **Microservices** approach to skill development and application integration enhances reuse-ability of code.
 
 
 .. toctree::

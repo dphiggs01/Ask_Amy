@@ -154,32 +154,32 @@ Alex Request JSON is always available for interrogation for niche cases.</p>
 <div class="section" id="features-key-features">
 <h2><a class="reference internal" href="_images/icon-features.png"><img alt="features" class="align-middle" src="_images/icon-features.png" style="width: 50px; height: 40px;" /></a> Key Features:<a class="headerlink" href="#features-key-features" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>The <strong>Template Skill Code Generator</strong> creates a deploy-able skill template from an Alexa Intent Schema json file.</li>
+<li>The <strong>Template Skill Code Generator</strong> creates a deploy-able skill template from an Alexa Intent Schema JSON file.</li>
 <li>A <strong>AWS CLI Wrapper</strong> simplifies Lambda function creation, deployment, and CloudWatch log file dumps.</li>
 <li>The <strong>No Code Persistence</strong> provides automatic saving and restoration of session state attributes across skill invocations.</li>
-<li><strong>Multiple Data Scopes</strong> supports encapsulation of attributes at the Request, Intent, Session, and Application scopes which enhances data visibility and minimizes use of session scope attributes when it is not required or desired.</li>
-<li>The <strong>JSON to Object Marshalling</strong> feature, automatically converts Alex json Events into Python Objects and Converts Python Reply Objects into Alex json format for return to the Alexa Service.</li>
+<li><strong>Multiple Data Scopes</strong> supports encapsulation of attributes at the Request, Intent, Session, and Application scopes which enhances data visibility and minimizes the use of session scope attributes when it is not required or desired.</li>
+<li>The <strong>JSON to Object Marshalling</strong> feature, automatically converts Alex JSON Events into Python Objects and Converts Python Reply Objects into Alex JSON format for return to the Alexa Service.</li>
 <li>The <strong>State Manager</strong> provides a simple yet powerful finite state machine that manages <em>expected intents</em> and <em>required field processing</em>.</li>
-<li>Numerous <strong>Sample Applications</strong> are provided, demonstrating Amazon’s blueprint samples from their Java and Node.JS github repos.</li>
+<li>Numerous <strong>Sample Applications</strong> are provided, demonstrating Amazon’s blueprint samples from their Java and Node.JS GitHub repos.</li>
 <li>Comprehensive <strong>Logging and log level throttling</strong> is provided to support development, debug, &amp; production monitoring.</li>
 </ul>
 </div>
 <div class="section" id="benefits-key-benefits">
 <h2><a class="reference internal" href="_images/icon-benefits.png"><img alt="benefits" class="align-middle" src="_images/icon-benefits.png" style="width: 50px; height: 30px;" /></a> Key Benefits:<a class="headerlink" href="#benefits-key-benefits" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><strong>Enhanced Developer Productivity</strong> The ASK Amy framework encapsulates much of the boiler plate code required for skill deployment enabling developers to focus writing core skill functionality.</li>
-<li><strong>Enhanced User Experience Design Productivity</strong> With ASK AMY the user experience (UX) is provided in a separate json file which can be developed an tweaked independent of the skill code.</li>
+<li><strong>Enhanced Developer Productivity</strong> The ASK Amy framework encapsulates much of the boiler plate code required for skill deployment enabling developers to focus on writing core skill functionality.</li>
+<li><strong>Enhanced User Experience Design Productivity</strong> With ASK AMY the user experience (UX) is provided in a separate JSON file which can be developed and tweaked independent of the skill code.</li>
 <li><strong>Improved Agility</strong> The ASK Amy framework is designed with change in mind and can easily accommodate iterative and incremental development and deployment.</li>
-<li><strong>Simplified Deploy and Debug Cycles</strong> Ask Amy reduces developer frustration with AWS logs and browser based deployments with directed tools supporting the specific needs of Alexa Skill development.</li>
+<li><strong>Simplified Deploy and Debug Cycles</strong> Ask Amy reduces developer frustration with AWS logs and browser-based deployments with directed tools supporting the specific needs of Alexa Skill development.</li>
 </ul>
 </div>
 <div class="section" id="design-design-principles">
 <h2><a class="reference internal" href="_images/icon-design.png"><img alt="design" class="align-middle" src="_images/icon-design.png" style="width: 40px; height: 30px;" /></a> Design Principles:<a class="headerlink" href="#design-design-principles" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><strong>Separation of Concern</strong> abstracting the text / speech of intent responses into a JSON document and providing a clear demarcation of intent processing user experience (UX) code from application code</li>
-<li><strong>Paradigm Consistency</strong> using similar terminology and design patterns found in the <em>Alexa Service</em> development allows for a more seamless flow between <em>intent schema</em> and <em>ASK Amy Skill</em> development</li>
-<li><strong>Extensible Framework</strong> supports plug-able components to support <em>state machines</em> or additional <em>databases</em></li>
-<li><strong>Microservices</strong> approach to skill development and application integration enhances reusability of code</li>
+<li><strong>Separation of Concern</strong> abstracting the text/speech of intent responses into a JSON document and providing a clear demarcation of intent processing, user experience (UX) and application specific code.</li>
+<li><strong>Paradigm Consistency</strong> using similar terminology and design patterns found in the <em>Alexa Service</em> development allows for a more seamless flow between <em>intent schema</em> and <em>ASK Amy Skill</em> development.</li>
+<li><strong>Extensible Framework</strong> provides plug-able components to support additional <em>state machines</em> or different <em>databases</em>.</li>
+<li><strong>Microservices</strong> approach to skill development and application integration enhances reuse-ability of code.</li>
 </ul>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
