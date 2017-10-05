@@ -19,6 +19,12 @@ facts can be easily changed and updated this is a useful and fun initial skill t
 Deploying our first skill
 -------------------------
 
+.. raw:: html
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/TUiri_2GNN0" frameborder="0" allowfullscreen></iframe>
+
+
+
 .. sidebar:: *Expected Time Under 10 Minutes*
 
    Once you have a functioning **ASK Amy** environment the time to create and deploy a pre build skill is *under 10 minutes*
