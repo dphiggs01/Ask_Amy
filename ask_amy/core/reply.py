@@ -253,6 +253,8 @@ class Card(CommunicationChannel):
         if event is not None:
             content = Card.inject_event_data(content, event)
             title = Card.inject_event_data(title, event)
+            small_image_url = Card.inject_event_data(small_image_url, event)
+            large_image_url = Card.inject_event_data(large_image_url, event)
         card = {'type': 'Standard', 'title': title, 'text': content}
         image = {}
         card['image'] = image
