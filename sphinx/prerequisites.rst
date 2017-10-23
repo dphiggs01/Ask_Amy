@@ -8,8 +8,8 @@ Prerequisites
    to create and secure the two Amazon accounts.
 
 
-|prereq| Before diving in there are a few prerequisites that must be satisfied. Happily, once these prerequisites are satisfied
-we can focus on coding our Alexa Skills and not focus the environment. Let's get started.
+|prereq| Before diving in, there are a few prerequisites that must be satisfied. Happily, once these requirements are
+satisfied, we can focus on coding our Alexa Skills and not concentrate the environment. Let’s get started.
 
 
 
@@ -27,8 +27,8 @@ Users Accounts
 
 .. note::
 
-    The AWS Account creation will require a *credit card* however the Free Tier should be sufficient for getting started
-    with all our Alexa Skills.
+    The AWS Account creation will require a *credit card* however the **Free Tier** will be more than sufficient for
+    getting started with all our Alexa Skills.
 
     Also **note** that although not strictly required it is a best practice to secure your `AWS Root account
     <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html>`_.
@@ -67,7 +67,7 @@ Add AWS User
 ------------
 
 With AWS CLI installed we now need to configure the environment to work with ASK Amy. We will need to create an AWS user
-that can support our development needs. To do so log into the **AWS Console** with a user who's credentials are capable
+that can support our development needs. To do so login to the **AWS Console** with a user who's credentials are capable
 of creating additional *Users*.
 
 Navigate to the `IAM Add user page <https://console.aws.amazon.com/iam/home#/users$new?step=details>`_

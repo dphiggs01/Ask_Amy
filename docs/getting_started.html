@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="ASK Amy Overview" href="models.html" />
+    <link rel="next" title="ASK Amy Example Skills" href="example_skills.html" />
     <link rel="prev" title="Prerequisites" href="prerequisites.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -91,7 +91,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="models.html" title="ASK Amy Overview"
+          <a href="example_skills.html" title="ASK Amy Example Skills"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="prerequisites.html" title="Prerequisites"
@@ -115,8 +115,8 @@
   <p class="topless"><a href="prerequisites.html"
                         title="previous chapter">Prerequisites</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="models.html"
-                        title="next chapter">ASK Amy Overview</a></p>
+  <p class="topless"><a href="example_skills.html"
+                        title="next chapter">ASK Amy Example Skills</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -144,10 +144,10 @@
             
   <div class="section" id="getting-started">
 <span id="getting-started-label"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p>The typical first application a programmer writes when working with a new language or framework is the <em>Hello World</em>
-application in which we enable a minimum thread of execution to demonstrate base functionality. For our first skill we will
-be deploying an simple fact telling skill, this is essentially the <em>Hello World</em> of Alexa skills but since the facts can
-be easily changed and updated this is actually a useful and fun initial skill to deploy and later modify.</p>
+<p>The typical first application a programmer writes when working with a new language or framework is the <em>“Hello World”</em>
+application in which we enable a minimum thread of execution to demonstrate base functionality. For our first skill,
+we will be deploying a simple fact telling skill, this is essentially the <em>“Hello World”</em> of Alexa skills but since the
+facts can be easily changed and updated this is a useful and fun initial skill to deploy and later modify.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Our fact skill is based upon the <a class="reference external" href="https://github.com/amzn/alexa-skills-kit-java/tree/master/samples/src/main/java/spacegeek">Space Geek Skill</a>
@@ -155,7 +155,7 @@ a demo skill written by the Amazon developer team for the Java programming langu
 </div>
 <div class="section" id="deploying-our-first-skill">
 <h2>Deploying our first skill<a class="headerlink" href="#deploying-our-first-skill" title="Permalink to this headline">¶</a></h2>
-<div class="sidebar">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/TUiri_2GNN0" frameborder="0" allowfullscreen></iframe><div class="sidebar">
 <p class="first sidebar-title"><em>Expected Time Under 10 Minutes</em></p>
 <p class="last">Once you have a functioning <strong>ASK Amy</strong> environment the time to create and deploy a pre build skill is <em>under 10 minutes</em>
 and with a little bit of experience it can be <em>under 5 minutes</em>.</p>
@@ -203,7 +203,13 @@ the Amazon Developer Portal and the <strong>second</strong> is deploying the ski
 <li><p class="first">Create the AWS Lambda Function by executing the <cite>ask-amy-cli create_lambda …</cite> command below.</p>
 <blockquote>
 <div><div class="highlight-bash"><div class="highlight"><pre><span></span>$ ask-amy-cli create_lambda --deploy-json-file cli_config.json
-<span class="o">{</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">After execution the output should be similar to the below content.</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">{</span>
     <span class="s2">&quot;add_trigger&quot;</span>: <span class="o">{</span>
         <span class="s2">&quot;Statement&quot;</span>: <span class="s2">&quot;{\&quot;Sid\&quot;:\&quot;al....</span>
 <span class="s2">    },</span>
@@ -286,7 +292,7 @@ into the Service Endpoint Field, click <cite>Save</cite> and <cite>Next</cite></
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="models.html" title="ASK Amy Overview"
+          <a href="example_skills.html" title="ASK Amy Example Skills"
              >next</a> |</li>
         <li class="right" >
           <a href="prerequisites.html" title="Prerequisites"
