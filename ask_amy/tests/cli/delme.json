@@ -1,0 +1,9 @@
+{
+  "intents": [
+    { "intent": "SurroundOnIntent"},
+    { "intent": "SurroundMuteIntent"},
+    { "intent": "TVOnIntent"},
+    { "intent": "TVMuteIntent"},
+    { "intent": "PowerOffIntent"}
+  ]
+}
