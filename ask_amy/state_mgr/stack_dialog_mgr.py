@@ -310,7 +310,7 @@ class StackDialogManager(DefaultDialog):
         logger.debug("**************** entering StackDialogManager.is_valid_slot_data_type")
         valid = True
         if type_validator is None:
-            return valid  # If type is not defined skip validation test
+            return valid  # If type is not defined skip validation tests
         else:
             try:
                 if type_validator.startswith('AMAZON'):

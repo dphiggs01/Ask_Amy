@@ -1,11 +1,11 @@
-ask\_amy\.cli\.code\_gen package
-================================
+ask\_amy.cli.code\_gen package
+==============================
 
 Submodules
 ----------
 
-ask\_amy\.cli\.code\_gen\.code\_generator module
-------------------------------------------------
+ask\_amy.cli.code\_gen.code\_generator module
+---------------------------------------------
 
 .. automodule:: ask_amy.cli.code_gen.code_generator
     :members:

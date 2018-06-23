@@ -1,91 +1,99 @@
-ask\_amy\.core package
-======================
+ask\_amy.core package
+=====================
 
 Submodules
 ----------
 
-ask\_amy\.core\.context module
-------------------------------
+ask\_amy.core.context module
+----------------------------
 
 .. automodule:: ask_amy.core.context
     :members:
     :undoc-members:
     :show-inheritance:
 
-ask\_amy\.core\.default\_dialog module
---------------------------------------
+ask\_amy.core.default\_dialog module
+------------------------------------
 
 .. automodule:: ask_amy.core.default_dialog
     :members:
     :undoc-members:
     :show-inheritance:
 
-ask\_amy\.core\.dialog module
------------------------------
+ask\_amy.core.default\_home\_skill module
+-----------------------------------------
+
+.. automodule:: ask_amy.core.default_home_skill
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+ask\_amy.core.dialog module
+---------------------------
 
 .. automodule:: ask_amy.core.dialog
     :members:
     :undoc-members:
     :show-inheritance:
 
-ask\_amy\.core\.directive module
---------------------------------
+ask\_amy.core.directive module
+------------------------------
 
 .. automodule:: ask_amy.core.directive
     :members:
     :undoc-members:
     :show-inheritance:
 
-ask\_amy\.core\.event module
-----------------------------
+ask\_amy.core.event module
+--------------------------
 
 .. automodule:: ask_amy.core.event
     :members:
     :undoc-members:
     :show-inheritance:
 
-ask\_amy\.core\.exceptions module
----------------------------------
+ask\_amy.core.exceptions module
+-------------------------------
 
 .. automodule:: ask_amy.core.exceptions
     :members:
     :undoc-members:
     :show-inheritance:
 
-ask\_amy\.core\.object\_dictionary module
------------------------------------------
+ask\_amy.core.object\_dictionary module
+---------------------------------------
 
 .. automodule:: ask_amy.core.object_dictionary
     :members:
     :undoc-members:
     :show-inheritance:
 
-ask\_amy\.core\.reply module
-----------------------------
+ask\_amy.core.reply module
+--------------------------
 
 .. automodule:: ask_amy.core.reply
     :members:
     :undoc-members:
     :show-inheritance:
 
-ask\_amy\.core\.request module
-------------------------------
+ask\_amy.core.request module
+----------------------------
 
 .. automodule:: ask_amy.core.request
     :members:
     :undoc-members:
     :show-inheritance:
 
-ask\_amy\.core\.session module
-------------------------------
+ask\_amy.core.session module
+----------------------------
 
 .. automodule:: ask_amy.core.session
     :members:
     :undoc-members:
     :show-inheritance:
 
-ask\_amy\.core\.skill\_factory module
--------------------------------------
+ask\_amy.core.skill\_factory module
+-----------------------------------
 
 .. automodule:: ask_amy.core.skill_factory
     :members:

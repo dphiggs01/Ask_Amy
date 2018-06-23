@@ -12,7 +12,7 @@ class TestDialog(TestCaseASKAmy):
         print(dialog_obj)
 
     def test_no_key_error_dict(self):
-        nkeDict = NoKeyErrorDict({'test':'value1'})
+        nkeDict = NoKeyErrorDict({'tests':'value1'})
         print(type(nkeDict))
-        x = nkeDict['test']['test2']
+        x = nkeDict['tests']['test2']
         print(x)

@@ -1,13 +1,13 @@
-ask\_amy package
-================
+ask\_amy.tests package
+======================
 
 Submodules
 ----------
 
-ask\_amy.lambda\_function module
---------------------------------
+ask\_amy.tests.utility module
+-----------------------------
 
-.. automodule:: ask_amy.lambda_function
+.. automodule:: ask_amy.tests.utility
     :members:
     :undoc-members:
     :show-inheritance:
@@ -16,7 +16,7 @@ ask\_amy.lambda\_function module
 Module contents
 ---------------
 
-.. automodule:: ask_amy
+.. automodule:: ask_amy.tests
     :members:
     :undoc-members:
     :show-inheritance:

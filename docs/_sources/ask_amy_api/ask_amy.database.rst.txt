@@ -1,11 +1,11 @@
-ask\_amy\.database package
-==========================
+ask\_amy.database package
+=========================
 
 Submodules
 ----------
 
-ask\_amy\.database\.database module
------------------------------------
+ask\_amy.database.database module
+---------------------------------
 
 .. automodule:: ask_amy.database.database
     :members:

@@ -3,13 +3,13 @@ Prerequisites
 
 .. sidebar:: *Expected Time 25 Minutes*
 
-   If you have a functioning Python 3.+ environment and are familiar with executing at the command line expect to spend
+   If you have a functioning Python 3.+ environment and are familiar with executing at the command line, expect to spend
    approximately 25 Minutes to install and configure the prerequisites described below. This estimate includes the time
    to create and secure the two Amazon accounts.
 
 
 |prereq| Before diving in, there are a few prerequisites that must be satisfied. Happily, once these requirements are
-satisfied, we can focus on coding our Alexa Skills and not concentrate the environment. Let’s get started.
+satisfied, we can focus on coding our Alexa Skills and not concentrate on the environment. Let’s get started.
 
 
 
@@ -160,7 +160,7 @@ will provide permission to *DynamoDB* and *Cloudwatch Logs*. You can create the 
         "iam_create_role": {
             "Role": {
                 "RoleName": "alexa_skill_role",
-                "Arn": "arn:aws:iam::280056172273:role/alexa_skill_role",
+                "Arn": "arn:aws:iam::**********73:role/alexa_skill_role",
                 "Path": "/",
                 "AssumeRolePolicyDocument": {
                     "Version": "2012-10-17",
@@ -174,7 +174,7 @@ will provide permission to *DynamoDB* and *Cloudwatch Logs*. You can create the 
                         }
                     ]
                 },
-                "RoleId": "AROAI4NG2EMC5HHRBYID4",
+                "RoleId": "A**********C5HHRBYID4",
                 "CreateDate": "2017-07-22T14:59:57.594Z"
             }
         },
