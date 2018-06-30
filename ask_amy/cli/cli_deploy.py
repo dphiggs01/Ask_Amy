@@ -1,12 +1,10 @@
 import json
-import pip
 from subprocess import Popen, PIPE
 import os
 import shutil
 import sys
 from ask_amy.cli.code_gen.code_generator import CodeGenerator
 from time import sleep
-import time
 
 class DeployCLI(object):
 
@@ -111,7 +109,8 @@ class DeployCLI(object):
             if source_dir is not None:
                 shutil.copytree(source_dir, ask_amy_dist)
             else:
-                pip.main(['install', '--upgrade', 'ask_amy', '-t', destination_dir])
+                #pip.main(['install', '--upgrade', 'ask_amy', '-t', destination_dir])
+                self.run(self.install_ask_amy_for_upload, destination_dir)
         except FileNotFoundError:
             sys.stderr.write("ERROR: path not found {}\n".format(source_dir))
             sys.exit(-1)
@@ -132,6 +131,10 @@ class DeployCLI(object):
     def make_zipfile(self, output_filename, source_dir):
         output_filename = output_filename[:-4]
         shutil.make_archive(output_filename, 'zip', source_dir)
+
+    install_ask_amy_for_upload = ('pip', 'install', '--upgrade', 'ask_amy',
+                               '-t', 0
+                               )
 
     lamabda_update_function = ('aws', '--output', 'json', 'lambda', 'update-function-code',
                                '--region', 0,
@@ -212,7 +215,11 @@ class DeployCLI(object):
             out = str(out, 'utf-8')
             if not out:
                 out = '{}'
-            return json.loads(out)
+            try:
+                json_out = json.loads(out)
+            except Exception:
+                json_out = {}
+            return json_out
         except Exception as e:
             sys.stderr.write("ERROR: command line error %s\n" % args)
             sys.stderr.write("ERROR: %s\n" % e)

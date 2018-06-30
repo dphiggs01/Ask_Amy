@@ -41,7 +41,7 @@ Alex Request JSON is always available for interrogation for niche cases.
 |design| Design Principles:
 ----------------------------
 * **Separation of Concern** abstracting the text/speech of intent responses into a JSON document and providing a clear demarcation of intent processing, user experience (UX) and application specific code.
-* **Paradigm Consistency** using similar terminology and design patterns found in the *Alexa Service* development allows for a more seamless flow between *intent schema* and *ASK Amy Skill* development.
+* **Paradigm Consistency** using similar terminology and design patterns found in the *Alexa Service* development allows for a more seamless flow between *interaction model* and *ASK Amy Skill* development.
 * **Extensible Framework** provides plug-able components to support additional *state machines* or different *databases*.
 * **Microservices** approach to skill development and application integration enhances reuse-ability of code.
 

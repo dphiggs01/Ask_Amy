@@ -9,6 +9,7 @@ with ask_amy accelerators
 * python setup.py sdist
 * python setup.py sdist upload
 
+https://pypi.org/project/ask_amy/
 
 pip install --upgrade ask_amy
 
@@ -20,7 +21,9 @@ ask-amy-cli create_template --skill-name alexa_scorekeeper_skill --role-name arn
 
 for sphinx documentation creation use deploy.sh in sphinx directory
 
+cleanup example skills dist directory
 find . -type d -name dist -exec rm -rf {} \;
+find . -type f -name alexa_skill.zip -exec rm {} \;
 
 
 

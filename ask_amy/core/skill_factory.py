@@ -9,7 +9,7 @@ logger = logging.getLogger()
 
 
 class SkillFactory(object):
-    SKILL_CONFIG = 'skill_config.json'
+    SKILL_CONFIG = 'amy_dialog_model.json'
 
     @staticmethod
     def build(config_file_name=None):
