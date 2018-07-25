@@ -84,7 +84,7 @@ To deploy our example skill:
                 "Statement": "{\"Sid\":\"al....
             },
             "create_function": {
-                "Role": "arn:aws:iam::095547219887:role/alexa_skill_role",
+                "Role": "arn:aws:iam::095547******:role/alexa_skill_role",
                 "MemorySize": 128,
                 "CodeSize": 69157,
                 "Description": "alexa_obama_fact_skill",
@@ -94,7 +94,7 @@ To deploy our example skill:
                     "Mode": "PassThrough"
                 },
                 "Version": "$LATEST",
-                "FunctionArn": "arn:aws:lambda:us-east-1:095547219887:function:alexa_obama_fact_skill",
+                "FunctionArn": "arn:aws:lambda:us-east-1:095547******:function:alexa_obama_fact_skill",
                 "CodeSha256": "JZ/7XolvjCmxaYHUELY7ezuPGJWQs1os6Udhwv1rG9Y=",
                 "LastModified": "2017-07-23T17:17:05.962+0000",
                 "Handler": "ask_amy.lambda_function.lambda_handler",
@@ -108,14 +108,14 @@ To deploy our example skill:
         `ask-amy-cli deploy_lambda --deploy-json-file cli_config.json`
 
 
-* Logon to `Alex Development Portal <https://developer.amazon.com/alexa>`_. Select `Add New Skill`
+* Logon to `Alex Development Portal <https://developer.amazon.com/alexa/console/ask>`_. Select `Create Skill`
 
     .. image:: _static/tut_1_01_add_new_skill.png
             :width: 600px
             :height: 203px
 
-* In **Skill Information** set *Name* to `Obama Fact` and set *Invocation Name* to `Obama Fact`, click `Save`
-  and `Next`
+* In **Create a new skill** set *Skill name* to `Obama Fact` and set *Default language* to `English (US)`,
+  choose `Custom` as the model (it is selected by default) click `Create a skill`
 
     .. image:: _static/tut_1_02_skill_information.png
             :width: 600px

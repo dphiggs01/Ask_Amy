@@ -51,7 +51,7 @@ environment.
 
 .. code-block:: bash
 
-    $ pip install --upgrade --user awscli
+    $ pip install awscli
 
 .. note::
 
