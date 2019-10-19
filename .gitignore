@@ -16,3 +16,4 @@ __pycache__/
 
 #Files to ignore
 logfile.log
+.SD_Store
