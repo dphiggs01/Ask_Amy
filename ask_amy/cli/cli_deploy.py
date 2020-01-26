@@ -9,9 +9,8 @@ from time import sleep
 class DeployCLI(object):
 
     def create_template(self, skill_name, aws_role='', intent_schema_nm=None):
-        with open(intent_schema_nm) as json_data:
-             intent_schema = json.load(json_data)
-        code_generator =  CodeGenerator(skill_name, aws_role, intent_schema)
+
+        code_generator =  CodeGenerator(skill_name, aws_role, intent_schema_nm)
         code_generator.create_cli_config()
         code_generator.create_skill_config()
         code_generator.create_skill_py()

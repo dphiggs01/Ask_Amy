@@ -30,6 +30,10 @@ class System(ObjectDictionary):
         return self.get_value_from_dict(['apiEndpoint'])
 
     @property
+    def api_access_token(self):
+        return self.get_value_from_dict(['apiAccessToken'])
+
+    @property
     def application_id(self):
         return self.get_value_from_dict(['application', 'applicationId'])
 

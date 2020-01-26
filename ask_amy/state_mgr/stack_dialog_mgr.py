@@ -11,6 +11,9 @@ logger = logging.getLogger()
 
 
 class StackDialogManager(DefaultDialog):
+    def __init__(self, dialog_dict=None):
+        super().__init__(dialog_dict)
+
     def no_intent(self):
         logger.debug("**************** StackDialogManager.no_intent")
         return self.confirmation_intent('no')

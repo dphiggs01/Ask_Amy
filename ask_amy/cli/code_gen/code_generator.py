@@ -1,14 +1,17 @@
 import logging
+import json
 import os.path
 from ask_amy.core.exceptions import FileExistsError
 logger = logging.getLogger()
 
 
 class CodeGenerator(object):
-    def __init__(self, skill_name, aws_role='', intent_schema=None):
+    def __init__(self, skill_name, aws_role, intent_schema_nm):
+        with open(intent_schema_nm) as json_data:
+            self._intent_schema = json.load(json_data)
+
         self._skill_name = skill_name
         self._aws_role = aws_role
-        self._intent_schema = intent_schema
         self._method_names = []
         self._slot_names = []
 
@@ -37,7 +40,7 @@ class CodeGenerator(object):
 
 
     def create_skill_config(self):
-        SKILL_CONFIG='./skill_config.json'
+        SKILL_CONFIG='./amy_dialog_model.json'
 
         if os.path.isfile(SKILL_CONFIG) :
             raise FileExistsError("Attempting to OVERWRITE {}".format(SKILL_CONFIG))
@@ -72,14 +75,14 @@ class CodeGenerator(object):
 
     def intent_control(self,file_ptr):
         file_ptr.write('    "intent_control": {\n')
-
-        if 'intents' in self._intent_schema:
-            for intent_item in self._intent_schema['intents']:
-                if 'intent' in intent_item:
-                    intent_nm =intent_item['intent']
-                    method_name = self.process_intent_nm(intent_nm)
-                    if method_name is not None:
-                        file_ptr.write('      "{}": "{}",\n'.format(intent_nm, method_name))
+        interactionModel = self._intent_schema['interactionModel']
+        languageModel = interactionModel['languageModel']
+        if 'intents' in languageModel:
+            for intent_item in languageModel['intents']:
+                intent_nm =intent_item['name']
+                method_name = self.process_intent_nm(intent_nm)
+                if method_name is not None:
+                    file_ptr.write('      "{}": "{}",\n'.format(intent_nm, method_name))
         file_ptr.write('      "AMAZON.HelpIntent": "help_intent",\n')
         file_ptr.write('      "AMAZON.CancelIntent": "default_cancel_intent",\n')
         file_ptr.write('      "AMAZON.StopIntent": "default_stop_intent"\n')
@@ -113,9 +116,12 @@ class CodeGenerator(object):
     def slots(self, file_ptr):
         add_close_comma = False
         file_ptr.write('    "slots": {\n')
-        if 'intents' in self._intent_schema:
-            for intent_item in self._intent_schema['intents']:
-                intent_nm =intent_item['intent']
+        interactionModel = self._intent_schema['interactionModel']
+        languageModel = interactionModel['languageModel']
+        if 'intents' in languageModel:
+
+            for intent_item in languageModel['intents']:
+                intent_nm =intent_item['name']
                 if 'slots' in intent_item:
                     slots =intent_item['slots']
                     for slot in slots:
@@ -132,7 +138,7 @@ class CodeGenerator(object):
                             file_ptr.write('               "re_prompt_text": "Sorry I did not hear that.",\n')
                             file_ptr.write('               "expected_intent": "{}"\n'.format(method_name))
                             file_ptr.write('            }')
-            file_ptr.write('\n    },\n')
+        file_ptr.write('\n    },\n')
 
 
     def intent_methods(self, file_ptr):
@@ -163,14 +169,16 @@ class CodeGenerator(object):
 
 
     def create_intent_methods(self,file_ptr):
-        if 'intents' in self._intent_schema:
-            for intent_item in self._intent_schema['intents']:
-                if 'intent' in intent_item:
-                    intent_nm =intent_item['intent']
-                    method_name = self.process_intent_nm(intent_nm)
-                    if method_name is not None:
-                        file_ptr.write('    def {}(self):\n'.format(method_name))
-                        file_ptr.write('        logger.debug("**************** entering {}.{}".format('
-                                       'self.__class__.__name__, self.intent_name))\n')
-                        file_ptr.write('        return self.handle_default_intent()\n')
-                        file_ptr.write('\n')
+        interactionModel = self._intent_schema['interactionModel']
+        languageModel = interactionModel['languageModel']
+        if 'intents' in languageModel:
+
+            for intent_item in languageModel['intents']:
+                intent_nm =intent_item['name']
+                method_name = self.process_intent_nm(intent_nm)
+                if method_name is not None:
+                    file_ptr.write('    def {}(self):\n'.format(method_name))
+                    file_ptr.write('        logger.debug("**************** entering {}.{}".format('
+                                   'self.__class__.__name__, self.intent_name))\n')
+                    file_ptr.write('        return self.handle_default_intent()\n')
+                    file_ptr.write('\n')

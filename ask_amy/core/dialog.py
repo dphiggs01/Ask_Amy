@@ -31,6 +31,10 @@ class Dialog(ObjectDictionary):
         return self._event.session
 
     @property
+    def context(self):
+        return self._event.context
+
+    @property
     def request(self):
         return self._event.request
 

@@ -48,8 +48,10 @@ class Reply(ObjectDictionary):
                 card = Card.standard(card_dict['title'], card_dict['content'], card_dict['small_image'],
                                      card_dict['large_image'], event)
             elif 'type' in card_dict:
-
-                card = Card.link_account(None, None)
+                if card_dict['type'] == 'LinkAccount':
+                    card = Card.link_account()
+                else: # AskForPermissionsConsent
+                    card = Card.ask_for_permissions_consent(card_dict['permissions'])
             else:
                 card = Card.simple(card_dict['title'], card_dict['content'], event)
 
@@ -263,10 +265,16 @@ class Card(CommunicationChannel):
         return cls(card)
 
     @classmethod
-    def link_account(cls, title, content, event=None):
+    def link_account(cls):
         logger.debug("**************** entering Card.link_account")
-        content = Card.concat_text_if_list(content)
-        if event is not None:
-            content = Card.inject_event_data(content, event)
         card = {'type': 'LinkAccount'}
+        return cls(card)
+
+    @classmethod
+    def ask_for_permissions_consent(cls, permissions):
+        # "read::alexa:device:all:address"
+        # "read::alexa:device:all:address:country_and_postal_code"
+        logger.debug("**************** entering Card.ask_for_permissions_consent")
+        card = {'type': 'AskForPermissionsConsent'}
+        card['permissions'] = permissions
         return cls(card)
