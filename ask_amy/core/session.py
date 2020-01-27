@@ -12,6 +12,7 @@ class Session(ObjectDictionary):
         super().__init__(session_dict)
 
         self._persistence = False  # Assume no persistence until explicitly defined
+
         config_dict = SkillFactory.load_configuartion(self.__class__.__name__)
         if config_dict:
             self._persistence = self.get_value_from_dict(['persistence'], config_dict)

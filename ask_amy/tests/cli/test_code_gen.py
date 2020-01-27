@@ -1,5 +1,4 @@
-from ask_amy.tests.utility import TestCaseASKAmy
-from ask_amy.cli.code_gen import dicttoxml
+from ask_amy.tests.test_ask_amy_base import TestCaseASKAmy
 import json
 import urllib
 import urllib.request
@@ -9,18 +8,6 @@ class TestDialog(TestCaseASKAmy):
     def setUp(self):
         pass
 
-    def test_dialog_constr(self):
-        print('hello world')
-        #page = urllib.urlopen('http://quandyfactory.com/api/example')
-        request_url = urllib.request.Request('http://quandyfactory.com/api/example')
-        obj = self.load_json_file('../data/intent_schema.json')
-
-        print(obj)
-
-        xml = dicttoxml.dicttoxml(obj)
-
-        dom = parseString(xml)
-        print(dom.toprettyxml())
 
 
     def test_dialog_constr(self):

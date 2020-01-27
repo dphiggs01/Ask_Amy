@@ -1,4 +1,4 @@
-from ask_amy.tests.utility import TestCaseASKAmy
+from ask_amy.tests.test_ask_amy_base import TestCaseASKAmy
 from ask_amy.core.session import Session
 
 
