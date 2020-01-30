@@ -1,4 +1,4 @@
-
+[![Build Status](https://travis-ci.org/dphiggs01/Ask_Amy.svg?branch=master)](https://travis-ci.org/dphiggs01/Ask_Amy)
 
 <img src="sphinx/_static/header.png"/>
 
