@@ -29,4 +29,9 @@ For sphinx documentation creation use `deploy.sh` in sphinx directory.
 * `find . -type f -name alexa_skill.zip -exec rm {} \;`
 
 
+###### If you checked in the alexa_skill.zip
+git rm --cached ./alexa_skill.zip
+cat alexa_skill.zip  >> .gitignore
+
+
 

@@ -3,7 +3,7 @@ from subprocess import Popen, PIPE
 import os
 import shutil
 import sys
-from ask_amy.cli.code_gen.code_generator import CodeGenerator
+from ask_amy.cli.code_gen.jinja_code_generator import CodeGenerator
 from time import sleep
 
 class DeployCLI(object):
@@ -12,7 +12,7 @@ class DeployCLI(object):
 
         code_generator =  CodeGenerator(skill_name, aws_role, intent_schema_nm)
         code_generator.create_cli_config()
-        code_generator.create_skill_config()
+        code_generator.create_dialog_model()
         code_generator.create_skill_py()
 
 
