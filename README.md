@@ -33,5 +33,5 @@ Alex Request JSON is always available for interrogation for niche cases.
 
 ### Check Out Ask Amy Website for more details
 
-*  https://dphiggs01.github.io/ask_amy/
+*  http://askamy.net
 
